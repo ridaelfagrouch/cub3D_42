@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mnaimi <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: bavos <bavos@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/06 13:14:32 by mnaimi            #+#    #+#             */
-/*   Updated: 2022/04/10 17:46:36 by mnaimi           ###   ########.fr       */
+/*   Created: 2022/07/15 16:30:25 by bavos             #+#    #+#             */
+/*   Updated: 2022/07/15 16:30:28 by bavos            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ int		ft_isascii(int c);
 int		ft_isprint(int c);
 int		ft_toupper(int c);
 int		ft_tolower(int c);
-int		ft_atoi(const char *str);
 int		ft_memcmp(const void *s1, const void *s2, size_t n);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 
@@ -77,8 +76,6 @@ char	*ft_strcpy(char *dest, const char *src);
 double	ft_abs(double nb);
 size_t	ft_intlen(long nb);
 long	ft_atol(const char *str);
-void	ft_free(void **ptr);
-void	ft_clear_console(void);
 int		ft_isspace(int c);
 int		ft_strcmp(const char *s1, const char *s2);
 char	*ft_strstr_tl(const char *haystack, const char *needle);
