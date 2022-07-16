@@ -1,20 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_isprint.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rel-fagr <rel-fagr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rel-fagr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/15 17:23:51 by bavos             #+#    #+#             */
-/*   Updated: 2022/07/16 03:48:54 by rel-fagr         ###   ########.fr       */
+/*   Created: 2021/11/02 13:36:16 by rel-fagr          #+#    #+#             */
+/*   Updated: 2021/11/07 12:09:33 by rel-fagr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "libft.h"
 
-int main(int argc, char **argv)
+int	ft_isprint(int c)
 {
-    (void)argc;
-    (void)argv;
-    return (0);
+	if (!((c >= 32) && (c < 127)))
+		return (0);
+	else
+		return (1);
 }
