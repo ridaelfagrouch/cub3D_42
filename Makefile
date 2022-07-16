@@ -6,7 +6,7 @@
 #    By: rel-fagr <rel-fagr@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: Invalid date        by ██████╗██║        #+#    #+#              #
-#    Updated: 2022/07/16 12:50:15 by rel-fagr         ###   ########.fr        #
+#    Updated: 2022/07/16 15:01:26 by rel-fagr         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,10 +38,11 @@ export TITLE
 
 # ---------------------------------------------------------------------------- #
 CC			:= gcc
-CC_FLAGS	:= -Wall -Wextra -Werror
+CC_FLAGS	:= -Wall -Wextra -Werror -lm
 NAME		:= cub3D
 MAIN		:= main.c
 HEADER		:= cub3d.h
+MLX		 	:= minilibx-linux
 
 LIBFT_ARCH	:= libft/libft.a
 PARS_ARCH	:= srcs/parser/libparser.a
@@ -68,7 +69,7 @@ title:
 	@echo " ${DARKVIOLET}$$TITLE${NC}"
 
 ${NAME}: title ${LIBFT_ARCH} ${PARS_ARCH} ${EXEC_ARCH} ${HEADER}
-	@${CC} ${CC_FLAGS} ${MAIN} -o ${NAME} ${ARCHIVES} -g
+	@${CC} ${CC_FLAGS} ${MAIN} -o ${NAME} ${ARCHIVES} -L $(MLX) -lmlx -lm -lbsd -lX11 -lXext -g
 	@printf "\n${MGN}Executable ${GRA}${NAME}${MGN} created${NNN} :)\n\n"
 
 clean:

@@ -38,7 +38,10 @@ W = -Wall -Werror -Wextra
 INC = libft.h
 NAME = libft.a
 
-all : ${NAME}
+all : title ${NAME}
+
+title:
+	@printf "\n${YEL}\033[4mEntering ${GRA}libft${YEL}'s makefile:${NNN} "
 
 ${NAME} : ${OFILES} ${INC}
 	@ar -rcs ${NAME} ${OFILES}
