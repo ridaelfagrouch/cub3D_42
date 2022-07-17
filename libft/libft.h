@@ -6,7 +6,7 @@
 /*   By: rel-fagr <rel-fagr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/15 17:37:28 by rel-fagr          #+#    #+#             */
-/*   Updated: 2022/07/16 03:22:42 by rel-fagr         ###   ########.fr       */
+/*   Updated: 2022/07/17 12:36:30 by rel-fagr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,14 +68,10 @@ void	ft_lstiter(t_list *lst, void (*f)(void *));
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 /*************************_extra-bonus_****************************/
 double	ft_abs(double nb);
-long	ft_atol(const char *str);
-size_t	ft_intlen(long nb);
-int		ft_memcmp(const void *s1, const void *s2, size_t n);
 int		ft_strcmp_tl(const char *s1, const char *s2);
 int		ft_strcmp(const char *s1, const char *s2);
 char	*ft_strcpy(char *dest, const char *src);
 char	*ft_strrstr(const char *haystack, const char *needle);
-char	*ft_strstr_tl(const char *haystack, const char *needle);
 char	*ft_strstr(const char *haystack, const char *needle);
 void	*ft_realloc(void *old_ptr, size_t old_size, size_t new_size);
 
