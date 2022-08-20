@@ -11,6 +11,9 @@
 
 // Libraries: Custom
 # include "libft/libft.h"
+#include "mlx.h"
+#include <unistd.h>
+
 
 /* --------------------------------- MACROS --------------------------------- */
 

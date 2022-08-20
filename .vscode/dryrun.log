@@ -1,0 +1,10 @@
+make --dry-run --keep-going --print-directory
+make: Entering directory `/Users/sahafid/Desktop/cub3D_42'
+echo " \033[1;5;1;36m$TITLE"
+make -C libft/
+make -C srcs/parser/
+make -C srcs/executor/
+gcc -Wall -Wextra -Werror -lm main.c -o cub3D -Llibft -lft -Lsrcs/parser -lparser -Lsrcs/executor -lexecutor -L minilibx-linux -lmlx -lm -lbsd -lX11 -lXext -g
+printf "\n\033[35mExecutable \033[37mcub3D\033[35m created\033[0m :)\n\n"
+make: Leaving directory `/Users/sahafid/Desktop/cub3D_42'
+ 
