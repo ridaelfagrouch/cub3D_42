@@ -6,7 +6,7 @@
 /*   By: sahafid <sahafid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 07:57:18 by sahafid           #+#    #+#             */
-/*   Updated: 2022/08/20 20:57:39 by sahafid          ###   ########.fr       */
+/*   Updated: 2022/08/20 21:29:57 by sahafid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,15 @@ void drawline(int x0, int y0, int x1, int y1, t_graph *lst, int j)
     }
 }
 
+void    color_line(int x, int y, int save, int x1, int y1, t_graph *lst, int i)
+{
+    while (y < save + 25)
+    {
+        drawline(x, y, x1, y1, lst, i);
+        y++;
+    } 
+}
+
 void draw_everything(char	**map, t_graph *lst)
 {
     int	i;
@@ -71,46 +80,28 @@ void draw_everything(char	**map, t_graph *lst)
 	x = 0;
 	y = 0;
     save = 0;
-	x1 = 50;
+	x1 = 25;
 	y1 = 0;
 	while (map[i])
     {
         while (map[i][j])
         {
             if (map[i][j] == '0')
-            {
-                while (y < save + 50)
-                {
-                    drawline(x, y, x1, y1, lst, 0);
-                    y++;
-                }     
-            }
+                color_line(x, y, save, x1, y1, lst, 0);
             else if (map[i][j] == '1')
-            {
-                while (y < save + 50)
-                {
-                    drawline(x, y, x1, y1, lst, 1);
-                    y++;
-                }     
-            }
+				color_line(x, y, save, x1, y1, lst, 1);
             else
-            {
-                while (y < save + 50)
-                {
-                    drawline(x, y, x1, y1, lst, 2);
-                    y++;
-                }
-            }
-            x += 50;
-            x1 += 50;
+				color_line(x, y, save, x1, y1, lst, 2);
+            x += 25;
+            x1 += 25;
             y = save;
             j++;
         }
         x = 0;
-        y += 50;
+        y += 25;
         save = y;
         j = 0;
-        x1 = 50;
+        x1 = 25;
         i++;
     }
 }
@@ -126,7 +117,7 @@ int main()
     char    *line;
 
     lst.floor_color = 16777215;
-    lst.wall_color = 255;
+    lst.wall_color = 8421504;
     lst.mlx = mlx_init();
     i = 0;
     j = 0;
@@ -137,7 +128,7 @@ int main()
         i++;
     while (map[0][j])
         j++;
-    lst.wind = mlx_new_window(lst.mlx, j * 50, i * 50, "cub3d");
+    lst.wind = mlx_new_window(lst.mlx, j * 25, i * 25, "cub3d");
     free(line);
     draw_everything(map, &lst);
     mlx_loop(lst.mlx);
