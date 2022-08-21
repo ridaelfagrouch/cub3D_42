@@ -1,21 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sahafid <sahafid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/20 07:57:18 by sahafid           #+#    #+#             */
-/*   Updated: 2022/08/20 21:29:57 by sahafid          ###   ########.fr       */
+/*   Created: 2022/08/21 14:48:25 by sahafid           #+#    #+#             */
+/*   Updated: 2022/08/21 16:56:51 by sahafid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
-#include <stdio.h>
 #include "../executor.h"
-#include <fcntl.h>
-#include <unistd.h>
-
 
 void drawline(int x0, int y0, int x1, int y1, t_graph *lst, int j)
 {
@@ -37,6 +33,8 @@ void drawline(int x0, int y0, int x1, int y1, t_graph *lst, int j)
                 mlx_pixel_put(lst->mlx, lst->wind , x, y, lst->floor_color);
             else  if (j == 1)
                 mlx_pixel_put(lst->mlx, lst->wind , x, y, lst->wall_color);
+            else  if (j == 2)
+                mlx_pixel_put(lst->mlx, lst->wind , x, y, lst->plyr.player_color);
             else
                 mlx_pixel_put(lst->mlx, lst->wind , x, y, 0);
             y++;
@@ -48,6 +46,8 @@ void drawline(int x0, int y0, int x1, int y1, t_graph *lst, int j)
                 mlx_pixel_put(lst->mlx, lst->wind , x, y, lst->floor_color);
             else if (j == 1)
                 mlx_pixel_put(lst->mlx, lst->wind , x, y, lst->wall_color);
+            else  if (j == 2)
+                mlx_pixel_put(lst->mlx, lst->wind , x, y, lst->plyr.player_color);
             else
                 mlx_pixel_put(lst->mlx, lst->wind , x, y, 0);
             p = p + 2 * dy;
@@ -56,81 +56,55 @@ void drawline(int x0, int y0, int x1, int y1, t_graph *lst, int j)
     }
 }
 
-void    color_line(int x, int y, int save, int x1, int y1, t_graph *lst, int i)
+void    draw_cub(int x, int y, int save, int x1, int y1, t_graph *lst, int i)
 {
-    while (y < save + 25)
+    while (y < save + 50)
     {
         drawline(x, y, x1, y1, lst, i);
         y++;
     } 
 }
 
-void draw_everything(char	**map, t_graph *lst)
+
+void    draw_everything(char	**map, t_graph *lst)
 {
     int	i;
     int j;
-	int	x;
     int save;
-	int	y;
-	int	x1;
-	int	y1;
 
 	i = 0;
     j = 0;
-	x = 0;
-	y = 0;
     save = 0;
-	x1 = 25;
-	y1 = 0;
 	while (map[i])
     {
         while (map[i][j])
         {
             if (map[i][j] == '0')
-                color_line(x, y, save, x1, y1, lst, 0);
+                draw_cub(lst->x, lst->y, save, lst->x1, lst->y1, lst, 0);
             else if (map[i][j] == '1')
-				color_line(x, y, save, x1, y1, lst, 1);
+				draw_cub(lst->x, lst->y, save, lst->x1, lst->y1, lst, 1);
+            else if (map[i][j] == 'P')
+            {
+                draw_cub(lst->x, lst->y, save, lst->x1, lst->y1, lst, 0);
+                lst->plyr.x_plyr = lst->x;
+                lst->plyr.y_plyr = lst->y;
+				// draw_cub(lst->x + 12, lst->y + 12, save - 10, lst->x1 - 12, lst->y1 - 12, lst, 2);
+                // drawline(lst->x + 25, lst->y + 25, lst->x1 + 25, lst->y1 - 25, lst, 2);
+            }
             else
-				color_line(x, y, save, x1, y1, lst, 2);
-            x += 25;
-            x1 += 25;
-            y = save;
+                draw_cub(lst->x, lst->y, save, lst->x1, lst->y1, lst, 3);
+            lst->x += 50;
+            lst->x1 += 50;
+            lst->y = save;
             j++;
         }
-        x = 0;
-        y += 25;
-        save = y;
+        lst->x = 0;
+        lst->y += 50;
+        save = lst->y;
         j = 0;
-        x1 = 25;
+        lst->x1 = 50;
         i++;
     }
-}
-
-int main()
-{
-    t_graph lst;
-    int     i;
-    int     j;
-
-    int     fd;
-    char    **map;
-    char    *line;
-
-    lst.floor_color = 16777215;
-    lst.wall_color = 8421504;
-    lst.mlx = mlx_init();
-    i = 0;
-    j = 0;
-    fd = open("cub3d.cub", O_RDONLY);
-    line = get_next_line1(fd);
-    map = ft_split(line, '\n');
-    while (map[i])
-        i++;
-    while (map[0][j])
-        j++;
-    lst.wind = mlx_new_window(lst.mlx, j * 25, i * 25, "cub3d");
-    free(line);
-    draw_everything(map, &lst);
-    mlx_loop(lst.mlx);
-    return (0);
+    draw_cub(lst->plyr.x_plyr + 12, lst->plyr.y_plyr + 12, lst->plyr.y_plyr - 10, lst->plyr.x_plyr + 50 - 12, lst->plyr.y_plyr - 12, lst, 2);
+    drawline(lst->plyr.x_plyr + 25, lst->plyr.y_plyr + 25, lst->plyr.x_plyr + 150, lst->plyr.y_plyr + 50 - 25, lst, 2);
 }
