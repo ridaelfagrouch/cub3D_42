@@ -6,7 +6,7 @@
 /*   By: sahafid <sahafid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 14:48:25 by sahafid           #+#    #+#             */
-/*   Updated: 2022/08/21 16:56:51 by sahafid          ###   ########.fr       */
+/*   Updated: 2022/08/23 00:39:32 by sahafid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,18 @@ void    draw_cub(int x, int y, int save, int x1, int y1, t_graph *lst, int i)
     } 
 }
 
+void    cast_ray(t_graph *lst)
+{
+    drawline(lst->plyr.x_plyr + 25 - 13,  lst->plyr.y_plyr + 25 - 13, lst->plyr.x1_plyr + 150, lst->plyr.y1_plyr - 25, lst, 2);
+}
 
-void    draw_everything(char	**map, t_graph *lst)
+void    draw_player(t_graph *lst)
+{
+    draw_cub(lst->plyr.x_plyr, lst->plyr.y_plyr, lst->plyr.y_plyr - 25, lst->plyr.x1_plyr, lst->plyr.y1_plyr, lst, 2);
+    cast_ray(lst);
+}
+
+void    draw_map(char	**map, t_graph *lst)
 {
     int	i;
     int j;
@@ -86,10 +96,10 @@ void    draw_everything(char	**map, t_graph *lst)
             else if (map[i][j] == 'P')
             {
                 draw_cub(lst->x, lst->y, save, lst->x1, lst->y1, lst, 0);
-                lst->plyr.x_plyr = lst->x;
-                lst->plyr.y_plyr = lst->y;
-				// draw_cub(lst->x + 12, lst->y + 12, save - 10, lst->x1 - 12, lst->y1 - 12, lst, 2);
-                // drawline(lst->x + 25, lst->y + 25, lst->x1 + 25, lst->y1 - 25, lst, 2);
+                lst->plyr.x_plyr = lst->x + 12;
+                lst->plyr.y_plyr = lst->y + 12;
+                lst->plyr.x1_plyr = lst->x1 - 12;
+                lst->plyr.y1_plyr = lst->y1 - 12;
             }
             else
                 draw_cub(lst->x, lst->y, save, lst->x1, lst->y1, lst, 3);
@@ -105,6 +115,4 @@ void    draw_everything(char	**map, t_graph *lst)
         lst->x1 = 50;
         i++;
     }
-    draw_cub(lst->plyr.x_plyr + 12, lst->plyr.y_plyr + 12, lst->plyr.y_plyr - 10, lst->plyr.x_plyr + 50 - 12, lst->plyr.y_plyr - 12, lst, 2);
-    drawline(lst->plyr.x_plyr + 25, lst->plyr.y_plyr + 25, lst->plyr.x_plyr + 150, lst->plyr.y_plyr + 50 - 25, lst, 2);
 }

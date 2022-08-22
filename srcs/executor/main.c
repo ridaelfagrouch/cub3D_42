@@ -6,7 +6,7 @@
 /*   By: sahafid <sahafid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 07:57:18 by sahafid           #+#    #+#             */
-/*   Updated: 2022/08/21 16:52:22 by sahafid          ###   ########.fr       */
+/*   Updated: 2022/08/23 00:36:51 by sahafid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,16 @@
 #include <fcntl.h>
 #include <unistd.h>
 
+
+void    init_player(t_graph *lst)
+{
+    lst->plyr.radius = 3;
+    lst->plyr.Turndirection = 0;
+    lst->plyr.Walkdirection = 0;
+    lst->plyr.rotationangle = M_LN10 / 2;
+    lst->plyr.speed = 3.0;
+    lst->plyr.rotationspeed = 3 * (M_LN10 / 180);
+}
 
 int main()
 {
@@ -33,6 +43,7 @@ int main()
 	lst.x1 = 50;
 	lst.y1 = 0;
     lst.mlx = mlx_init();
+    init_player(&lst);
     i = 0;
     j = 0;
     fd = open("cub3d.cub", O_RDONLY);
@@ -42,10 +53,11 @@ int main()
         i++;
     while (lst.map[0][j])
         j++;
-    lst.wind = mlx_new_window(lst.mlx, j * 50, i * 50, "cub3d");
+    lst.wind = mlx_new_window(lst.mlx, 1800, 1100, "cub3d");
     free(line);
-    draw_everything(lst.map, &lst);
-    mlx_key_hook(lst.wind, deal_key, &lst);
+    draw_map(lst.map, &lst);
+    draw_player(&lst);
+    // mlx_key_hook(lst.wind, deal_key, &lst);
     mlx_loop(lst.mlx);
     return (0);
 }
