@@ -6,7 +6,7 @@
 /*   By: sahafid <sahafid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 07:57:18 by sahafid           #+#    #+#             */
-/*   Updated: 2022/08/23 00:36:51 by sahafid          ###   ########.fr       */
+/*   Updated: 2022/08/23 16:06:10 by sahafid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@ void    init_player(t_graph *lst)
     lst->plyr.radius = 3;
     lst->plyr.Turndirection = 0;
     lst->plyr.Walkdirection = 0;
-    lst->plyr.rotationangle = M_LN10 / 2;
+    lst->plyr.rotationangle = M_PI / 4;
     lst->plyr.speed = 3.0;
-    lst->plyr.rotationspeed = 3 * (M_LN10 / 180);
+    lst->plyr.rotationspeed = 3 * (M_PI / 180);
 }
 
 int main()

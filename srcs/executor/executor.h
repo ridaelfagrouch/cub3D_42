@@ -11,6 +11,7 @@
 # include "../parser/parser.h"
 # include "mlx.h"
 # include <math.h>
+# include <stdio.h>
 
 
 /* --------------------------------- MACROS --------------------------------- */
@@ -25,7 +26,7 @@ typedef struct s_player
     double   radius;
     int     Turndirection;
     int     Walkdirection;
-    int     rotationangle;
+    double  rotationangle;
     double  speed;
     int     rotationspeed;
 } t_player;
