@@ -6,7 +6,7 @@
 /*   By: sahafid <sahafid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 14:48:25 by sahafid           #+#    #+#             */
-/*   Updated: 2022/08/23 17:33:01 by sahafid          ###   ########.fr       */
+/*   Updated: 2022/08/24 18:22:40 by sahafid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,9 @@
 //         {
 //             if (j == 0)
 //                 mlx_pixel_put(lst->mlx, lst->wind , x, y, lst->floor_color);
-//             else  if (j == 1)
+//             else if (j == 1)
 //                 mlx_pixel_put(lst->mlx, lst->wind , x, y, lst->wall_color);
-//             else  if (j == 2)
+//             else if (j == 2)
 //                 mlx_pixel_put(lst->mlx, lst->wind , x, y, lst->plyr.player_color);
 //             else
 //                 mlx_pixel_put(lst->mlx, lst->wind , x, y, 0);
@@ -67,8 +67,27 @@
 //         }
 //         x++;
 //     }
-    
+
 // }
+// void    my_mlx_pixvel_put(int x, int y, t_data *data, int color)
+// {
+//     char    *dst;
+
+//     if ((x >= 0 && x < W) && (y >= 0 && y < H))
+//     {
+//         dst = data->mlx_vars->buffer + (y * data->mlx_vars->line_lenght + x * (data->mlx_vars->bpp / 8));
+//         *(unsigned int *)dst = color;
+//     }
+// }
+void    my_mlx_pixel_put(t_graph   *lst, int x, int y, int color)
+{
+	char	*test;
+	
+	test = &lst->addr[(y * lst->size_line) + (x * lst->bpp / 8)];
+	// test = lst->addr + ((y * lst->size_line) + (x * lst->bpp / 8));
+	*(unsigned int*)test = color;
+    // lst->addr[(y * 1100) + (x * 1800)];
+}
 
 void drawline(int x0, int y0, int x1, int y1, t_graph *lst, int j)
 {
@@ -90,14 +109,8 @@ void drawline(int x0, int y0, int x1, int y1, t_graph *lst, int j)
 	y = dy / steps;
 	while (i < steps)
 	{
-		if (j == 0)
-            mlx_pixel_put(lst->mlx, lst->wind , x0, y0, lst->floor_color);
-        else  if (j == 1)
-            mlx_pixel_put(lst->mlx, lst->wind , x0, y0, lst->wall_color);
-        else  if (j == 2)
-            mlx_pixel_put(lst->mlx, lst->wind , x0, y0, lst->plyr.player_color);
-        else
-            mlx_pixel_put(lst->mlx, lst->wind , x0, y0, 0);
+        my_mlx_pixel_put(lst ,x0, y0, j);
+		// mlx_pixel_put(lst->mlx, lst->wind , j, y, i);
 		x0 = x0 + x;
 		y0 = y0 + y;
 		i++;
@@ -107,19 +120,25 @@ void drawline(int x0, int y0, int x1, int y1, t_graph *lst, int j)
 
 void    draw_cub(int x, int y, int save, int x1, int y1, t_graph *lst, int i)
 {
-    // while (y < save + 50)
-    // {
-    //     drawline(x, y, x1, y1, lst, i);
-    //     y++;
-    // }
 	int	j;
 
+	// while (x < 1800)
+	// {
+	// 	y = 0;
+	// 	while (y < 1100)
+	// 	{
+	// 		my_mlx_pixel_put(lst ,x, y, i);
+	// 		y++;
+	// 	}
+	// 	x++;
+	// }
 	j = x;
-	while (y < save + 50)
+	while (y < save + lst->unit)
     {
         while (j < x1)
 		{
-			mlx_pixel_put(lst->mlx, lst->wind, j, y, i);
+			my_mlx_pixel_put(lst ,j, y, i);
+			// mlx_pixel_put(lst->mlx, lst->wind , j, y, i);
 			j++;
 		}
 		j = x;
@@ -129,12 +148,11 @@ void    draw_cub(int x, int y, int save, int x1, int y1, t_graph *lst, int i)
 
 void    cast_ray(t_graph *lst)
 {
-	// printf("")
     drawline(lst->plyr.x_plyr,  
        		lst->plyr.y_plyr, 
-        	lst->plyr.x_plyr + cos(lst->plyr.rotationangle) * 100, 
-        	lst->plyr.y_plyr + sin(lst->plyr.rotationangle) * 100, 
-        	lst, 2);
+        	lst->plyr.x_plyr + cos(lst->plyr.rotationangle) * 50, 
+        	lst->plyr.y_plyr + sin(lst->plyr.rotationangle) * 50, 
+        	lst, lst->plyr.player_color);
 }
 
 void    draw_player(t_graph *lst)
@@ -148,10 +166,15 @@ void    draw_map(char	**map, t_graph *lst)
     int	i;
     int j;
     int save;
+    int t;
+    int c;
+    int y;
 
 	i = 0;
     j = 0;
     save = 0;
+    lst->img = mlx_new_image(lst->mlx, lst->j * lst->unit, lst->i * lst->unit);
+    lst->addr = mlx_get_data_addr(lst->img, &lst->bpp, &lst->size_line, &lst->endian);
 	while (map[i])
     {
         while (map[i][j])
@@ -163,8 +186,8 @@ void    draw_map(char	**map, t_graph *lst)
             else if (map[i][j] == 'P')
             {
                 draw_cub(lst->x, lst->y, save, lst->x1, lst->y1, lst, lst->plyr.player_color);
-                lst->plyr.x_plyr = lst->x + 12;
-                lst->plyr.y_plyr = lst->y + 12;
+                lst->plyr.x_plyr = lst->x;
+                lst->plyr.y_plyr = lst->y;
                 lst->plyr.x1_plyr = lst->plyr.x_plyr + cos(lst->plyr.rotationangle) * 30;
                 lst->plyr.y1_plyr = lst->plyr.y_plyr + sin(lst->plyr.rotationangle) * 30;
 				// lst->plyr.x1_plyr = lst->x1 - 12;
@@ -172,16 +195,17 @@ void    draw_map(char	**map, t_graph *lst)
             }
             else
                 draw_cub(lst->x, lst->y, save, lst->x1, lst->y1, lst, 3);
-            lst->x += 50;
-            lst->x1 += 50;
+            lst->x += lst->unit;
+            lst->x1 += lst->unit;
             lst->y = save;
             j++;
         }
         lst->x = 0;
-        lst->y += 50;
+        lst->y += lst->unit;
         save = lst->y;
         j = 0;
-        lst->x1 = 50;
+        lst->x1 = lst->unit;
         i++;
     }
+	mlx_put_image_to_window(lst->mlx, lst->wind, lst->img, 0, 0);
 }

@@ -35,9 +35,17 @@ typedef struct s_graph {
 
     void    *mlx;
     void    *wind;
+    void    *img;
+    char    *addr;
+    int     unit;
     int     floor_color;
     int     wall_color;
     char    **map;
+    int     i;
+    int     j;
+    int     size_line;
+    int     bpp;
+    int     endian;
     int     x;
 	int     y;
 	int     x1;
