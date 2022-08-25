@@ -6,7 +6,7 @@
 /*   By: sahafid <sahafid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 07:57:18 by sahafid           #+#    #+#             */
-/*   Updated: 2022/08/24 18:20:13 by sahafid          ###   ########.fr       */
+/*   Updated: 2022/08/25 14:59:11 by sahafid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,9 @@
 void    init_player(t_graph *lst)
 {
     lst->plyr.radius = 3;
-    lst->plyr.Turndirection = 0;
-    lst->plyr.Walkdirection = 0;
-    lst->plyr.rotationangle = M_PI / 4;
-    lst->plyr.speed = 3.0;
-    lst->plyr.rotationspeed = 3 * (M_PI / 180);
+    lst->plyr.rotationangle = M_PI / 2;
+    lst->plyr.speed = 9.0;
+    lst->plyr.rotationspeed = 15 * (M_PI / 180);
 }
 
 int main()
@@ -38,11 +36,8 @@ int main()
     lst.floor_color = 16777215;
     lst.wall_color = 8421504;
     lst.plyr.player_color = 14423100;
-    lst.unit = 40;
-    lst.x = 0;
-	lst.y = 0;
-	lst.x1 = 50;
-	lst.y1 = 0;
+    lst.unit = 30;
+    lst.first_time = 0;
     lst.mlx = mlx_init();
     init_player(&lst);
     lst.i = 0;
@@ -58,7 +53,8 @@ int main()
     free(line);
     draw_map(lst.map, &lst);
     draw_player(&lst);
-    // mlx_hook(lst.wind, 2, 0L, deal_key, &lst);
+    mlx_put_image_to_window(lst.mlx, lst.wind, lst.img, 0, 0);
+    mlx_hook(lst.wind, 2, 0L, deal_key, &lst);
     mlx_loop(lst.mlx);
     return (0);
 }

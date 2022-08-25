@@ -18,17 +18,15 @@
 
 typedef struct s_player
 {
-    int     x_plyr;
-    int     y_plyr;
-    int     x1_plyr;
-    int     y1_plyr;
+    double     x_plyr;
+    double     y_plyr;
+    double     x1_plyr;
+    double     y1_plyr;
     int     player_color;
     double   radius;
-    int     Turndirection;
-    int     Walkdirection;
     double  rotationangle;
     double  speed;
-    int     rotationspeed;
+    double    rotationspeed;
 } t_player;
 
 typedef struct s_graph {
@@ -50,6 +48,7 @@ typedef struct s_graph {
 	int     y;
 	int     x1;
 	int     y1;
+    int     first_time;
     struct s_player plyr;
 } t_graph;
 
