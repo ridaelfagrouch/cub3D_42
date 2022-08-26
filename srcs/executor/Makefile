@@ -6,7 +6,7 @@
 #    By: sahafid <sahafid@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: Invalid date        by ██████╗██║        #+#    #+#              #
-#    Updated: 2022/08/24 21:16:44 by sahafid          ###   ########.fr        #
+#    Updated: 2022/08/26 18:57:08 by sahafid          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -84,13 +84,13 @@
 
 # ---------------------------------------------------------------------------- #
 
-CFILES  = 	srcs/get_next_line.c srcs/draw.c srcs/movement.c
+CFILES  = 	srcs/get_next_line.c srcs/draw.c srcs/movement.c srcs/cast_ray.c
 
 OFILES	= $(CFILES:.c=.o)
 
 CC	= gcc
 INT	= executor.h
-FLAGS = -L /Users/sahafid/Desktop/minilibx_opengl_20191021 -lmlx -framework OpenGl -framework AppKit -fsanitize=address
+FLAGS = -L /Users/sahafid/Desktop/minilibx_opengl_20191021 -lmlx -framework OpenGl -framework AppKit
 NAME = cub3d
 ARCHIVE = ../../libft/libft.a
 

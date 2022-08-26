@@ -6,23 +6,13 @@
 /*   By: sahafid <sahafid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 14:48:25 by sahafid           #+#    #+#             */
-/*   Updated: 2022/08/25 16:39:57 by sahafid          ###   ########.fr       */
+/*   Updated: 2022/08/26 17:30:15 by sahafid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 #include "../executor.h"
 
-// void    my_mlx_pixel_put(int x, int y, t_data *data, int color)
-// {
-//     char    *dst;
-
-//     if ((x >= 0 && x < W) && (y >= 0 && y < H))
-//     {
-//         dst = data->mlx_vars->buffer + (y * data->mlx_vars->line_lenght + x * (data->mlx_vars->bpp / 8));
-//         *(unsigned int *)dst = color;
-//     }
-// }
 
 // void drawline(int x0, int y0, int x1, int y1, t_graph *lst, int j)
 // {
@@ -67,28 +57,18 @@
 //         }
 //         x++;
 //     }
-
 // }
-// void    my_mlx_pixvel_put(int x, int y, t_data *data, int color)
-// {
-//     char    *dst;
 
-//     if ((x >= 0 && x < W) && (y >= 0 && y < H))
-//     {
-//         dst = data->mlx_vars->buffer + (y * data->mlx_vars->line_lenght + x * (data->mlx_vars->bpp / 8));
-//         *(unsigned int *)dst = color;
-//     }
-// }
 void    my_mlx_pixel_put(t_graph   *lst, int x, int y, int color)
 {
 	char	*test;
 	
+    // if (!(&lst->addr[(y * lst->size_line) + (x * lst->bpp / 8)]))
+    //     return ;
 	test = &lst->addr[(y * lst->size_line) + (x * lst->bpp / 8)];
     if (!test)
         return ;
-	// test = lst->addr + ((y * lst->size_line) + (x * lst->bpp / 8));
 	*(unsigned int*)test = color;
-    // lst->addr[(y * 1100) + (x * 1800)];
 }
 
 void drawline(double x0, double y0, int x1, int y1, t_graph *lst, int j)
@@ -113,7 +93,6 @@ void drawline(double x0, double y0, int x1, int y1, t_graph *lst, int j)
 	while (i < steps)
 	{
         my_mlx_pixel_put(lst , x0, y0, j);
-		// mlx_pixel_put(lst->mlx, lst->wind , j, y, i);
 		x0 = x0 + x;
 		y0 = y0 + y;
 		i++;
@@ -128,9 +107,14 @@ void    draw_cub(int x, int y, int x1, int y1, t_graph *lst, int i)
 	j = x;
 	while (y < y1)
     {
+        my_mlx_pixel_put(lst ,j, y, 0);
+        j++;
         while (j < x1)
 		{
-			my_mlx_pixel_put(lst ,j, y, i);
+            if (j == x)
+			    my_mlx_pixel_put(lst ,j, y, 0);
+            else
+                my_mlx_pixel_put(lst ,j, y, i);
 			j++;
 		}
 		j = x;
@@ -138,19 +122,10 @@ void    draw_cub(int x, int y, int x1, int y1, t_graph *lst, int i)
     }
 }
 
-void    cast_ray(t_graph *lst)
-{
-    drawline(lst->plyr.x_plyr,  
-       		lst->plyr.y_plyr, 
-        	lst->plyr.x_plyr + cos(lst->plyr.rotationangle) * lst->unit, 
-        	lst->plyr.y_plyr + sin(lst->plyr.rotationangle) * lst->unit, 
-        	lst, lst->plyr.player_color);
-}
-
 void    draw_player(t_graph *lst)
 {
-    draw_cub(lst->plyr.x_plyr, lst->plyr.y_plyr, lst->plyr.x1_plyr, lst->plyr.y1_plyr, lst, lst->plyr.player_color);
-    cast_ray(lst);
+    // draw_cub(lst->plyr.x_plyr, lst->plyr.y_plyr, lst->plyr.x1_plyr, lst->plyr.y1_plyr, lst, lst->plyr.player_color);
+    cast_rays(lst);
 }
 
 void    draw_map(char	**map, t_graph *lst)
