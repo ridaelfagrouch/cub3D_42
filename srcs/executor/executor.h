@@ -18,8 +18,8 @@
 
 typedef struct s_player
 {
-    int     x_plyr;
-    int     y_plyr;
+    double     x_plyr;
+    double     y_plyr;
     double     x1_plyr;
     double     y1_plyr;
     int     player_color;
@@ -31,7 +31,16 @@ typedef struct s_player
 
 typedef struct s_ray_casting
 {
-    int num_rays;
+    double  ray_angle;
+    int     num_rays;
+    double     xintercept;
+    double     yintercept;
+    double     xstep;
+    double     ystep;
+    int     facingup;
+    int     facingdown;
+    int     facingleft;
+    int     facingright;
 }   t_ray_casting;
 
 typedef struct s_graph {

@@ -6,7 +6,7 @@
 /*   By: sahafid <sahafid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 14:48:25 by sahafid           #+#    #+#             */
-/*   Updated: 2022/08/26 17:30:15 by sahafid          ###   ########.fr       */
+/*   Updated: 2022/08/29 15:13:42 by sahafid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,10 +65,11 @@ void    my_mlx_pixel_put(t_graph   *lst, int x, int y, int color)
 	
     // if (!(&lst->addr[(y * lst->size_line) + (x * lst->bpp / 8)]))
     //     return ;
-	test = &lst->addr[(y * lst->size_line) + (x * lst->bpp / 8)];
-    if (!test)
-        return ;
-	*(unsigned int*)test = color;
+    if ((x >= 0 && x <= lst->j * lst->unit) && (y >= 0 && y <= lst->i * lst->unit))
+    {
+        test = &lst->addr[(y * lst->size_line) + (x * lst->bpp / 8)];
+	    *(unsigned int*)test = color;   
+    }
 }
 
 void drawline(double x0, double y0, int x1, int y1, t_graph *lst, int j)
@@ -107,14 +108,9 @@ void    draw_cub(int x, int y, int x1, int y1, t_graph *lst, int i)
 	j = x;
 	while (y < y1)
     {
-        my_mlx_pixel_put(lst ,j, y, 0);
-        j++;
-        while (j < x1)
+        while (j <= x1)
 		{
-            if (j == x)
-			    my_mlx_pixel_put(lst ,j, y, 0);
-            else
-                my_mlx_pixel_put(lst ,j, y, i);
+            my_mlx_pixel_put(lst ,j, y, i);
 			j++;
 		}
 		j = x;
@@ -163,7 +159,7 @@ void    draw_map(char	**map, t_graph *lst)
                 }
             }
             else
-                draw_cub(lst->x, lst->y, lst->x1, lst->y1, lst, 3);
+                draw_cub(lst->x, lst->y, lst->x1, lst->y1, lst, 20);
             lst->x += lst->unit;
             lst->x1 += lst->unit;
             j++;

@@ -6,7 +6,7 @@
 #    By: sahafid <sahafid@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: Invalid date        by ██████╗██║        #+#    #+#              #
-#    Updated: 2022/08/26 18:57:08 by sahafid          ###   ########.fr        #
+#    Updated: 2022/08/29 17:04:12 by sahafid          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -90,7 +90,7 @@ OFILES	= $(CFILES:.c=.o)
 
 CC	= gcc
 INT	= executor.h
-FLAGS = -L /Users/sahafid/Desktop/minilibx_opengl_20191021 -lmlx -framework OpenGl -framework AppKit
+FLAGS = -L /Users/sahafid/Desktop/minilibx_opengl_20191021 -lmlx -framework OpenGl -framework AppKit 
 NAME = cub3d
 ARCHIVE = ../../libft/libft.a
 
@@ -104,11 +104,12 @@ $(NAME) : $(OFILES) main.c
 
 clean:
 	@rm -rf $(OFILES)
+	@rm -f $(NAME)
 
 # fclean:	clean
 # 	@rm -rf $(NAME)
 
-re: fclean all
+re: clean all
 
 
 # ---------------------------------------------------------------------------- # 
