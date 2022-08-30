@@ -6,7 +6,7 @@
 /*   By: sahafid <sahafid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 07:57:18 by sahafid           #+#    #+#             */
-/*   Updated: 2022/08/30 16:45:21 by sahafid          ###   ########.fr       */
+/*   Updated: 2022/08/30 17:32:57 by sahafid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int main()
     lst.floor_color = 16777215;
     lst.wall_color = 8421504;
     lst.plyr.player_color = 11393254;
-    lst.unit = 40;
+    lst.unit = 32;
     lst.first_time = 0;
     lst.mlx = mlx_init();
     init_player(&lst);

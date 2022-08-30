@@ -6,7 +6,7 @@
 /*   By: sahafid <sahafid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 14:47:27 by sahafid           #+#    #+#             */
-/*   Updated: 2022/08/30 16:43:38 by sahafid          ###   ########.fr       */
+/*   Updated: 2022/08/30 18:22:44 by sahafid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,18 +43,12 @@ int	deal_key(int key, t_graph *var)
 	if (key == 2)
 	{
 		var->plyr.rotationangle +=  var->plyr.rotationspeed;
-		if (var->plyr.rotationangle > 2 * M_PI)
-			var->plyr.rotationangle = fmod(var->plyr.rotationangle, 2 * M_PI);
-		if (var->plyr.rotationangle < 0)
-			var->plyr.rotationangle += 2 * M_PI;
+		normilizeAngle(&var->plyr.rotationangle);
 	}
 	if (key == 0)
 	{
 		var->plyr.rotationangle += (-1 *  var->plyr.rotationspeed);
-		if (var->plyr.rotationangle > 2 * M_PI)
-			var->plyr.rotationangle = fmod(var->plyr.rotationangle, 2 * M_PI);
-		if (var->plyr.rotationangle < 0)
-			var->plyr.rotationangle += 2 * M_PI;
+		normilizeAngle(&var->plyr.rotationangle);
 	}
 	if (key == 13)
 	{

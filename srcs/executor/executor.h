@@ -81,8 +81,13 @@ int     check_wall(t_graph *lst, int x, int y);
 void    drawline(double x0, double y0, int x1, int y1, t_graph *lst, int j);
 void    my_mlx_pixel_put(t_graph   *lst, int x, int y, int color);
 void    cast_rays(t_graph *lst);
-
-
+void	normilizeAngle(double	*ray_angle);
+void	vertical_intersaction(t_graph *lst);
+void    checking_where_plyr_facing(t_graph *lst);
+void	normilizeAngle(double	*ray_angle);
+double	calculate_intersactions(t_graph *lst);
+double	distance_points(double x1, double x2, double y1, double y2);
+void	horizantal_intersaction(t_graph *lst);
 
 
 /* --------------------------------- PROTOTYPES ----------------------------- */
