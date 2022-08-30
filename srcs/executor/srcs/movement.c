@@ -6,13 +6,11 @@
 /*   By: sahafid <sahafid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 14:47:27 by sahafid           #+#    #+#             */
-/*   Updated: 2022/08/29 17:10:57 by sahafid          ###   ########.fr       */
+/*   Updated: 2022/08/30 16:43:38 by sahafid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "../executor.h"
-
 
 int	check_wall(t_graph *lst, int x, int y)
 {
@@ -23,7 +21,6 @@ int	check_wall(t_graph *lst, int x, int y)
 	i = 0;
 	pos1 = x / lst->unit;
 	pos2 = y / lst->unit;
-	// printf("%d   %d   %d   %d  %d\n", x, pos1, y, pos2, lst->i);
 	if ((pos1 >= 0 && pos1 < lst->j) && (pos2 >= 0 && pos2 < lst->i))
 	{
 		if (lst->map[pos2] && lst->map[pos2][pos1] && lst->map[pos2][pos1] == '1')

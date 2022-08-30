@@ -29,19 +29,23 @@ typedef struct s_player
     double    rotationspeed;
 } t_player;
 
-typedef struct s_ray_casting
+typedef struct s_raycasting
 {
     double  ray_angle;
     int     num_rays;
-    double     xintercept;
-    double     yintercept;
-    double     xstep;
-    double     ystep;
-    int     facingup;
-    int     facingdown;
-    int     facingleft;
-    int     facingright;
-}   t_ray_casting;
+    double	xintercept_horiz;
+    double	yintercept_horiz;
+    double	xintercept_vertic;
+    double	yintercept_vertic;
+    double	xstep;
+    double	ystep;
+    int		facingup;
+    int		facingdown;
+    int		facingleft;
+    int		facingright;
+	int		horiz_intersaction;
+	int		vertic_intersaction;
+}   t_raycasting;
 
 typedef struct s_graph {
 
@@ -64,7 +68,7 @@ typedef struct s_graph {
 	int     y1;
     int     first_time;
     struct s_player plyr;
-    struct s_ray_casting raycast;
+    struct s_raycasting raycast;
 } t_graph;
 
 /* --------------------------------- TYPEDEFs ------------------------------- */

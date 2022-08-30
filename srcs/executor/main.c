@@ -6,7 +6,7 @@
 /*   By: sahafid <sahafid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 07:57:18 by sahafid           #+#    #+#             */
-/*   Updated: 2022/08/29 16:04:05 by sahafid          ###   ########.fr       */
+/*   Updated: 2022/08/30 16:45:21 by sahafid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,10 @@
 
 void    init_player(t_graph *lst)
 {
-    lst->plyr.radius = 3;
-    lst->plyr.rotationangle = M_PI / 2;
+    lst->plyr.radius = 2;
+    lst->plyr.rotationangle = M_PI;
     lst->plyr.speed = 5.0;
-    lst->plyr.rotationspeed = 15 * (M_PI / 180);
+    lst->plyr.rotationspeed = 10 * (M_PI / 180);
 }
 
 void   init_raycast(t_graph *lst)
@@ -31,6 +31,7 @@ void   init_raycast(t_graph *lst)
 	lst->raycast.facingdown = 0;
 	lst->raycast.facingright = 0;
 	lst->raycast.facingleft = 0;
+    lst->raycast.horiz_intersaction = 0;
 }
 
 int main()
@@ -44,7 +45,7 @@ int main()
     lst.floor_color = 16777215;
     lst.wall_color = 8421504;
     lst.plyr.player_color = 11393254;
-    lst.unit = 32;
+    lst.unit = 40;
     lst.first_time = 0;
     lst.mlx = mlx_init();
     init_player(&lst);

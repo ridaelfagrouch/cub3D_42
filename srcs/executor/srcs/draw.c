@@ -6,7 +6,7 @@
 /*   By: sahafid <sahafid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 14:48:25 by sahafid           #+#    #+#             */
-/*   Updated: 2022/08/29 15:13:42 by sahafid          ###   ########.fr       */
+/*   Updated: 2022/08/30 11:41:06 by sahafid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,9 +62,7 @@
 void    my_mlx_pixel_put(t_graph   *lst, int x, int y, int color)
 {
 	char	*test;
-	
-    // if (!(&lst->addr[(y * lst->size_line) + (x * lst->bpp / 8)]))
-    //     return ;
+
     if ((x >= 0 && x <= lst->j * lst->unit) && (y >= 0 && y <= lst->i * lst->unit))
     {
         test = &lst->addr[(y * lst->size_line) + (x * lst->bpp / 8)];
