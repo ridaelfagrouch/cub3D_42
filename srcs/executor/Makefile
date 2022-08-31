@@ -6,7 +6,7 @@
 #    By: sahafid <sahafid@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: Invalid date        by ██████╗██║        #+#    #+#              #
-#    Updated: 2022/08/30 18:29:14 by sahafid          ###   ########.fr        #
+#    Updated: 2022/08/30 21:28:15 by sahafid          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -84,7 +84,8 @@
 
 # ---------------------------------------------------------------------------- #
 
-CFILES  = 	srcs/get_next_line.c srcs/draw.c srcs/movement.c srcs/cast_ray.c srcs/vertical_inter.c srcs/ray_cast_utils.c
+CFILES  = 	srcs/get_next_line.c srcs/draw.c srcs/movement.c srcs/cast_ray.c srcs/vertical_inter.c srcs/ray_cast_utils.c \
+			srcs/horizantal_inter.c
 
 OFILES	= $(CFILES:.c=.o)
 

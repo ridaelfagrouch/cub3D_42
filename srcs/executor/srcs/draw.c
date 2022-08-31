@@ -6,58 +6,12 @@
 /*   By: sahafid <sahafid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 14:48:25 by sahafid           #+#    #+#             */
-/*   Updated: 2022/08/30 11:41:06 by sahafid          ###   ########.fr       */
+/*   Updated: 2022/08/31 11:44:52 by sahafid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 #include "../executor.h"
-
-
-// void drawline(int x0, int y0, int x1, int y1, t_graph *lst, int j)
-// {
-//     int dx; 
-// 	int dy;
-// 	int p;
-// 	int x; 
-// 	int y;
- 
-//     dx = x1 - x0;
-//     dy = y1 - y0;
-//     x = x0;
-//     y = y0;
-
-//     p = 2 * dy - dx;    
-//     while (x <= x1)
-//     {
-//         if(p >= 0)
-//         {
-//             if (j == 0)
-//                 mlx_pixel_put(lst->mlx, lst->wind , x, y, lst->floor_color);
-//             else if (j == 1)
-//                 mlx_pixel_put(lst->mlx, lst->wind , x, y, lst->wall_color);
-//             else if (j == 2)
-//                 mlx_pixel_put(lst->mlx, lst->wind , x, y, lst->plyr.player_color);
-//             else
-//                 mlx_pixel_put(lst->mlx, lst->wind , x, y, 0);
-//             y++;
-//             p = p + 2 * dy - 2 * dx;
-//         }
-//         else
-//         {
-//             if (j == 0)
-//                 mlx_pixel_put(lst->mlx, lst->wind , x, y, lst->floor_color);
-//             else if (j == 1)
-//                 mlx_pixel_put(lst->mlx, lst->wind , x, y, lst->wall_color);
-//             else  if (j == 2)
-//                 mlx_pixel_put(lst->mlx, lst->wind , x, y, lst->plyr.player_color);
-//             else
-//                 mlx_pixel_put(lst->mlx, lst->wind , x, y, 0);
-//             p = p + 2 * dy;
-//         }
-//         x++;
-//     }
-// }
 
 void    my_mlx_pixel_put(t_graph   *lst, int x, int y, int color)
 {
@@ -116,9 +70,54 @@ void    draw_cub(int x, int y, int x1, int y1, t_graph *lst, int i)
     }
 }
 
+void    rotate_player(t_graph *lst)
+{
+    if (lst->plyr.rotatedirection == -1)
+    {
+        lst->plyr.rotationangle += (-1 *  lst->plyr.rotationspeed);
+		normilizeAngle(&lst->plyr.rotationangle);
+    }
+    else if (lst->plyr.rotatedirection == 1)
+    {
+        lst->plyr.rotationangle +=  lst->plyr.rotationspeed;
+		normilizeAngle(&lst->plyr.rotationangle);
+    }
+}
+
+void    player_movement(t_graph *lst)
+{
+    int save1;
+    int save2;
+    
+    if (lst->plyr.walkdirection == -1)
+    {
+        save1 = lst->plyr.x_plyr - lst->plyr.speed * cos(lst->plyr.rotationangle);
+		save2 = lst->plyr.y_plyr - lst->plyr.speed * sin(lst->plyr.rotationangle);
+		if (check_wall(lst, save1, save2))
+			return ;
+		lst->plyr.x_plyr = save1;
+		lst->plyr.y_plyr = save2;
+		lst->plyr.x1_plyr = lst->plyr.x_plyr + (lst->unit / 4);
+		lst->plyr.y1_plyr = lst->plyr.y_plyr + (lst->unit / 4);
+    }
+    else if (lst->plyr.walkdirection == 1)
+    {
+        save1 = lst->plyr.x_plyr + lst->plyr.speed * cos(lst->plyr.rotationangle);
+		save2 = lst->plyr.y_plyr + lst->plyr.speed * sin(lst->plyr.rotationangle);
+		if (check_wall(lst, save1, save2))
+			return ;
+		lst->plyr.x_plyr = save1;
+		lst->plyr.y_plyr = save2;
+		lst->plyr.x1_plyr = lst->plyr.x_plyr + (lst->unit / 4);
+		lst->plyr.y1_plyr = lst->plyr.y_plyr + (lst->unit / 4);
+    }
+}
+
 void    draw_player(t_graph *lst)
 {
     // draw_cub(lst->plyr.x_plyr, lst->plyr.y_plyr, lst->plyr.x1_plyr, lst->plyr.y1_plyr, lst, lst->plyr.player_color);
+    rotate_player(lst);
+    player_movement(lst);
     cast_rays(lst);
 }
 

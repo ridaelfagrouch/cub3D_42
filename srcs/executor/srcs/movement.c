@@ -6,11 +6,36 @@
 /*   By: sahafid <sahafid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 14:47:27 by sahafid           #+#    #+#             */
-/*   Updated: 2022/08/30 18:22:44 by sahafid          ###   ########.fr       */
+/*   Updated: 2022/08/31 11:44:39 by sahafid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../executor.h"
+
+int routine(t_graph *lst)
+{
+    mlx_hook(lst->wind, 2, 0L, deal_key, lst);
+	mlx_hook(lst->wind, 3, 0L, reset, lst);
+	mlx_destroy_image(lst->mlx, lst->img);
+	mlx_clear_window(lst->mlx, lst->wind);
+	draw_map(lst->map, lst);
+    draw_player(lst);
+	mlx_put_image_to_window(lst->mlx, lst->wind, lst->img, 0, 0);
+	return (0);
+}
+
+int	reset(int key, t_graph *var)
+{
+	if (key == 124)
+		var->plyr.rotatedirection = 0;
+	if (key == 123)
+		var->plyr.rotatedirection = 0;
+	if (key == 13)
+		var->plyr.walkdirection = 0;
+	if (key == 1)
+		var->plyr.walkdirection = 0;
+	return (0);
+}
 
 int	check_wall(t_graph *lst, int x, int y)
 {
@@ -31,55 +56,21 @@ int	check_wall(t_graph *lst, int x, int y)
 
 int	deal_key(int key, t_graph *var)
 {
-	int	x;
-	int	y;
-	int	save1;
-	int	save2;
-
-	x = 0;
-	y = 0;
-	save1 = 0;
-	save2 = 0;
-	if (key == 2)
-	{
-		var->plyr.rotationangle +=  var->plyr.rotationspeed;
-		normilizeAngle(&var->plyr.rotationangle);
-	}
-	if (key == 0)
-	{
-		var->plyr.rotationangle += (-1 *  var->plyr.rotationspeed);
-		normilizeAngle(&var->plyr.rotationangle);
-	}
+	if (key == 124)
+		var->plyr.rotatedirection = 1;
+	if (key == 123)
+		var->plyr.rotatedirection = -1;
 	if (key == 13)
 	{
 		var->first_time = 1;
-		save1 = var->plyr.x_plyr + var->plyr.speed * cos(var->plyr.rotationangle);
-		save2 = var->plyr.y_plyr + var->plyr.speed * sin(var->plyr.rotationangle);
-		if (check_wall(var, save1, save2))
-			return (0);
-		var->plyr.x_plyr = save1;
-		var->plyr.y_plyr = save2;
-		var->plyr.x1_plyr = var->plyr.x_plyr + (var->unit / 4);
-		var->plyr.y1_plyr = var->plyr.y_plyr + (var->unit / 4);
+		var->plyr.walkdirection = 1;
 	}
 	if (key == 1)
 	{
 		var->first_time = 1;
-		save1 = var->plyr.x_plyr - var->plyr.speed * cos(var->plyr.rotationangle);
-		save2 = var->plyr.y_plyr - var->plyr.speed * sin(var->plyr.rotationangle);
-		if (check_wall(var, save1, save2))
-			return (0);
-		var->plyr.x_plyr = save1;
-		var->plyr.y_plyr = save2;
-		var->plyr.x1_plyr = var->plyr.x_plyr + (var->unit / 4);
-		var->plyr.y1_plyr = var->plyr.y_plyr + (var->unit / 4);
+		var->plyr.walkdirection = -1;
 	}
 	if (key == 53)
 		exit(0);
-	mlx_destroy_image(var->mlx, var->img);
-	mlx_clear_window(var->mlx, var->wind);
-	draw_map(var->map, var);
-	draw_player(var);
-	mlx_put_image_to_window(var->mlx, var->wind, var->img, 0, 0);
 	return (0);
 }
