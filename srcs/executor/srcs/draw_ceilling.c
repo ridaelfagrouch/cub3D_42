@@ -1,32 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   draw_ceilling.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sahafid <sahafid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/20 07:57:18 by sahafid           #+#    #+#             */
-/*   Updated: 2022/09/01 15:14:04 by sahafid          ###   ########.fr       */
+/*   Created: 2022/09/01 15:21:14 by sahafid           #+#    #+#             */
+/*   Updated: 2022/09/01 15:30:11 by sahafid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "../executor.h"
 
-#include <stdio.h>
-#include "executor.h"
-
-int main()
+void	draw_floor_ceilling(t_graph *lst)
 {
-    t_graph lst;
-    int     fd;
+	int i;
 
-    fd = 0;
-    init_map(&lst);
-    init_player(&lst);
-    init_raycast(&lst);
-    init_everything(&lst, fd);
-    draw_map(lst.map.map, &lst);
-    draw_player(&lst);
-    mlx_loop_hook(lst.mlx, routine, &lst);
-    mlx_loop(lst.mlx);
-    return (0);
+	i = (lst->height * lst->map.unit) / 2;
+	// draw ceilling
+	draw_rect(0, 0, lst->width * lst->map.unit, i, lst, lst->map.player_color);
+	// draw floor
+	draw_rect(0, i, lst->width * lst->map.unit, lst->height * lst->map.unit, lst, lst->map.floor_color);
 }

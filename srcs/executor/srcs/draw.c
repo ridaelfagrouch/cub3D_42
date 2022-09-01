@@ -6,7 +6,7 @@
 /*   By: sahafid <sahafid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 14:48:25 by sahafid           #+#    #+#             */
-/*   Updated: 2022/08/31 11:44:52 by sahafid          ###   ########.fr       */
+/*   Updated: 2022/09/01 15:19:11 by sahafid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ void    my_mlx_pixel_put(t_graph   *lst, int x, int y, int color)
 {
 	char	*test;
 
-    if ((x >= 0 && x <= lst->j * lst->unit) && (y >= 0 && y <= lst->i * lst->unit))
+    if ((x >= 0 && x < lst->width * lst->map.unit) && (y >= 0 && y < lst->height * lst->map.unit))
     {
-        test = &lst->addr[(y * lst->size_line) + (x * lst->bpp / 8)];
+        test = &lst->addr[(y * lst->map.size_line) + (x * lst->map.bpp / 8)];
 	    *(unsigned int*)test = color;   
     }
 }
@@ -55,14 +55,13 @@ void drawline(double x0, double y0, int x1, int y1, t_graph *lst, int j)
 void    draw_cub(int x, int y, int x1, int y1, t_graph *lst, int i)
 {
 	int	j;
-    int save;
 
 	j = x;
 	while (y < y1)
     {
         while (j <= x1)
 		{
-            my_mlx_pixel_put(lst ,j, y, i);
+            my_mlx_pixel_put(lst ,lst->map.minimap * j, lst->map.minimap * y, i);
 			j++;
 		}
 		j = x;
@@ -86,36 +85,35 @@ void    rotate_player(t_graph *lst)
 
 void    player_movement(t_graph *lst)
 {
-    int save1;
-    int save2;
+    double save1;
+    double save2;
     
     if (lst->plyr.walkdirection == -1)
     {
-        save1 = lst->plyr.x_plyr - lst->plyr.speed * cos(lst->plyr.rotationangle);
-		save2 = lst->plyr.y_plyr - lst->plyr.speed * sin(lst->plyr.rotationangle);
+        save1 = lst->plyr.x_plyr - (lst->plyr.speed * cos(lst->plyr.rotationangle));
+		save2 = lst->plyr.y_plyr - (lst->plyr.speed * sin(lst->plyr.rotationangle));
 		if (check_wall(lst, save1, save2))
 			return ;
 		lst->plyr.x_plyr = save1;
 		lst->plyr.y_plyr = save2;
-		lst->plyr.x1_plyr = lst->plyr.x_plyr + (lst->unit / 4);
-		lst->plyr.y1_plyr = lst->plyr.y_plyr + (lst->unit / 4);
+		lst->plyr.x1_plyr = lst->plyr.x_plyr + (lst->map.unit / 4);
+		lst->plyr.y1_plyr = lst->plyr.y_plyr + (lst->map.unit / 4);
     }
     else if (lst->plyr.walkdirection == 1)
     {
-        save1 = lst->plyr.x_plyr + lst->plyr.speed * cos(lst->plyr.rotationangle);
-		save2 = lst->plyr.y_plyr + lst->plyr.speed * sin(lst->plyr.rotationangle);
+        save1 = lst->plyr.x_plyr + (lst->plyr.speed * cos(lst->plyr.rotationangle));
+		save2 = lst->plyr.y_plyr + (lst->plyr.speed * sin(lst->plyr.rotationangle));
 		if (check_wall(lst, save1, save2))
 			return ;
 		lst->plyr.x_plyr = save1;
 		lst->plyr.y_plyr = save2;
-		lst->plyr.x1_plyr = lst->plyr.x_plyr + (lst->unit / 4);
-		lst->plyr.y1_plyr = lst->plyr.y_plyr + (lst->unit / 4);
+		lst->plyr.x1_plyr = lst->plyr.x_plyr + (lst->map.unit / 4);
+		lst->plyr.y1_plyr = lst->plyr.y_plyr + (lst->map.unit / 4);
     }
 }
 
 void    draw_player(t_graph *lst)
 {
-    // draw_cub(lst->plyr.x_plyr, lst->plyr.y_plyr, lst->plyr.x1_plyr, lst->plyr.y1_plyr, lst, lst->plyr.player_color);
     rotate_player(lst);
     player_movement(lst);
     cast_rays(lst);
@@ -125,46 +123,44 @@ void    draw_map(char	**map, t_graph *lst)
 {
     int	i;
     int j;
+    int x;
+    int y;
 
 	i = 0;
     j = 0;
-    lst->x = 0;
-	lst->y = 0;
-	lst->x1 = lst->unit;
-	lst->y1 = lst->unit;
-    lst->img = NULL;
-    lst->addr = NULL;
-    lst->img = mlx_new_image(lst->mlx, lst->j * lst->unit, lst->i * lst->unit);
-    lst->addr = mlx_get_data_addr(lst->img, &lst->bpp, &lst->size_line, &lst->endian);
+    x = 0;
+	y = 0;
+	lst->x1 = lst->map.unit;
+	lst->y1 = lst->map.unit;
 	while (map[i])
     {
         while (map[i][j])
         {
             if (map[i][j] == '0')
-                draw_cub(lst->x, lst->y, lst->x1, lst->y1, lst, lst->floor_color);
+                draw_cub(x, y, lst->x1, lst->y1, lst, lst->map.floor_color);
             else if (map[i][j] == '1')
-				draw_cub(lst->x, lst->y, lst->x1, lst->y1, lst, lst->wall_color);
+				draw_cub(x, y, lst->x1, lst->y1, lst, lst->map.wall_color);
             else if (map[i][j] == 'P')
             {
-                draw_cub(lst->x, lst->y, lst->x1, lst->y1, lst, lst->floor_color);
+                draw_cub(x, y, lst->x1, lst->y1, lst, lst->map.floor_color);
                 if (lst->first_time == 0)
                 {
-                    lst->plyr.x_plyr = lst->x + lst->unit / 4;
-                    lst->plyr.y_plyr = lst->y + lst->unit / 4;
-                    lst->plyr.x1_plyr = lst->plyr.x_plyr + (lst->unit / 4);
-                    lst->plyr.y1_plyr = lst->plyr.y_plyr + (lst->unit / 4);
+                    lst->plyr.x_plyr = x + lst->map.unit / 4;
+                    lst->plyr.y_plyr = y + lst->map.unit / 4;
+                    lst->plyr.x1_plyr = lst->plyr.x_plyr + (lst->map.unit / 4);
+                    lst->plyr.y1_plyr = lst->plyr.y_plyr + (lst->map.unit / 4);
                 }
             }
             else
-                draw_cub(lst->x, lst->y, lst->x1, lst->y1, lst, 20);
-            lst->x += lst->unit;
-            lst->x1 += lst->unit;
+                draw_cub(x, y, lst->x1, lst->y1, lst, 20);
+            x += lst->map.unit;
+            lst->x1 += lst->map.unit;
             j++;
         }
-        lst->x = 0;
-        lst->y += lst->unit;
-        lst->y1 += lst->unit;
-        lst->x1 = lst->unit;
+        x = 0;
+        y += lst->map.unit;
+        lst->y1 += lst->map.unit;
+        lst->x1 = lst->map.unit;
         j = 0;
         i++;
     }

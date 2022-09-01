@@ -6,7 +6,7 @@
 /*   By: sahafid <sahafid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 14:47:27 by sahafid           #+#    #+#             */
-/*   Updated: 2022/08/31 11:44:39 by sahafid          ###   ########.fr       */
+/*   Updated: 2022/09/01 15:24:49 by sahafid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,12 @@ int routine(t_graph *lst)
 	mlx_hook(lst->wind, 3, 0L, reset, lst);
 	mlx_destroy_image(lst->mlx, lst->img);
 	mlx_clear_window(lst->mlx, lst->wind);
-	draw_map(lst->map, lst);
+	lst->img = mlx_new_image(lst->mlx, lst->width * lst->map.unit, lst->height * lst->map.unit);
+    lst->addr = mlx_get_data_addr(lst->img, &lst->map.bpp, &lst->map.size_line, &lst->map.endian);
+	draw_floor_ceilling(lst);
     draw_player(lst);
+	draw_map(lst->map.map, lst);
+	draw_cub(lst->plyr.x_plyr, lst->plyr.y_plyr, lst->plyr.x1_plyr, lst->plyr.y1_plyr, lst, lst->map.player_color);
 	mlx_put_image_to_window(lst->mlx, lst->wind, lst->img, 0, 0);
 	return (0);
 }
@@ -44,11 +48,11 @@ int	check_wall(t_graph *lst, int x, int y)
 	int	pos2;
 
 	i = 0;
-	pos1 = x / lst->unit;
-	pos2 = y / lst->unit;
-	if ((pos1 >= 0 && pos1 < lst->j) && (pos2 >= 0 && pos2 < lst->i))
+	pos1 = x / lst->map.unit;
+	pos2 = y / lst->map.unit;
+	if ((pos1 >= 0 && pos1 < lst->x) && (pos2 >= 0 && pos2 < lst->y))
 	{
-		if (lst->map[pos2] && lst->map[pos2][pos1] && lst->map[pos2][pos1] == '1')
+		if (lst->map.map[pos2] && lst->map.map[pos2][pos1] && lst->map.map[pos2][pos1] == '1')
 			return (1);
 	}
 	return (0);

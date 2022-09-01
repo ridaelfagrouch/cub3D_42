@@ -6,7 +6,7 @@
 #    By: sahafid <sahafid@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: Invalid date        by ██████╗██║        #+#    #+#              #
-#    Updated: 2022/08/30 21:28:15 by sahafid          ###   ########.fr        #
+#    Updated: 2022/09/01 15:21:44 by sahafid          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -85,13 +85,13 @@
 # ---------------------------------------------------------------------------- #
 
 CFILES  = 	srcs/get_next_line.c srcs/draw.c srcs/movement.c srcs/cast_ray.c srcs/vertical_inter.c srcs/ray_cast_utils.c \
-			srcs/horizantal_inter.c
+			srcs/horizantal_inter.c srcs/init.c srcs/draw_ceilling.c
 
 OFILES	= $(CFILES:.c=.o)
 
 CC	= gcc
 INT	= executor.h
-FLAGS = -L /Users/sahafid/Desktop/minilibx_opengl_20191021 -lmlx -framework OpenGl -framework AppKit
+FLAGS = -L /Users/sahafid/Desktop/minilibx_opengl_20191021 -lmlx -framework OpenGl -framework AppKit 
 NAME = cub3d
 ARCHIVE = ../../libft/libft.a
 
