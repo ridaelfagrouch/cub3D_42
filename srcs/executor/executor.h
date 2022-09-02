@@ -17,6 +17,8 @@
 
 /* --------------------------------- MACROS --------------------------------- */
 
+
+
 typedef struct s_map
 {
 	int		unit;
@@ -86,7 +88,7 @@ typedef struct s_graph
 char	*get_next_line1(int fd);
 void	draw_map(char **map, t_graph *lst);
 int		deal_key(int key, t_graph *var);
-void	draw_player(t_graph *lst);
+void	draw_walls(t_graph *lst);
 int		check_wall(t_graph *lst, int x, int y);
 void	drawline(double x0, double y0, int x1, int y1, t_graph *lst, int j);
 void    draw_cub(int x, int y, int x1, int y1, t_graph *lst, int i);

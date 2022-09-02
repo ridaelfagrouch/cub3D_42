@@ -6,7 +6,7 @@
 /*   By: sahafid <sahafid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 14:47:27 by sahafid           #+#    #+#             */
-/*   Updated: 2022/09/01 15:24:49 by sahafid          ###   ########.fr       */
+/*   Updated: 2022/09/02 16:41:39 by sahafid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@ int routine(t_graph *lst)
 	lst->img = mlx_new_image(lst->mlx, lst->width * lst->map.unit, lst->height * lst->map.unit);
     lst->addr = mlx_get_data_addr(lst->img, &lst->map.bpp, &lst->map.size_line, &lst->map.endian);
 	draw_floor_ceilling(lst);
-    draw_player(lst);
+    draw_walls(lst);
 	draw_map(lst->map.map, lst);
-	draw_cub(lst->plyr.x_plyr, lst->plyr.y_plyr, lst->plyr.x1_plyr, lst->plyr.y1_plyr, lst, lst->map.player_color);
+	draw_cub(lst->plyr.x_plyr, lst->plyr.y_plyr, lst->plyr.x1_plyr + (lst->map.unit / 2), lst->plyr.y1_plyr + (lst->map.unit / 2), lst, lst->map.player_color);
 	mlx_put_image_to_window(lst->mlx, lst->wind, lst->img, 0, 0);
 	return (0);
 }
@@ -37,6 +37,10 @@ int	reset(int key, t_graph *var)
 	if (key == 13)
 		var->plyr.walkdirection = 0;
 	if (key == 1)
+		var->plyr.walkdirection = 0;
+	if (key == 2)
+		var->plyr.walkdirection = 0;
+	if (key == 0)
 		var->plyr.walkdirection = 0;
 	return (0);
 }
@@ -73,6 +77,16 @@ int	deal_key(int key, t_graph *var)
 	{
 		var->first_time = 1;
 		var->plyr.walkdirection = -1;
+	}
+	if (key == 2)
+	{
+		var->first_time = 1;
+		var->plyr.walkdirection = 2;
+	}
+	if (key == 0)
+	{
+		var->first_time = 1;
+		var->plyr.walkdirection = 3;
 	}
 	if (key == 53)
 		exit(0);

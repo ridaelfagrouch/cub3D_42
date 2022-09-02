@@ -6,7 +6,7 @@
 /*   By: sahafid <sahafid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 07:57:18 by sahafid           #+#    #+#             */
-/*   Updated: 2022/09/01 15:14:04 by sahafid          ###   ########.fr       */
+/*   Updated: 2022/09/01 16:54:21 by sahafid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int main()
     init_raycast(&lst);
     init_everything(&lst, fd);
     draw_map(lst.map.map, &lst);
-    draw_player(&lst);
+    draw_walls(&lst);
     mlx_loop_hook(lst.mlx, routine, &lst);
     mlx_loop(lst.mlx);
     return (0);

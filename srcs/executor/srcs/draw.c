@@ -6,7 +6,7 @@
 /*   By: sahafid <sahafid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 14:48:25 by sahafid           #+#    #+#             */
-/*   Updated: 2022/09/01 15:19:11 by sahafid          ###   ########.fr       */
+/*   Updated: 2022/09/02 16:41:46 by sahafid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,35 @@ void    rotate_player(t_graph *lst)
     }
 }
 
+
+void    turningleftright(t_graph *lst, int direction)
+{
+    double	newangle;
+    int		save1;
+    int		save2;
+
+	if (direction == 0)
+	{
+		newangle = lst->plyr.rotationangle + M_PI / 2;
+		normilizeAngle(&newangle);
+		save1 = lst->plyr.x_plyr + (lst->plyr.speed * cos(newangle));
+		save2 = lst->plyr.y_plyr + (lst->plyr.speed * sin(newangle));
+	}
+	else
+	{
+		newangle = lst->plyr.rotationangle - M_PI / 2;
+		normilizeAngle(&newangle);
+		save1 = lst->plyr.x_plyr + (lst->plyr.speed * cos(newangle));
+		save2 = lst->plyr.y_plyr + (lst->plyr.speed * sin(newangle));
+	}
+    if (check_wall(lst, save1, save2))
+			return ;
+	lst->plyr.x_plyr = save1;
+	lst->plyr.y_plyr = save2;
+	lst->plyr.x1_plyr = lst->plyr.x_plyr + (lst->map.unit / 4);
+	lst->plyr.y1_plyr = lst->plyr.y_plyr + (lst->map.unit / 4);
+}
+
 void    player_movement(t_graph *lst)
 {
     double save1;
@@ -110,9 +139,13 @@ void    player_movement(t_graph *lst)
 		lst->plyr.x1_plyr = lst->plyr.x_plyr + (lst->map.unit / 4);
 		lst->plyr.y1_plyr = lst->plyr.y_plyr + (lst->map.unit / 4);
     }
+    else if (lst->plyr.walkdirection == 2)
+        turningleftright(lst, 0);
+    else if (lst->plyr.walkdirection == 3)
+        turningleftright(lst, 1);
 }
 
-void    draw_player(t_graph *lst)
+void    draw_walls(t_graph *lst)
 {
     rotate_player(lst);
     player_movement(lst);

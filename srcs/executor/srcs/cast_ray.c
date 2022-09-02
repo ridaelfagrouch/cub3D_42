@@ -6,7 +6,7 @@
 /*   By: sahafid <sahafid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 16:46:05 by sahafid           #+#    #+#             */
-/*   Updated: 2022/09/01 16:40:13 by sahafid          ###   ########.fr       */
+/*   Updated: 2022/09/02 16:41:15 by sahafid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	rendringwalls(t_graph *lst, int i, int j)
 	distance = distance * cos(lst->raycast.ray_angle - lst->plyr.rotationangle);
 	distanceprojectionplane = ((lst->width * lst->map.unit) / 2) / tan(lst->plyr.fov / 2);
 	wallstripeheight = (lst->map.unit / distance) * distanceprojectionplane;
-	x = (lst->width * lst->map.unit) / 320;
+	x = 1;
 	draw_rect((i * x),
 			((lst->height * lst->map.unit) / 2) - (wallstripeheight / 2),
 			(i * x) + x,
@@ -56,21 +56,21 @@ void	draw_rays(t_graph *lst, int j, int i)
 {
 	if (j == 1)
 	{
+		rendringwalls(lst, i, 1);
 		drawline(lst->map.minimap * lst->plyr.x_plyr,
 			lst->map.minimap * lst->plyr.y_plyr,
 			lst->map.minimap * lst->raycast.xintercept_vertic,
 			lst->map.minimap * lst->raycast.yintercept_vertic,
 			lst, lst->map.player_color);
-		rendringwalls(lst, i, 1);
 	}
 	else
 	{
+		rendringwalls(lst, i, 0);
 		drawline(lst->map.minimap * lst->plyr.x_plyr,
 			lst->map.minimap * lst->plyr.y_plyr,
 			lst->map.minimap * lst->raycast.xintercept_horiz,
 			lst->map.minimap * lst->raycast.yintercept_horiz,
 			lst, lst->map.player_color);
-		rendringwalls(lst, i, 0);
 	}
 }
 
@@ -83,11 +83,10 @@ void cast_rays(t_graph *lst)
 
 	lst->raycast.xintercept_horiz = 0;
 	lst->raycast.yintercept_horiz = 0;
-	fov = 1.0472;
-	lst->raycast.ray_angle = lst->plyr.rotationangle - fov / 2;
+	lst->raycast.ray_angle = lst->plyr.rotationangle - lst->plyr.fov / 2;
 	i = 0;
 	j = 0;
-	rays_num = 319;
+	rays_num = lst->width * lst->map.unit;
 	while (i < rays_num)
 	{
 		normilizeAngle(&lst->raycast.ray_angle);
@@ -96,7 +95,7 @@ void cast_rays(t_graph *lst)
 		vertical_intersaction(lst);
 		j = calculate_intersactions(lst);
 		draw_rays(lst, j, i);
-		lst->raycast.ray_angle += fov / rays_num;
+		lst->raycast.ray_angle += lst->plyr.fov / rays_num;
 		i++;
 	}
 }

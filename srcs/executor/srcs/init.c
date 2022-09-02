@@ -6,7 +6,7 @@
 /*   By: sahafid <sahafid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 13:09:18 by sahafid           #+#    #+#             */
-/*   Updated: 2022/09/01 16:40:56 by sahafid          ###   ########.fr       */
+/*   Updated: 2022/09/02 16:48:36 by sahafid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void    init_player(t_graph *lst)
 {
-    lst->plyr.rotationangle = M_PI;
+    lst->plyr.rotationangle = M_PI / 2;
     lst->plyr.fov = 60 * (M_PI / 180);
     lst->plyr.speed = 3;
     lst->plyr.rotationspeed = 4 * (M_PI / 180);
@@ -33,10 +33,10 @@ void   init_raycast(t_graph *lst)
 
 void    init_map(t_graph *lst)
 {
-    lst->map.floor_color = 16711680;
+    lst->map.floor_color = 9498256;
     lst->map.wall_color = 8421504;
     lst->map.player_color = 11393254;
-    lst->map.unit = 50;
+    lst->map.unit = 20;
     lst->map.minimap = 0.2;
 }
 
@@ -55,14 +55,16 @@ void    init_everything(t_graph *lst, int fd)
     free(line);
 	while (lst->map.map[lst->y])
     {
-        lst->height++;
+        // lst->height++;
         lst->y++;
     }
     while (lst->map.map[0][lst->x])
     {
-        lst->width++;
+        // lst->width++;
         lst->x++;
     }
+    lst->height = 50;
+    lst->width = 50;
 	lst->mlx = mlx_init();
     lst->wind = mlx_new_window(lst->mlx, lst->width * lst->map.unit, lst->height * lst->map.unit, "cub3d");
 	lst->img = NULL;
