@@ -6,7 +6,7 @@
 /*   By: sahafid <sahafid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 14:47:27 by sahafid           #+#    #+#             */
-/*   Updated: 2022/09/02 16:41:39 by sahafid          ###   ########.fr       */
+/*   Updated: 2022/09/03 12:51:50 by sahafid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,15 @@ int routine(t_graph *lst)
 {
     mlx_hook(lst->wind, 2, 0L, deal_key, lst);
 	mlx_hook(lst->wind, 3, 0L, reset, lst);
-	mlx_destroy_image(lst->mlx, lst->img);
+	mlx_destroy_image(lst->mlx, lst->map.img);
 	mlx_clear_window(lst->mlx, lst->wind);
-	lst->img = mlx_new_image(lst->mlx, lst->width * lst->map.unit, lst->height * lst->map.unit);
-    lst->addr = mlx_get_data_addr(lst->img, &lst->map.bpp, &lst->map.size_line, &lst->map.endian);
+	lst->map.img = mlx_new_image(lst->mlx, lst->map.width * lst->map.unit, lst->map.height * lst->map.unit);
+    lst->map.addr = mlx_get_data_addr(lst->map.img, &lst->map.bpp, &lst->map.size_line, &lst->map.endian);
 	draw_floor_ceilling(lst);
-    draw_walls(lst);
 	draw_map(lst->map.map, lst);
+    draw_walls(lst);
 	draw_cub(lst->plyr.x_plyr, lst->plyr.y_plyr, lst->plyr.x1_plyr + (lst->map.unit / 2), lst->plyr.y1_plyr + (lst->map.unit / 2), lst, lst->map.player_color);
-	mlx_put_image_to_window(lst->mlx, lst->wind, lst->img, 0, 0);
+	mlx_put_image_to_window(lst->mlx, lst->wind, lst->map.img, 0, 0);
 	return (0);
 }
 

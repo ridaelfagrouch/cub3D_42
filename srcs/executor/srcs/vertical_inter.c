@@ -6,7 +6,7 @@
 /*   By: sahafid <sahafid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 18:25:36 by sahafid           #+#    #+#             */
-/*   Updated: 2022/08/31 12:35:02 by sahafid          ###   ########.fr       */
+/*   Updated: 2022/09/03 12:05:49 by sahafid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	vertical_intersaction(t_graph *lst)
 		lst->raycast.ystep *= -1;
 	if (lst->raycast.facingleft)
 		lst->raycast.xintercept_vertic--;
-	while ((lst->raycast.xintercept_vertic >= 0 && lst->raycast.xintercept_vertic <= lst->map.unit * lst->width) && (lst->raycast.yintercept_vertic >= 0 && lst->raycast.yintercept_vertic <= lst->map.unit * lst->height))
+	while ((lst->raycast.xintercept_vertic >= 0 && lst->raycast.xintercept_vertic <= lst->map.unit * lst->map.width) && (lst->raycast.yintercept_vertic >= 0 && lst->raycast.yintercept_vertic <= lst->map.unit * lst->map.height))
 	{
 		if (check_wall(lst, lst->raycast.xintercept_vertic, lst->raycast.yintercept_vertic))
 		{

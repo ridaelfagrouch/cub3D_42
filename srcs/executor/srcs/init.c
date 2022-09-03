@@ -6,7 +6,7 @@
 /*   By: sahafid <sahafid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 13:09:18 by sahafid           #+#    #+#             */
-/*   Updated: 2022/09/02 16:48:36 by sahafid          ###   ########.fr       */
+/*   Updated: 2022/09/03 23:42:56 by sahafid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void    init_map(t_graph *lst)
     lst->map.floor_color = 9498256;
     lst->map.wall_color = 8421504;
     lst->map.player_color = 11393254;
-    lst->map.unit = 20;
+    lst->map.unit = 50;
     lst->map.minimap = 0.2;
 }
 
@@ -44,31 +44,38 @@ void    init_everything(t_graph *lst, int fd)
 {
 	char	*line;
 	
-    lst->width = 0;
-    lst->height = 0;
+    lst->map.width = 0;
+    lst->map.height = 0;
     lst->y = 0;
     lst->x =0;
     lst->first_time = 0;
-	fd = open("cub3d.cub", O_RDONLY);
+	fd = open("maps/lol.cub", O_RDONLY);
     line = get_next_line1(fd);
     lst->map.map = ft_split(line, '\n');
     free(line);
 	while (lst->map.map[lst->y])
     {
-        // lst->height++;
+        lst->map.height++;
         lst->y++;
     }
     while (lst->map.map[0][lst->x])
     {
-        // lst->width++;
+        lst->map.width++;
         lst->x++;
     }
-    lst->height = 50;
-    lst->width = 50;
 	lst->mlx = mlx_init();
-    lst->wind = mlx_new_window(lst->mlx, lst->width * lst->map.unit, lst->height * lst->map.unit, "cub3d");
-	lst->img = NULL;
-    lst->addr = NULL;
-    lst->img = mlx_new_image(lst->mlx, lst->width * lst->map.unit, lst->height * lst->map.unit);
-    lst->addr = mlx_get_data_addr(lst->img, &lst->map.bpp, &lst->map.size_line, &lst->map.endian);
+    lst->wind = mlx_new_window(lst->mlx, lst->map.width * lst->map.unit, lst->map.height * lst->map.unit, "cub3d");
+	lst->map.img = NULL;
+    lst->map.addr = NULL;
+    lst->map.img = mlx_new_image(lst->mlx, lst->map.width * lst->map.unit, lst->map.height * lst->map.unit);
+    lst->map.addr = mlx_get_data_addr(lst->map.img, &lst->map.bpp, &lst->map.size_line, &lst->map.endian);
+}
+
+void    init_texture(t_graph *lst)
+{
+    int i;
+    int j;
+
+    lst->texture.texture_img = mlx_xpm_file_to_image(lst->mlx, "img/wall.xpm", &i, &j);
+    lst->texture.img_addr = mlx_get_data_addr(lst->texture.texture_img, &lst->texture.bpp, &lst->texture.size_line, &lst->texture.endian);
 }

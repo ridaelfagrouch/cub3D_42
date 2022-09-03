@@ -6,27 +6,73 @@
 /*   By: sahafid <sahafid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 16:46:05 by sahafid           #+#    #+#             */
-/*   Updated: 2022/09/02 16:41:15 by sahafid          ###   ########.fr       */
+/*   Updated: 2022/09/03 23:42:44 by sahafid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../executor.h"
 
+
+unsigned int	get_texture(t_graph *lst, double j, double x)
+{
+	int	y;
+	int	x2;
+	int	color;
+	
+	y = j * 50;
+	x2 = x * 50;
+	// printf("%d  %d\n", x2, y);
+	color = (int)lst->texture.img_addr[((y * lst->texture.size_line) + (x2 * lst->texture.bpp / 8))];
+	return (color);
+}
+
 void    draw_rect(int x, int y, int x1, int y1, t_graph *lst, int i)
 {
-	int	j;
+	int				j;
+	double			posX;
+	double			posY;
+	double			wallstripeheight;
+	unsigned int	pixel_color;	
 
 	j = x;
-	while (y < y1)
-    {
-        while (j < x1)
-		{
-            my_mlx_pixel_put(lst ,j, y, i);
-			j++;
-		}
-		j = x;
-        y++;
-    }
+	pixel_color = 0;
+	posX = 0;
+	posY = 0;
+	wallstripeheight = y1 - y;
+	if (i == 0)
+	{
+		posX = ((double)lst->raycast.yintercept_horiz / (double)50.0);
+		// printf("%f\n", posX);
+		while (y < y1)
+    	{
+    	    while (j < x1)
+			{
+				posY = ((double)(y1 - y) / (double)wallstripeheight);
+				pixel_color = get_texture(lst, posY, posX);
+    	        my_mlx_pixel_put(lst ,j, y, pixel_color);
+				j++;
+			}
+			j = x;
+    	    y++;
+    	}
+	}
+	else
+	{
+		posX =  fmod((double)lst->raycast.xintercept_vertic / (double)50, 1.0);
+		while (y < y1)
+    	{
+    	    while (j < x1)
+			{
+				posY = ((double)(y1 - y) / (double)wallstripeheight);
+				pixel_color = get_texture(lst, 1, 1);
+    	        my_mlx_pixel_put(lst ,j, y, pixel_color);
+				j++;
+			}
+			j = x;
+    	    y++;
+    	}
+	}
+	
 }
 
 void	rendringwalls(t_graph *lst, int i, int j)
@@ -42,13 +88,13 @@ void	rendringwalls(t_graph *lst, int i, int j)
 	else
 		distance = distance_points(lst->plyr.x_plyr, lst->raycast.xintercept_vertic, lst->plyr.y_plyr, lst->raycast.yintercept_vertic);
 	distance = distance * cos(lst->raycast.ray_angle - lst->plyr.rotationangle);
-	distanceprojectionplane = ((lst->width * lst->map.unit) / 2) / tan(lst->plyr.fov / 2);
+	distanceprojectionplane = ((lst->map.width * lst->map.unit) / 2) / tan(lst->plyr.fov / 2);
 	wallstripeheight = (lst->map.unit / distance) * distanceprojectionplane;
 	x = 1;
 	draw_rect((i * x),
-			((lst->height * lst->map.unit) / 2) - (wallstripeheight / 2),
+			((lst->map.height * lst->map.unit) / 2) - (wallstripeheight / 2),
 			(i * x) + x,
-			wallstripeheight + ((lst->height * lst->map.unit) / 2) - (wallstripeheight / 2), lst, 16777215);
+			wallstripeheight + ((lst->map.height * lst->map.unit) / 2) - (wallstripeheight / 2), lst, j);
 	
 }
 
@@ -86,7 +132,7 @@ void cast_rays(t_graph *lst)
 	lst->raycast.ray_angle = lst->plyr.rotationangle - lst->plyr.fov / 2;
 	i = 0;
 	j = 0;
-	rays_num = lst->width * lst->map.unit;
+	rays_num = lst->map.width * lst->map.unit;
 	while (i < rays_num)
 	{
 		normilizeAngle(&lst->raycast.ray_angle);

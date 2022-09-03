@@ -2,6 +2,7 @@ make --dry-run --always-make --keep-going --print-directory
 make: Entering directory `/Users/sahafid/Desktop/cub3D_42'
 echo " \033[1;5;1;36m$TITLE"
 make -C libft/
+ 
 make -C srcs/parser/
 make -C srcs/executor/
 gcc -Wall -Wextra -Werror -lm main.c -o cub3D -Llibft -lft -Lsrcs/parser -lparser -Lsrcs/executor -lexecutor -L minilibx-linux -lmlx -lm -lbsd -lX11 -lXext -g

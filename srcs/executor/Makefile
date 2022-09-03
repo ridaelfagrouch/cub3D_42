@@ -5,8 +5,8 @@
 #                                                     +:+ +:+         +:+      #
 #    By: sahafid <sahafid@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: Invalid date        by ██████╗██║        #+#    #+#              #
-#    Updated: 2022/09/01 15:21:44 by sahafid          ###   ########.fr        #
+#    Created: Invalid Date        by ██████╗██║        #+#    #+#              #
+#    Updated: 2022/09/03 13:28:40 by sahafid          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -105,10 +105,9 @@ $(NAME) : $(OFILES) main.c
 
 clean:
 	@rm -rf $(OFILES)
-	@rm -f $(NAME)
 
-# fclean:	clean
-# 	@rm -rf $(NAME)
+fclean:	clean
+	@rm -rf $(NAME)
 
 re: clean all
 

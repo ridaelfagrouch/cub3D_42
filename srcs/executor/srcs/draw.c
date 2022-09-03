@@ -6,7 +6,7 @@
 /*   By: sahafid <sahafid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 14:48:25 by sahafid           #+#    #+#             */
-/*   Updated: 2022/09/02 16:41:46 by sahafid          ###   ########.fr       */
+/*   Updated: 2022/09/03 15:55:16 by sahafid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ void    my_mlx_pixel_put(t_graph   *lst, int x, int y, int color)
 {
 	char	*test;
 
-    if ((x >= 0 && x < lst->width * lst->map.unit) && (y >= 0 && y < lst->height * lst->map.unit))
+    if ((x >= 0 && x < lst->map.width * lst->map.unit) && (y >= 0 && y < lst->map.height * lst->map.unit))
     {
-        test = &lst->addr[(y * lst->map.size_line) + (x * lst->map.bpp / 8)];
+        test = &lst->map.addr[(y * lst->map.size_line) + (x * lst->map.bpp / 8)];
 	    *(unsigned int*)test = color;   
     }
 }
@@ -62,6 +62,23 @@ void    draw_cub(int x, int y, int x1, int y1, t_graph *lst, int i)
         while (j <= x1)
 		{
             my_mlx_pixel_put(lst ,lst->map.minimap * j, lst->map.minimap * y, i);
+			j++;
+		}
+		j = x;
+        y++;
+    }
+}
+
+void    draw_cub1(int x, int y, int x1, int y1, t_graph *lst, int i)
+{
+	int	j;
+
+	j = x;
+	while (y < y1)
+    {
+        while (j <= x1)
+		{
+            my_mlx_pixel_put(lst ,j, y, i);
 			j++;
 		}
 		j = x;

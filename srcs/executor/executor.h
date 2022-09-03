@@ -30,6 +30,10 @@ typedef struct s_map
 	int		bpp;
 	int		size_line;
 	int		endian;
+	void	*img;
+	char	*addr;
+	int		height;
+	int		width;
 } t_map;
 
 
@@ -65,22 +69,29 @@ typedef struct s_raycasting
 	int		vertic_intersaction;
 } t_raycasting;
 
+typedef struct s_texture
+{
+	void	*texture_img;
+	char	*img_addr;
+	int		bpp;
+	int		size_line;
+	int		endian;
+} t_texture;
+
 typedef struct s_graph
 {
-	void		*mlx;
-	void		*wind;
-	void		*img;
-	char		*addr;
-	int			height;
-	int			width;
-	int			x;
-	int			y;
-	int			x1;
-	int			y1;
-	int			first_time;
+	void				*mlx;
+	void				*wind;
+	
+	int					x;
+	int					y;
+	int					x1;
+	int					y1;
+	int					first_time;
 	struct s_player		plyr;
 	struct s_raycasting raycast;
 	struct s_map		map;
+	struct s_texture	texture;
 } t_graph;
 
 /* --------------------------------- TYPEDEFs ------------------------------- */
@@ -110,6 +121,7 @@ void    init_everything(t_graph *lst, int fd);
 void    draw_cub1(int x, int y, int x1, int y1, t_graph *lst, int i);
 void    draw_rect(int x, int y, int x1, int y1, t_graph *lst, int i);
 void	draw_floor_ceilling(t_graph *lst);
+void    init_texture(t_graph *lst);
 
 
 /* --------------------------------- PROTOTYPES ----------------------------- */
