@@ -72,10 +72,12 @@ typedef struct s_raycasting
 typedef struct s_texture
 {
 	void	*texture_img;
-	char	*img_addr;
+	int		*img_addr;
 	int		bpp;
 	int		size_line;
 	int		endian;
+	int		width;
+	int		height;
 } t_texture;
 
 typedef struct s_graph
