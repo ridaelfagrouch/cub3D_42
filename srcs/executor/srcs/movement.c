@@ -6,7 +6,7 @@
 /*   By: sahafid <sahafid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 14:47:27 by sahafid           #+#    #+#             */
-/*   Updated: 2022/09/03 12:51:50 by sahafid          ###   ########.fr       */
+/*   Updated: 2022/09/04 18:49:14 by sahafid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ int routine(t_graph *lst)
 	draw_floor_ceilling(lst);
 	draw_map(lst->map.map, lst);
     draw_walls(lst);
-	draw_cub(lst->plyr.x_plyr, lst->plyr.y_plyr, lst->plyr.x1_plyr + (lst->map.unit / 2), lst->plyr.y1_plyr + (lst->map.unit / 2), lst, lst->map.player_color);
 	mlx_put_image_to_window(lst->mlx, lst->wind, lst->map.img, 0, 0);
 	return (0);
 }

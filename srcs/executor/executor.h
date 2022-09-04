@@ -71,20 +71,33 @@ typedef struct s_raycasting
 
 typedef struct s_texture
 {
-	void	*texture_img;
-	int		*img_addr;
+	void	*texture_img_n;
+	int		*img_addr_N;
+	void	*texture_img_S;
+	int		*img_addr_S;
+	void	*texture_img_E;
+	int		*img_addr_E;
+	void	*texture_img_W;
+	int		*img_addr_W;
 	int		bpp;
 	int		size_line;
 	int		endian;
 	int		width;
 	int		height;
+	int		width_n;
+	int		height_n;
+	int		width_S;
+	int		height_S;
+	int		width_W;
+	int		height_W;
+	int		width_E;
+	int		height_E;
 } t_texture;
 
 typedef struct s_graph
 {
 	void				*mlx;
 	void				*wind;
-	
 	int					x;
 	int					y;
 	int					x1;

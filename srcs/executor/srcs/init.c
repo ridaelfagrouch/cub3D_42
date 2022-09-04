@@ -6,7 +6,7 @@
 /*   By: sahafid <sahafid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 13:09:18 by sahafid           #+#    #+#             */
-/*   Updated: 2022/09/04 17:29:22 by sahafid          ###   ########.fr       */
+/*   Updated: 2022/09/04 20:08:00 by sahafid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,15 @@ void    init_everything(t_graph *lst, int fd)
 
 void    init_texture(t_graph *lst)
 {
-    lst->texture.texture_img = mlx_xpm_file_to_image(lst->mlx, "img/home2.xpm", &lst->texture.width, &lst->texture.height);
-    lst->texture.img_addr = (int *)mlx_get_data_addr(lst->texture.texture_img, &lst->texture.bpp, &lst->texture.size_line, &lst->texture.endian);
+    lst->texture.width_n = 0;
+    lst->texture.height_n = 0;
+    lst->texture.texture_img_n = mlx_xpm_file_to_image(lst->mlx, "img/wall.xpm", &lst->texture.width_n, &lst->texture.height_n);
+    printf("anah na\n");
+    lst->texture.img_addr_N = (int *)mlx_get_data_addr(lst->texture.texture_img_n, &lst->texture.bpp, &lst->texture.size_line, &lst->texture.endian);
+    lst->texture.texture_img_S = mlx_xpm_file_to_image(lst->mlx, "img/andrew.xpm", &lst->texture.width_S, &lst->texture.height_S);
+    lst->texture.img_addr_S = (int *)mlx_get_data_addr(lst->texture.texture_img_S, &lst->texture.bpp, &lst->texture.size_line, &lst->texture.endian);
+    lst->texture.texture_img_E = mlx_xpm_file_to_image(lst->mlx, "img/wall.xpm", &lst->texture.width_E, &lst->texture.height_E);
+    lst->texture.img_addr_E = (int *)mlx_get_data_addr(lst->texture.texture_img_E, &lst->texture.bpp, &lst->texture.size_line, &lst->texture.endian);
+    lst->texture.texture_img_W = mlx_xpm_file_to_image(lst->mlx, "img/wall2.xpm", &lst->texture.width_W, &lst->texture.height_W);
+    lst->texture.img_addr_W = (int *)mlx_get_data_addr(lst->texture.texture_img_W, &lst->texture.bpp, &lst->texture.size_line, &lst->texture.endian);
 }
