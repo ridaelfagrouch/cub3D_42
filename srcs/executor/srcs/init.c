@@ -6,7 +6,7 @@
 /*   By: sahafid <sahafid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 13:09:18 by sahafid           #+#    #+#             */
-/*   Updated: 2022/09/04 13:45:33 by sahafid          ###   ########.fr       */
+/*   Updated: 2022/09/04 17:29:22 by sahafid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void    init_player(t_graph *lst)
 {
     lst->plyr.rotationangle = M_PI / 2;
     lst->plyr.fov = 60 * (M_PI / 180);
-    lst->plyr.speed = 3;
+    lst->plyr.speed = 7;
     lst->plyr.rotationspeed = 4 * (M_PI / 180);
     lst->plyr.rotatedirection = 0;
     lst->plyr.walkdirection = 0;
@@ -36,7 +36,7 @@ void    init_map(t_graph *lst)
     lst->map.floor_color = 9498256;
     lst->map.wall_color = 8421504;
     lst->map.player_color = 11393254;
-    lst->map.unit = 50;
+    lst->map.unit = 64;
     lst->map.minimap = 0.2;
 }
 
@@ -73,6 +73,6 @@ void    init_everything(t_graph *lst, int fd)
 
 void    init_texture(t_graph *lst)
 {
-    lst->texture.texture_img = mlx_xpm_file_to_image(lst->mlx, "img/andrew.xpm", &lst->texture.width, &lst->texture.height);
+    lst->texture.texture_img = mlx_xpm_file_to_image(lst->mlx, "img/home2.xpm", &lst->texture.width, &lst->texture.height);
     lst->texture.img_addr = (int *)mlx_get_data_addr(lst->texture.texture_img, &lst->texture.bpp, &lst->texture.size_line, &lst->texture.endian);
 }

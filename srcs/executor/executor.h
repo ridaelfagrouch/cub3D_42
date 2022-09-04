@@ -121,7 +121,7 @@ void	init_raycast(t_graph *lst);
 void	init_map(t_graph *lst);
 void    init_everything(t_graph *lst, int fd);
 void    draw_cub1(int x, int y, int x1, int y1, t_graph *lst, int i);
-void    draw_rect(int x, int y, int x1, int y1, t_graph *lst, int i);
+void    draw_rect(int x, int y, int x1, int y1, t_graph *lst, int i, double wallstripeheight);
 void	draw_floor_ceilling(t_graph *lst);
 void    init_texture(t_graph *lst);
 
