@@ -6,7 +6,7 @@
 /*   By: sahafid <sahafid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 14:47:27 by sahafid           #+#    #+#             */
-/*   Updated: 2022/09/04 18:49:14 by sahafid          ###   ########.fr       */
+/*   Updated: 2022/09/05 16:43:06 by sahafid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int routine(t_graph *lst)
 	mlx_hook(lst->wind, 3, 0L, reset, lst);
 	mlx_destroy_image(lst->mlx, lst->map.img);
 	mlx_clear_window(lst->mlx, lst->wind);
-	lst->map.img = mlx_new_image(lst->mlx, lst->map.width * lst->map.unit, lst->map.height * lst->map.unit);
+	lst->map.img = mlx_new_image(lst->mlx, lst->map.width, lst->map.height);
     lst->map.addr = mlx_get_data_addr(lst->map.img, &lst->map.bpp, &lst->map.size_line, &lst->map.endian);
 	draw_floor_ceilling(lst);
 	draw_map(lst->map.map, lst);

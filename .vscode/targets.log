@@ -8,11 +8,10 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # This program built for i386-apple-darwin11.3.0
  
 
-# Make data base, printed on Sat Sep  3 18:56:00 2022
+# Make data base, printed on Mon Sep  5 12:32:28 2022
 
 # Variables
 
- 
 # makefile (from `Makefile', line 18)
 GRA := \033[37m
 # automatic
@@ -44,15 +43,13 @@ MAKEFILE_LIST :=  Makefile
 # environment
 VSCODE_VERBOSE_LOGGING = true
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /var/folders/zz/zyxvpxvq6csfxvn_n000ccch003334/T/vscode-ipc-ef760421-9ff9-42cf-a724-ce5229b8c6a9.sock
+VSCODE_IPC_HOOK_EXTHOST = /var/folders/zz/zyxvpxvq6csfxvn_n000ccch003334/T/vscode-ipc-f50723d2-5931-4d63-8a4d-0948eb2d36e9.sock
 # environment
 VSCODE_CWD = /
 # environment
-PATH = /Users/sahafid/goinfre/.brew/bin:/Users/sahafid/goinfre/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/munki:/Library/Frameworks/Mono.framework/Versions/Current/Commands
+PATH = /usr/bin:/bin:/usr/sbin:/sbin
 # environment
-LSCOLORS = Gxfxcxdxbxegedabagacad
-# environment
-LaunchInstanceID = D277FDFA-C180-4EE2-B505-2804A7D21253
+LaunchInstanceID = E2B24D5B-B674-4AA0-BF42-A28499CA604E
 # environment
 VSCODE_LOG_STACK = false
 # environment
@@ -64,7 +61,7 @@ GRN := \033[32m
 # makefile (from `Makefile', line 41)
 CC_FLAGS := -Wall -Wextra -Werror -lm
 # environment
-SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.6fElp2PHNt/Listeners
+SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.w2oNpWR40X/Listeners
 # automatic
 %F = $(notdir $%)
 # makefile (from `Makefile', line 47)
@@ -84,7 +81,7 @@ VSCODE_AMD_ENTRYPOINT = vs/workbench/api/node/extensionHostProcess
 # environment
 HOME = /Users/sahafid
 # default
-MAKEFILEPATH := /Applications/Xcode.app/Contents/Developer/Makefiles
+MAKEFILEPATH = $(shell /usr/bin/xcode-select -print-path 2>/dev/null || echo /Developer)/Makefiles
 # environment
 VSCODE_CODE_CACHE_PATH = /Users/sahafid/Library/Application Support/Code/CachedData/57fd6d0195bb9b9d1b49f6da5db789060795de47
 # environment
@@ -93,8 +90,6 @@ LOGNAME = sahafid
 APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = 1
 # makefile (from `Makefile', line 50)
 ARCHIVES := -Llibft -lft -Lsrcs/parser -lparser -Lsrcs/executor -lexecutor
-# environment
-ZSH = /Users/sahafid/.oh-my-zsh
 # environment
 VSCODE_HANDLES_UNCAUGHT_ERRORS = true
 # automatic
@@ -132,12 +127,10 @@ DARKVIOLET = \033[1;5;1;36m
 .DEFAULT_GOAL := all
 # makefile (from `Makefile', line 42)
 NAME := cub3D
-# environment
-LESS = -R
 # automatic
 %D = $(patsubst %/,%,$(dir $%))
 # default
-MAKE_COMMAND := /Applications/Xcode.app/Contents/Developer/usr/bin/make
+MAKE_COMMAND := /Library/Developer/CommandLineTools/usr/bin/make
 # default
 .VARIABLES := 
 # environment
@@ -156,25 +149,22 @@ MAKEFLAGS = Rrqp
 MFLAGS = -Rrqp
 # automatic
 *D = $(patsubst %/,%,$(dir $*))
- 
 # makefile (from `Makefile', line 43)
 MAIN := main.c
 # environment
-XPC_SERVICE_NAME = com.microsoft.VSCode.1012
+XPC_SERVICE_NAME = com.apple.xpc.launchd.oneshot.0x10000003.Electron
 # automatic
 +D = $(patsubst %/,%,$(dir $+))
 # automatic
 +F = $(notdir $+)
 # environment
 __CF_USER_TEXT_ENCODING = 0x18C64:0x0:0x0
+# environment
+COMMAND_MODE = unix2003
 # default
 MAKEFILES := 
-# environment
-HOMEBREW_NO_AUTO_UPDATE = 1
 # automatic
 <F = $(notdir $<)
-# environment
-PAGER = less
 # environment
 LC_ALL = C
 # makefile (from `Makefile', line 17)
@@ -196,9 +186,9 @@ PARS_ARCH := srcs/parser/libparser.a
 # environment
 LANG = C
 # environment
-VSCODE_PID = 840
+VSCODE_PID = 3457
 # variable set hash-table stats:
-# Load=87/1024=8%, Rehash=0, Collisions=2/128=2%
+# Load=83/1024=8%, Rehash=0, Collisions=2/124=2%
 
 # Pattern-specific Variable Values
 
@@ -243,6 +233,7 @@ title:
 # + := 
 # automatic
 # | := 
+ 
 # automatic
 # < := 
 # automatic
@@ -369,6 +360,6 @@ srcs/parser/libparser.a:
 # strcache size: total = 4096 / max = 4096 / min = 4096 / avg = 4096
 # strcache free: total = 4087 / max = 4087 / min = 4087 / avg = 4087
 
-# Finished Make data base on Sat Sep  3 18:56:00 2022
+# Finished Make data base on Mon Sep  5 12:32:28 2022
 
  

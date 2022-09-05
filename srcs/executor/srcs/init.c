@@ -6,7 +6,7 @@
 /*   By: sahafid <sahafid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 13:09:18 by sahafid           #+#    #+#             */
-/*   Updated: 2022/09/04 20:08:00 by sahafid          ###   ########.fr       */
+/*   Updated: 2022/09/05 16:43:14 by sahafid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void    init_map(t_graph *lst)
     lst->map.wall_color = 8421504;
     lst->map.player_color = 11393254;
     lst->map.unit = 64;
-    lst->map.minimap = 0.2;
+    lst->map.minimap = 0.1;
 }
 
 void    init_everything(t_graph *lst, int fd)
@@ -54,34 +54,27 @@ void    init_everything(t_graph *lst, int fd)
     lst->map.map = ft_split(line, '\n');
     free(line);
 	while (lst->map.map[lst->y])
-    {
-        lst->map.height++;
         lst->y++;
-    }
     while (lst->map.map[0][lst->x])
-    {
-        lst->map.width++;
         lst->x++;
-    }
+    lst->map.height = 1000;
+    lst->map.width = 1000;
 	lst->mlx = mlx_init();
-    lst->wind = mlx_new_window(lst->mlx, lst->map.width * lst->map.unit, lst->map.height * lst->map.unit, "cub3d");
+    lst->wind = mlx_new_window(lst->mlx, lst->map.width, lst->map.height, "cub3d");
 	lst->map.img = NULL;
     lst->map.addr = NULL;
-    lst->map.img = mlx_new_image(lst->mlx, lst->map.width * lst->map.unit, lst->map.height * lst->map.unit);
+    lst->map.img = mlx_new_image(lst->mlx, lst->map.width, lst->map.height);
     lst->map.addr = mlx_get_data_addr(lst->map.img, &lst->map.bpp, &lst->map.size_line, &lst->map.endian);
 }
 
 void    init_texture(t_graph *lst)
 {
-    lst->texture.width_n = 0;
-    lst->texture.height_n = 0;
-    lst->texture.texture_img_n = mlx_xpm_file_to_image(lst->mlx, "img/wall.xpm", &lst->texture.width_n, &lst->texture.height_n);
-    printf("anah na\n");
-    lst->texture.img_addr_N = (int *)mlx_get_data_addr(lst->texture.texture_img_n, &lst->texture.bpp, &lst->texture.size_line, &lst->texture.endian);
-    lst->texture.texture_img_S = mlx_xpm_file_to_image(lst->mlx, "img/andrew.xpm", &lst->texture.width_S, &lst->texture.height_S);
+    lst->texture.texture_img_N = mlx_xpm_file_to_image(lst->mlx, "img/hitler.xpm", &lst->texture.width_N, &lst->texture.height_N);
+    lst->texture.img_addr_N = (int *)mlx_get_data_addr(lst->texture.texture_img_N, &lst->texture.bpp, &lst->texture.size_line, &lst->texture.endian);
+    lst->texture.texture_img_S = mlx_xpm_file_to_image(lst->mlx, "img/hitler.xpm", &lst->texture.width_S, &lst->texture.height_S);
     lst->texture.img_addr_S = (int *)mlx_get_data_addr(lst->texture.texture_img_S, &lst->texture.bpp, &lst->texture.size_line, &lst->texture.endian);
-    lst->texture.texture_img_E = mlx_xpm_file_to_image(lst->mlx, "img/wall.xpm", &lst->texture.width_E, &lst->texture.height_E);
+    lst->texture.texture_img_E = mlx_xpm_file_to_image(lst->mlx, "img/hitler.xpm", &lst->texture.width_E, &lst->texture.height_E);
     lst->texture.img_addr_E = (int *)mlx_get_data_addr(lst->texture.texture_img_E, &lst->texture.bpp, &lst->texture.size_line, &lst->texture.endian);
-    lst->texture.texture_img_W = mlx_xpm_file_to_image(lst->mlx, "img/wall2.xpm", &lst->texture.width_W, &lst->texture.height_W);
+    lst->texture.texture_img_W = mlx_xpm_file_to_image(lst->mlx, "img/hitler.xpm", &lst->texture.width_W, &lst->texture.height_W);
     lst->texture.img_addr_W = (int *)mlx_get_data_addr(lst->texture.texture_img_W, &lst->texture.bpp, &lst->texture.size_line, &lst->texture.endian);
 }
