@@ -13,6 +13,7 @@
 # include "libft/libft.h"
 #include "mlx.h"
 #include <unistd.h>
+#include <fcntl.h>
 
 
 /* --------------------------------- MACROS --------------------------------- */

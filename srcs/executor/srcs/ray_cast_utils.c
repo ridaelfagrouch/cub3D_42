@@ -15,8 +15,8 @@
 double	distance_points(double x1, double x2, double y1, double y2)
 {
 	double square_root;
-	
-	square_root = sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1));
+
+	square_root = sqrt(pow((x2 - x1), 2) + pow((y2 - y1), 2));
 	return (square_root);
 }
 
@@ -44,6 +44,7 @@ double	calculate_intersactions(t_graph *lst)
 	else
 		return (0);
 }
+
 void	normilizeAngle(double	*ray_angle)
 {
 	*ray_angle = fmod(*ray_angle, 2 * M_PI);

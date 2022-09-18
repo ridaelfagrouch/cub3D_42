@@ -14,7 +14,7 @@
 
 void	draw_floor_ceilling(t_graph *lst)
 {
-	int i;
+	double i;
 
 	i = (lst->map.height) / 2;
 	draw_cub1(0, 0, lst->map.width, i, lst, lst->map.player_color);

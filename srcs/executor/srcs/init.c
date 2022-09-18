@@ -33,32 +33,30 @@ void   init_raycast(t_graph *lst)
 
 void    init_map(t_graph *lst)
 {
-    lst->map.floor_color = 9498256;
-    lst->map.wall_color = 8421504;
+    lst->map.floor_color = 0xffffff;
+    lst->map.wall_color = 0;
     lst->map.player_color = 11393254;
     lst->map.unit = 64;
-    lst->map.minimap = 0.1;
+    lst->map.minimap = 0.2;
 }
 
 void    init_everything(t_graph *lst, int fd)
 {
 	char	*line;
-	
-    lst->map.width = 0;
-    lst->map.height = 0;
+
     lst->y = 0;
-    lst->x =0;
+    lst->x = 0;
     lst->first_time = 0;
 	fd = open("maps/lol.cub", O_RDONLY);
     line = get_next_line1(fd);
     lst->map.map = ft_split(line, '\n');
     free(line);
-	while (lst->map.map[lst->y])
+	while (lst->map.map[(int)lst->y])
         lst->y++;
-    while (lst->map.map[0][lst->x])
+    while (lst->map.map[0][(int)lst->x])
         lst->x++;
     lst->map.height = 1000;
-    lst->map.width = 1000;
+    lst->map.width = 1500;
 	lst->mlx = mlx_init();
     lst->wind = mlx_new_window(lst->mlx, lst->map.width, lst->map.height, "cub3d");
 	lst->map.img = NULL;
@@ -71,9 +69,9 @@ void    init_texture(t_graph *lst)
 {
     lst->texture.texture_img_N = mlx_xpm_file_to_image(lst->mlx, "img/hitler.xpm", &lst->texture.width_N, &lst->texture.height_N);
     lst->texture.img_addr_N = (int *)mlx_get_data_addr(lst->texture.texture_img_N, &lst->texture.bpp, &lst->texture.size_line, &lst->texture.endian);
-    lst->texture.texture_img_S = mlx_xpm_file_to_image(lst->mlx, "img/hitler.xpm", &lst->texture.width_S, &lst->texture.height_S);
+    lst->texture.texture_img_S = mlx_xpm_file_to_image(lst->mlx, "img/wall4.xpm", &lst->texture.width_S, &lst->texture.height_S);
     lst->texture.img_addr_S = (int *)mlx_get_data_addr(lst->texture.texture_img_S, &lst->texture.bpp, &lst->texture.size_line, &lst->texture.endian);
-    lst->texture.texture_img_E = mlx_xpm_file_to_image(lst->mlx, "img/hitler.xpm", &lst->texture.width_E, &lst->texture.height_E);
+    lst->texture.texture_img_E = mlx_xpm_file_to_image(lst->mlx, "img/wall4.xpm", &lst->texture.width_E, &lst->texture.height_E);
     lst->texture.img_addr_E = (int *)mlx_get_data_addr(lst->texture.texture_img_E, &lst->texture.bpp, &lst->texture.size_line, &lst->texture.endian);
     lst->texture.texture_img_W = mlx_xpm_file_to_image(lst->mlx, "img/hitler.xpm", &lst->texture.width_W, &lst->texture.height_W);
     lst->texture.img_addr_W = (int *)mlx_get_data_addr(lst->texture.texture_img_W, &lst->texture.bpp, &lst->texture.size_line, &lst->texture.endian);

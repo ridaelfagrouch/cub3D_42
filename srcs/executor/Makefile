@@ -21,7 +21,7 @@ OFILES	= $(CFILES:.c=.o)
 
 CC	= gcc
 INT	= executor.h
-FLAGS = -L /Users/sahafid/Desktop/minilibx_opengl_20191021 -lmlx -framework OpenGl -framework AppKit
+FLAGS = -L /Users/rel-fagr/Desktop/minilibx_opengl_20191021 -lmlx -framework OpenGl -framework AppKit
 NAME = cub3d
 ARCHIVE = ../../libft/libft.a
 
