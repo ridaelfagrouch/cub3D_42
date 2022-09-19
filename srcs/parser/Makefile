@@ -6,7 +6,7 @@
 #    By: rel-fagr <rel-fagr@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: Invalid date        by ██████╗██║        #+#    #+#              #
-#    Updated: 2022/09/18 15:49:54 by rel-fagr         ###   ########.fr        #
+#    Updated: 2022/09/19 15:33:55 by rel-fagr         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -69,19 +69,22 @@
 # ---------------------------------------------------------------------------- #
 
 
-CFILES  = get_next_line/get_next_line_utils.c  get_next_line/get_next_line.c
+CFILES  = get_next_line/get_next_line_utils.c  get_next_line/get_next_line.c \
+		process_data/parse_map.c  process_data/remp_color_texture.c
 
 OFILES	= $(CFILES:.c=.o)
 
 CC	= gcc
 INT	= parser.h
-FLAGS = -Wall -Werror -Wextra
+FLAGS = -Wall -Werror -Wextra 
+# -static-libsan -fsanitize=address
 NAME = cub3d
 ARCHIVE = ../../libft/libft.a
 
 all : $(NAME)
 
 $(NAME) : $(OFILES) main.c
+	@make -C ../../libft
 	@$(CC) $(FLAGS)  main.c $(ARCHIVE) $(CFILES) -o $@
 
 %.o:%.c
@@ -89,6 +92,7 @@ $(NAME) : $(OFILES) main.c
 
 clean:
 	@rm -rf $(OFILES)
+	@make fclean -C ../../libft
 
 fclean:	clean
 	@rm -rf $(NAME)
