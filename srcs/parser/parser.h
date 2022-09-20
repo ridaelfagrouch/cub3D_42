@@ -6,7 +6,7 @@
 /*   By: rel-fagr <rel-fagr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/18 13:12:07 by rel-fagr          #+#    #+#             */
-/*   Updated: 2022/09/20 18:11:43 by rel-fagr         ###   ########.fr       */
+/*   Updated: 2022/09/20 21:37:09 by rel-fagr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,5 +62,6 @@ void	ft_bzero1(void *s, size_t n);
 int		process_data(char *str, t_map_ *map, int *count);
 int		check_map(char *str, t_map_ *data, int i);
 void	creat_map_array(t_map_ *data, char **argv);
+void	check_valid_line(t_map_ *data);
 
 #endif

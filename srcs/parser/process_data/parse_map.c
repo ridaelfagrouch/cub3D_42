@@ -6,7 +6,7 @@
 /*   By: rel-fagr <rel-fagr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 13:08:10 by rel-fagr          #+#    #+#             */
-/*   Updated: 2022/09/20 15:27:26 by rel-fagr         ###   ########.fr       */
+/*   Updated: 2022/09/20 21:20:40 by rel-fagr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	check_map_error(char *str, t_map_ *data)
 				data->map_d.count_player++;
 		}
 		else
-			return (write(1, "NO valid map!!\n", 15), 1);
+			return (write(2, "NO valid map!!\n", 15), 1);
 	}
 	return (0);
 }

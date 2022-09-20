@@ -6,7 +6,7 @@
 /*   By: rel-fagr <rel-fagr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 13:05:48 by rel-fagr          #+#    #+#             */
-/*   Updated: 2022/09/20 18:22:20 by rel-fagr         ###   ########.fr       */
+/*   Updated: 2022/09/20 18:43:07 by rel-fagr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,13 +90,13 @@ void	remp_texture(int *count, char *ptr, t_map_ *data, char *c)
 		if (!ft_strcmp(c, "SO "))
 			data->so_t = str;
 		fd = open(str, O_RDONLY);
-		textur_fd(c, fd, data);
 		if (fd < 0)
 		{
 			printf("error!! bad texture file\n");
 			free(data);
 			exit(1);
 		}
+		textur_fd(c, fd, data);
 	}
 }
 

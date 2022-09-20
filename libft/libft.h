@@ -6,7 +6,7 @@
 /*   By: rel-fagr <rel-fagr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/15 17:37:28 by rel-fagr          #+#    #+#             */
-/*   Updated: 2022/09/19 18:05:14 by rel-fagr         ###   ########.fr       */
+/*   Updated: 2022/09/20 21:51:50 by rel-fagr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ void	ft_putstr_fd(char *s, int fd);
 void	ft_putendl_fd(char *s, int fd);
 void	ft_putnbr_fd(int n, int fd);
 int		ft_strlen_split(char **str);
+void	free_matrice(char **ptr);
 /*************************_bonus_****************************/
 t_list	*ft_lstnew(void *content);
 void	ft_lstadd_front(t_list **alst, t_list *new);

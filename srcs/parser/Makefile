@@ -6,7 +6,7 @@
 #    By: rel-fagr <rel-fagr@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: Invalid date        by ██████╗██║        #+#    #+#              #
-#    Updated: 2022/09/20 15:44:10 by rel-fagr         ###   ########.fr        #
+#    Updated: 2022/09/20 21:36:45 by rel-fagr         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -70,7 +70,8 @@
 
 
 CFILES  = get_next_line/get_next_line_utils.c  get_next_line/get_next_line.c \
-		process_data/parse_map.c  process_data/remp_color_texture.c  process_data/creat_map.c
+		process_data/parse_map.c  process_data/remp_color_texture.c  process_data/creat_map.c \
+		process_data/check_map_syntax.c
 
 OFILES	= $(CFILES:.c=.o)
 
