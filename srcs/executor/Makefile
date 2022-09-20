@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: sahafid <sahafid@student.42.fr>            +#+  +:+       +#+         #
+#    By: rel-fagr <rel-fagr@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: Invalid Date        by ██████╗██║        #+#    #+#              #
-#    Updated: 2022/09/05 16:47:56 by sahafid          ###   ########.fr        #
+#    Created: Invalid date        by ██████╗██║        #+#    #+#              #
+#    Updated: 2022/09/20 15:29:14 by rel-fagr         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,8 @@ ARCHIVE = ../../libft/libft.a
 
 all : $(NAME)
 
-$(NAME) : $(OFILES) main.c 
+$(NAME) : $(OFILES) main.c
+	@make -C ../../libft
 	@$(CC) $(FLAGS)  main.c $(ARCHIVE) $(CFILES) -o $@
 
 %.o:%.c
@@ -35,6 +36,7 @@ $(NAME) : $(OFILES) main.c
 
 clean:
 	@rm -rf $(OFILES)
+	@make fclean -C ../../libft
 
 fclean:	clean
 	@rm -rf $(NAME)
