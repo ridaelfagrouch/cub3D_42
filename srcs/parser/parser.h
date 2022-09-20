@@ -6,7 +6,7 @@
 /*   By: rel-fagr <rel-fagr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/18 13:12:07 by rel-fagr          #+#    #+#             */
-/*   Updated: 2022/09/20 16:23:42 by rel-fagr         ###   ########.fr       */
+/*   Updated: 2022/09/20 18:11:43 by rel-fagr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,10 @@ typedef struct s_map_
 	char		*so_t;
 	char		*we_t;
 	char		*ea_t;
+	int			no_fd;
+	int			so_fd;
+	int			we_fd;
+	int			ea_fd;
 	int			fd;
 	int			ceil_color;
 	int			floor_color;

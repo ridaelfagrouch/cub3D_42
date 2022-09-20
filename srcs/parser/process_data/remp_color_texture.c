@@ -6,7 +6,7 @@
 /*   By: rel-fagr <rel-fagr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 13:05:48 by rel-fagr          #+#    #+#             */
-/*   Updated: 2022/09/20 15:26:59 by rel-fagr         ###   ########.fr       */
+/*   Updated: 2022/09/20 18:22:20 by rel-fagr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ void	check_color(char **split_color, int *i)
 			break ;
 	}
 }
+
+/* --------------------------------------------------------------- */
 
 void	remp_color(int *count, char *ptr, t_map_ *data, char *c)
 {
@@ -56,6 +58,20 @@ void	remp_color(int *count, char *ptr, t_map_ *data, char *c)
 
 /* --------------------------------------------------------------- */
 
+void	textur_fd(char *c, int fd, t_map_ *data)
+{
+	if (!ft_strcmp(c, "NO "))
+		data->no_fd = fd;
+	else if (!ft_strcmp(c, "EA "))
+		data->ea_fd = fd;
+	else if (!ft_strcmp(c, "WE "))
+		data->we_fd = fd;
+	else if (!ft_strcmp(c, "SO "))
+		data->so_fd = fd;
+}
+
+/* --------------------------------------------------------------- */
+
 void	remp_texture(int *count, char *ptr, t_map_ *data, char *c)
 {
 	int		fd;
@@ -74,6 +90,7 @@ void	remp_texture(int *count, char *ptr, t_map_ *data, char *c)
 		if (!ft_strcmp(c, "SO "))
 			data->so_t = str;
 		fd = open(str, O_RDONLY);
+		textur_fd(c, fd, data);
 		if (fd < 0)
 		{
 			printf("error!! bad texture file\n");
@@ -107,8 +124,5 @@ int	process_data(char *str, t_map_ *data, int *count)
 		printf("error!! process data\n");
 		exit(1);
 	}
-	// printf("no %s | ea = %s | we = %s | so = %s | Fcol = %d | Ccol = %d | count = %d\n", data->no_t, \
-	// 		data->ea_t,data->we_t, data->so_t, data->floor_color, data->ceil_color, *count);
-	// 	printf("----------------\n");
 	return (0);
 }
