@@ -6,7 +6,7 @@
 /*   By: rel-fagr <rel-fagr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/18 13:12:07 by rel-fagr          #+#    #+#             */
-/*   Updated: 2022/09/19 15:44:02 by rel-fagr         ###   ########.fr       */
+/*   Updated: 2022/09/20 16:23:42 by rel-fagr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,16 +19,17 @@
 # include <stdlib.h>
 # include <math.h>
 
-typedef struct map_data
+typedef struct s_mapdata
 {
 	char	**map;
 	int		map_hight;
 	int		map_width;
 	int		fst_line;
+	int		count_player;
 
-}	t_map_data;
+}	t_mapData;
 
-typedef struct map
+typedef struct s_map_
 {
 	char		*no_t;
 	char		*so_t;
@@ -37,9 +38,9 @@ typedef struct map
 	int			fd;
 	int			ceil_color;
 	int			floor_color;
-	t_map_data	*map_d;
+	t_mapData	map_d;
 
-}	t_map;
+}	t_map_;
 
 /* ------------------------------- GET_N_L -------------------------------- */
 
@@ -54,7 +55,8 @@ void	ft_bzero1(void *s, size_t n);
 
 /* ------------------------------- PARSER -------------------------------- */
 
-int		process_data(char *str, t_map *map, int *count);
-int		check_map(char *str, t_map *map, int i);
+int		process_data(char *str, t_map_ *map, int *count);
+int		check_map(char *str, t_map_ *data, int i);
+void	creat_map_array(t_map_ *data, char **argv);
 
 #endif

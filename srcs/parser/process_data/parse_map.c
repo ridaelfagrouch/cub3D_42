@@ -6,7 +6,7 @@
 /*   By: rel-fagr <rel-fagr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 13:08:10 by rel-fagr          #+#    #+#             */
-/*   Updated: 2022/09/19 14:36:47 by rel-fagr         ###   ########.fr       */
+/*   Updated: 2022/09/20 15:27:26 by rel-fagr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 /* --------------------------------------------------------------- */
 
-int	check_map_error(char *str)
+int	check_map_error(char *str, t_map_ *data)
 {
 	int		i;
 	char	c;
@@ -24,8 +24,12 @@ int	check_map_error(char *str)
 	{
 		c = str[i];
 		if (c == '0' || c == '1' || c == ' ' || c == 'N' || c == 'S' \
-			|| c == 'W' || c == 'N')
+			|| c == 'W' || c == 'E')
+		{
 			i++;
+			if (c == 'N' || c == 'S' || c == 'W' || c == 'E')
+				data->map_d.count_player++;
+		}
 		else
 			return (write(1, "NO valid map!!\n", 15), 1);
 	}
@@ -34,21 +38,38 @@ int	check_map_error(char *str)
 
 /* --------------------------------------------------------------- */
 
-int	check_map(char *str, t_map *map, int i)
+void	free_check_data(char *ptr, char *ptr1, char *str, t_map_ *data)
+{
+	free(ptr);
+	free(ptr1);
+	free(str);
+	free(data);
+	exit(1);
+}
+
+/* --------------------------------------------------------------- */
+
+int	check_map(char *str, t_map_ *data, int i)
 {
 	char	*ptr;
-	ptr = ft_strtrim(str, " ");
-	if (ft_strlen(ptr) == 0 && map->map_d->map_hight == 0)
-		return (0);
+	char	*ptr1;
+
+	ptr1 = ft_strtrim(str, "\n");
+	ptr = ft_strtrim(ptr1, " ");
+	if (ft_strlen(ptr) == 0 && data->map_d.map_hight == 0)
+		return (free(ptr1), free(ptr), 0);
 	else
 	{
-		if (map->map_d->fst_line == 0)
-			map->map_d->fst_line = i;
-		map->map_d->map_hight++;
+		if (data->map_d.fst_line == 0)
+			data->map_d.fst_line = i;
+		data->map_d.map_hight++;
 	}
-	if ((int)ft_strlen(str) > map->map_d->map_width)
-		map->map_d->map_width = ft_strlen(str);
-	if (check_map_error(str))
-		return (1);
-	return (0);
+	if (data->map_d.map_hight > 0 && ft_strlen(ptr) != 0)
+	{
+		if (check_map_error(ptr1, data))
+			free_check_data(ptr, ptr1, str, data);
+	}
+	if ((int)ft_strlen(ptr1) > data->map_d.map_width)
+		data->map_d.map_width = ft_strlen(ptr1);
+	return (free(ptr1), free(ptr), 0);
 }

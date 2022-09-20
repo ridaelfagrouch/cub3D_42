@@ -6,7 +6,7 @@
 #    By: rel-fagr <rel-fagr@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: Invalid date        by ██████╗██║        #+#    #+#              #
-#    Updated: 2022/09/19 15:33:55 by rel-fagr         ###   ########.fr        #
+#    Updated: 2022/09/20 15:44:10 by rel-fagr         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -70,14 +70,13 @@
 
 
 CFILES  = get_next_line/get_next_line_utils.c  get_next_line/get_next_line.c \
-		process_data/parse_map.c  process_data/remp_color_texture.c
+		process_data/parse_map.c  process_data/remp_color_texture.c  process_data/creat_map.c
 
 OFILES	= $(CFILES:.c=.o)
 
 CC	= gcc
 INT	= parser.h
-FLAGS = -Wall -Werror -Wextra 
-# -static-libsan -fsanitize=address
+FLAGS = -Wall -Werror -Wextra -static-libsan -fsanitize=address
 NAME = cub3d
 ARCHIVE = ../../libft/libft.a
 

@@ -6,7 +6,7 @@
 /*   By: rel-fagr <rel-fagr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 13:05:48 by rel-fagr          #+#    #+#             */
-/*   Updated: 2022/09/19 13:29:30 by rel-fagr         ###   ########.fr       */
+/*   Updated: 2022/09/20 15:26:59 by rel-fagr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,34 +28,35 @@ void	check_color(char **split_color, int *i)
 	}
 }
 
-void	remp_color(int *count, char *ptr, t_map *map, char *c)
+void	remp_color(int *count, char *ptr, t_map_ *data, char *c)
 {
 	char	**split_color;
 	int		i;
 
 	i = 0;
-	*count += 1;
 	split_color = ft_split(ft_strtrim(ft_strtrim(ptr, "F "), "C "), ',');
 	check_color(split_color, &i);
 	if (ft_strlen_split(split_color) == 3 && i == 3)
 	{
+		*count += 1;
 		if (c[0] == 'F')
-			map->floor_color = (pow(256, 2) * ft_atoi(split_color[0])) + \
+			data->floor_color = (pow(256, 2) * ft_atoi(split_color[0])) + \
 				(256 * ft_atoi(split_color[1])) + ft_atoi(split_color[2]);
 		else
-			map->ceil_color = (pow(256, 2) * ft_atoi(split_color[0])) + \
+			data->ceil_color = (pow(256, 2) * ft_atoi(split_color[0])) + \
 				(256 * ft_atoi(split_color[1])) + ft_atoi(split_color[2]);
 	}
 	else
 	{
 		printf("error!! bad color\n");
+		free(data);
 		exit(1);
 	}
 }
 
 /* --------------------------------------------------------------- */
 
-void	remp_texture(int *count, char *ptr, t_map *map, char *c)
+void	remp_texture(int *count, char *ptr, t_map_ *data, char *c)
 {
 	int		fd;
 	char	*str;
@@ -65,17 +66,18 @@ void	remp_texture(int *count, char *ptr, t_map *map, char *c)
 	{
 		str = ft_strtrim(ft_substr(ptr, 2, ft_strlen(ptr) - 2), " ");
 		if (!ft_strcmp(c, "NO "))
-			map->no_t = str;
+			data->no_t = str;
 		if (!ft_strcmp(c, "EA "))
-			map->ea_t = str;
+			data->ea_t = str;
 		if (!ft_strcmp(c, "WE "))
-			map->we_t = str;
+			data->we_t = str;
 		if (!ft_strcmp(c, "SO "))
-			map->so_t = str;
+			data->so_t = str;
 		fd = open(str, O_RDONLY);
 		if (fd < 0)
 		{
 			printf("error!! bad texture file\n");
+			free(data);
 			exit(1);
 		}
 	}
@@ -83,7 +85,7 @@ void	remp_texture(int *count, char *ptr, t_map *map, char *c)
 
 /* --------------------------------------------------------------- */
 
-int	process_data(char *str, t_map *map, int *count)
+int	process_data(char *str, t_map_ *data, int *count)
 {
 	char	*ptr;
 	char	c[4];
@@ -97,10 +99,16 @@ int	process_data(char *str, t_map *map, int *count)
 	c[2] = ptr[2];
 	if (!ft_strcmp(c, "NO ") || !ft_strcmp(c, "EA ") || \
 		!ft_strcmp(c, "WE ") || !ft_strcmp(c, "SO "))
-		remp_texture(count, ptr, map, c);
+		remp_texture(count, ptr, data, c);
 	else if ((c[0] == 'F' || c[0] == 'C') && c[1] == ' ')
-		remp_color(count, ptr, map, c);
+		remp_color(count, ptr, data, c);
 	else
-		return (write(1, "error!!\n", 8), 1);
+	{
+		printf("error!! process data\n");
+		exit(1);
+	}
+	// printf("no %s | ea = %s | we = %s | so = %s | Fcol = %d | Ccol = %d | count = %d\n", data->no_t, \
+	// 		data->ea_t,data->we_t, data->so_t, data->floor_color, data->ceil_color, *count);
+	// 	printf("----------------\n");
 	return (0);
 }
