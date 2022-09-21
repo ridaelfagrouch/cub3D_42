@@ -1,10 +1,10 @@
-NO ./textures/hitler.xpm
+NO srcs/textures/hitler.xpm
 
-       EA                ./textures/wall4.xpm
+       EA                srcs/textures/wall4.xpm
 
-WE ./textures/hitler.xpm
+WE srcs/textures/hitler.xpm
 
-SO ./textures/wall4.xpm
+SO srcs/textures/wall4.xpm
 
 C 225     ,30    ,    0
 
@@ -20,7 +20,7 @@ F 220,100,0
 10001    100000000000000000000001
 10011111101111111111111111000001
 10001    100000000000000001111111
-11011    111111111111001101                           111111
+11011    11111111111001101                           111111
 100011111110000000000000001                          10000001
 10001000011011111111111111111111111111111           1000000001
 1000000001101               1000000000001          100000000001

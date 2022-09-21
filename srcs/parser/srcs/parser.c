@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rel-fagr <rel-fagr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/18 11:00:48 by rel-fagr          #+#    #+#             */
-/*   Updated: 2022/09/21 16:33:40 by rel-fagr         ###   ########.fr       */
+/*   Updated: 2022/09/21 20:00:52 by rel-fagr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parser.h"
+#include "../parser.h"
 
 /* --------------------------------------------------------------- */
 
@@ -80,10 +80,10 @@ int	ft_check_map(t_map_	*data)
 	free(str);
 	if (data->map_d.count_player == 0 || data->map_d.count_player > 1)
 		return (write(1, "error!! bad player number\n", 26), 1);
-	// printf("|t_no : %s , fd_no : %d|\n|t_so : %s , fd_so : %d|\n|t_we : %s ,\
-	// fd_we : %d|\n|t_ea : %s , fd_ea : %d|\n", data->no_t, data->no_fd, \
-	// 	data->so_t, data->so_fd, data->we_t, data->we_fd, data->ea_t, data->ea_fd);
-	// printf("|color_F : %d|\n|color_C : %d|\n\n", data->floor_color, data->ceil_color);
+	printf("|t_no : %s , fd_no : %d|\n|t_so : %s , fd_so : %d|\n|t_we : %s ,\
+	fd_we : %d|\n|t_ea : %s , fd_ea : %d|\n", data->no_t, data->no_fd, \
+		data->so_t, data->so_fd, data->we_t, data->we_fd, data->ea_t, data->ea_fd);
+	printf("|color_F : %d|\n|color_C : %d|\n\n", data->floor_color, data->ceil_color);
 	return (0);
 }
 
@@ -115,22 +115,13 @@ int	init_map_data(t_map_ *data, char **argv)
 
 /* --------------------------------------------------------------- */
 
-int	main(int argc, char *argv[])
+int	parser(char **argv, t_map_ *data)
 {
-	t_map_	*data;
-
-	data = (t_map_ *)malloc(sizeof(t_map_));
-	if (!data)
-		return (0);
-	if (argc == 2)
-	{
-		if (init_map_data(data, argv) || ft_check_map(data))
-			return (free(data), 0);
-		creat_map_array(data, argv);
-		check_valid_line(data);
-		virtual_wall(data);
-		ft_print_split(data->map_d.map);
-	}
-	else
-		return (free(data), write(1, "bad arg number!!\n", 17), 0);
+	if (init_map_data(data, argv) || ft_check_map(data))
+			return (1);
+	creat_map_array(data, argv);
+	check_valid_line(data);
+	virtual_wall(data);
+	ft_print_split(data->map_d.map);
+	return (0);
 }

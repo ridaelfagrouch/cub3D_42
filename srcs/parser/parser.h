@@ -6,7 +6,7 @@
 /*   By: rel-fagr <rel-fagr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/18 13:12:07 by rel-fagr          #+#    #+#             */
-/*   Updated: 2022/09/21 16:34:20 by rel-fagr         ###   ########.fr       */
+/*   Updated: 2022/09/21 18:56:10 by rel-fagr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,32 +19,6 @@
 # include <stdlib.h>
 # include <math.h>
 
-typedef struct s_mapdata
-{
-	char	**map;
-	int		map_hight;
-	int		map_width;
-	int		fst_line;
-	int		count_player;
-}	t_mapData;
-
-typedef struct s_map_
-{
-	char		*no_t;
-	char		*so_t;
-	char		*we_t;
-	char		*ea_t;
-	int			no_fd;
-	int			so_fd;
-	int			we_fd;
-	int			ea_fd;
-	int			fd;
-	int			ceil_color;
-	int			floor_color;
-	t_mapData	map_d;
-
-}	t_map_;
-
 typedef struct s_data_p
 {
 	char	*ptr1;
@@ -54,7 +28,6 @@ typedef struct s_data_p
 	int		i;
 
 }	t_data_p;
-
 
 /* ------------------------------- GET_N_L -------------------------------- */
 
