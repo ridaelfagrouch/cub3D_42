@@ -6,18 +6,37 @@
 /*   By: rel-fagr <rel-fagr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/18 11:00:48 by rel-fagr          #+#    #+#             */
-/*   Updated: 2022/09/20 21:35:43 by rel-fagr         ###   ########.fr       */
+/*   Updated: 2022/09/21 15:17:59 by rel-fagr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-void	print_split(char **str)
+/* --------------------------------------------------------------- */
+
+void	check_valid_line(t_map_ *data)
 {
-	while (*str)
+	int		i;
+	int		j;
+	char	c;
+
+	i = -1;
+	while (data->map_d.map[++i])
 	{
-		printf("%s\n", *str);
-		str++;
+		j = 0;
+		if (check_empty_line(data, i))
+			free_garbage(data, "error!! empty line");
+		while (data->map_d.map[i][j])
+		{
+			c = data->map_d.map[i][j];
+			if (c == '0' || c == 'W' || c == 'E' || c == 'N' || c == 'S')
+			{
+				if (check_left_right(data->map_d.map[i], j) && \
+					check_up_down(data, i, j))
+					free_garbage(data, "error!! unclosed map");
+			}
+			j++;
+		}
 	}
 }
 
@@ -109,7 +128,7 @@ int	main(int argc, char *argv[])
 			return (free(data), 0);
 		creat_map_array(data, argv);
 		check_valid_line(data);
-		// print_split(data->map_d.map);
+		// ft_print_split(data->map_d.map);
 	}
 	else
 		return (free(data), write(1, "bad arg number!!\n", 17), 0);

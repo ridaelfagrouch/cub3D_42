@@ -6,7 +6,7 @@
 /*   By: rel-fagr <rel-fagr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/18 13:12:07 by rel-fagr          #+#    #+#             */
-/*   Updated: 2022/09/20 21:37:09 by rel-fagr         ###   ########.fr       */
+/*   Updated: 2022/09/21 15:19:10 by rel-fagr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ typedef struct s_mapdata
 	int		map_width;
 	int		fst_line;
 	int		count_player;
-
 }	t_mapData;
 
 typedef struct s_map_
@@ -46,6 +45,17 @@ typedef struct s_map_
 
 }	t_map_;
 
+typedef struct s_data_p
+{
+	char	*ptr1;
+	char	*ptr2;
+	char	*ptr3;
+	char	*ptr4;
+	int		i;
+
+}	t_data_p;
+
+
 /* ------------------------------- GET_N_L -------------------------------- */
 
 # define BUFFER_SIZE 940
@@ -62,6 +72,9 @@ void	ft_bzero1(void *s, size_t n);
 int		process_data(char *str, t_map_ *map, int *count);
 int		check_map(char *str, t_map_ *data, int i);
 void	creat_map_array(t_map_ *data, char **argv);
-void	check_valid_line(t_map_ *data);
+void	free_garbage(t_map_ *data, char *str);
+int		check_empty_line(t_map_ *data, int i);
+int		check_up_down(t_map_ *data, int i, int j);
+int		check_left_right(char *str, int i);
 
 #endif

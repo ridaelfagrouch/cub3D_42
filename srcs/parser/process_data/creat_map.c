@@ -6,7 +6,7 @@
 /*   By: rel-fagr <rel-fagr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 15:22:32 by rel-fagr          #+#    #+#             */
-/*   Updated: 2022/09/20 19:01:55 by rel-fagr         ###   ########.fr       */
+/*   Updated: 2022/09/21 14:12:20 by rel-fagr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	filling_array(char *array, char *str, t_map_ *data)
 		if (i < (int)ft_strlen(ptr))
 			array[i] = ptr[i];
 		else
-			array[i] = '1';
+			array[i] = ' ';
 		i++;
 	}
 }
