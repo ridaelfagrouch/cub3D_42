@@ -6,7 +6,7 @@
 /*   By: rel-fagr <rel-fagr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/18 11:00:48 by rel-fagr          #+#    #+#             */
-/*   Updated: 2022/09/21 15:17:59 by rel-fagr         ###   ########.fr       */
+/*   Updated: 2022/09/21 16:33:40 by rel-fagr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,7 +128,8 @@ int	main(int argc, char *argv[])
 			return (free(data), 0);
 		creat_map_array(data, argv);
 		check_valid_line(data);
-		// ft_print_split(data->map_d.map);
+		virtual_wall(data);
+		ft_print_split(data->map_d.map);
 	}
 	else
 		return (free(data), write(1, "bad arg number!!\n", 17), 0);
