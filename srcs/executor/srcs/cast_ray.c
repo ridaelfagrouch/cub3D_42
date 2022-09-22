@@ -6,7 +6,7 @@
 /*   By: rel-fagr <rel-fagr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 16:46:05 by sahafid           #+#    #+#             */
-/*   Updated: 2022/09/22 14:15:31 by rel-fagr         ###   ########.fr       */
+/*   Updated: 2022/09/22 14:33:38 by rel-fagr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void    draw_rect(int x, int y, int x1, int y1, t_graph *lst, int i, double wall
 	height = 0;
 	posX = 0;
 	s = 0;
-	posY = 0;;
+	posY = 0;
 	get_width_height(lst, &width, &height, i);
 	posX = get_x_of_texture(lst, i, width);
 	ds = 0;

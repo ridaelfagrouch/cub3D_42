@@ -6,7 +6,7 @@
 /*   By: rel-fagr <rel-fagr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 18:59:26 by rel-fagr          #+#    #+#             */
-/*   Updated: 2022/09/21 15:19:43 by rel-fagr         ###   ########.fr       */
+/*   Updated: 2022/09/22 16:05:31 by rel-fagr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,18 @@ int	check_left_right(char *str, int i)
 
 	j = i;
 	k = i;
-	while (str[j] != '1' && str[j] != ' ' && j >= 0)
+	while (str[j] != '1' && j >= 0)
+	{
+		if (str[j] == ' ')
+			break ;
 		j--;
-	while (str[k] && str[k] != '1' && str[k] != ' ')
+	}
+	while (str[k] && str[k] != '1')
+	{
+		if (str[k] == ' ')
+			break ;
 		k++;
+	}
 	if (str[j] == '1' && str[k] == '1')
 		return (0);
 	else
@@ -40,12 +48,18 @@ int	check_up_down(t_map_ *data, int i, int j)
 
 	i1 = i;
 	i2 = i;
-	while (data->map_d.map[i1][j] != '1' && \
-		data->map_d.map[i1][j] != ' ' && i1 >= i)
+	while (data->map_d.map[i1][j] != '1' && i1 >= 0)
+	{
+		if (data->map_d.map[i1][j] == ' ')
+			break ;
 		i1--;
-	while (data->map_d.map[i2][j] != '1' && data->map_d.map[i2][j] != ' ' \
-		&& i2 >= (data->map_d.map_hight - 1))
+	}
+	while (data->map_d.map[i2][j] && data->map_d.map[i2][j] != '1')
+	{
+		if (data->map_d.map[i2][j] == ' ')
+			break ;
 		i2++;
+	}
 	if (data->map_d.map[i1][j] == '1' && data->map_d.map[i2][j] == '1')
 		return (0);
 	else

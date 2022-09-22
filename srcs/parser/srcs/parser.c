@@ -6,7 +6,7 @@
 /*   By: rel-fagr <rel-fagr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/18 11:00:48 by rel-fagr          #+#    #+#             */
-/*   Updated: 2022/09/22 13:44:48 by rel-fagr         ###   ########.fr       */
+/*   Updated: 2022/09/22 16:13:30 by rel-fagr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,7 @@ void	check_valid_line(t_map_ *data)
 			c = data->map_d.map[i][j];
 			if (c == '0' || c == 'W' || c == 'E' || c == 'N' || c == 'S')
 			{
-				if (check_left_right(data->map_d.map[i], j) && \
-					check_up_down(data, i, j))
+				if (check_left_right(data->map_d.map[i], j) && check_up_down(data, i, j))
 					free_garbage(data, "error!! unclosed map");
 			}
 			j++;

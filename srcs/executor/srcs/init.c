@@ -6,7 +6,7 @@
 /*   By: rel-fagr <rel-fagr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 13:09:18 by sahafid           #+#    #+#             */
-/*   Updated: 2022/09/22 14:16:53 by rel-fagr         ###   ########.fr       */
+/*   Updated: 2022/09/22 15:21:00 by rel-fagr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,11 @@ void   init_raycast(t_graph *lst)
 
 void    init_map(t_graph *lst, t_map_ *data)
 {
-    lst->map.floor_color = data->floor_color;
-    lst->map.wall_color = 0;
-    lst->map.player_color = data->ceil_color;
-    lst->map.unit = 64;
-    lst->map.minimap = 0.2;
+	lst->map.floor_color = data->floor_color;
+	lst->map.wall_color = 0;
+	lst->map.player_color = data->ceil_color;
+	lst->map.unit = 64;
+	lst->map.minimap = 0.2;
 }
 
 void    init_everything(t_graph *lst, t_map_ *data)
@@ -46,6 +46,7 @@ void    init_everything(t_graph *lst, t_map_ *data)
 	lst->x = 0;
 	lst->first_time = 0;
 	lst->map.map = data->map_d.map;
+	ft_print_split(lst->map.map);
 	lst->map.height = 1000;
 	lst->map.width = 1500;
 	lst->mlx = mlx_init();
@@ -60,7 +61,6 @@ void    init_everything(t_graph *lst, t_map_ *data)
 
 void    init_texture(t_graph *lst, t_map_ *data)
 {
-	printf("%s\n%s\n%s\n%s\n", data->ea_t, data->no_t, data->so_t, data->we_t);
     lst->texture.texture_img_N = mlx_xpm_file_to_image(lst->mlx, data->no_t, &lst->texture.width_N, &lst->texture.height_N);
     lst->texture.img_addr_N = (int *)mlx_get_data_addr(lst->texture.texture_img_N, &lst->texture.bpp, &lst->texture.size_line, &lst->texture.endian);
     lst->texture.texture_img_S = mlx_xpm_file_to_image(lst->mlx, data->so_t, &lst->texture.width_S, &lst->texture.height_S);
