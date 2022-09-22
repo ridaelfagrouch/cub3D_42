@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sahafid <sahafid@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rel-fagr <rel-fagr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 14:48:25 by sahafid           #+#    #+#             */
-/*   Updated: 2022/09/05 16:25:01 by sahafid          ###   ########.fr       */
+/*   Updated: 2022/09/22 13:57:14 by rel-fagr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -186,11 +186,11 @@ void    draw_map(char	**map, t_graph *lst)
     {
         while (map[i][j])
         {
-            if (map[i][j] == '0')
+            if (map[i][j] == '0' || map[i][j] == 'V')
                 draw_cub(x, y, lst->x1, lst->y1, lst, lst->map.floor_color);
             else if (map[i][j] == '1')
 				draw_cub(x, y, lst->x1, lst->y1, lst, lst->map.wall_color);
-            else if (map[i][j] == 'P')
+            else if (map[i][j] == 'S' || map[i][j] == 'W' || map[i][j] == 'N' || map[i][j] == 'E')
             {
                 draw_cub(x, y, lst->x1, lst->y1, lst, lst->map.floor_color);
                 if (lst->first_time == 0)

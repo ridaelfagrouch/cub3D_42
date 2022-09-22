@@ -7,13 +7,7 @@
 
 // Custom
 # include "../../cub3d.h"
-# include "../../libft/libft.h"
-# include "../parser/parser.h"
 # include "mlx.h"
-# include <math.h>
-# include <stdio.h>
-# include <fcntl.h>
-# include <unistd.h>
 
 /* --------------------------------- MACROS --------------------------------- */
 
@@ -121,9 +115,9 @@ int		check_wall(t_graph *lst, int x, int y);
 
 void	init_player(t_graph *lst);
 void	init_raycast(t_graph *lst);
-void	init_map(t_graph *lst);
-void   	init_everything(t_graph *lst, int fd);
-void   	init_texture(t_graph *lst);
+void	init_map(t_graph *lst, t_map_ *data);
+void	init_everything(t_graph *lst, t_map_ *data);
+void	init_texture(t_graph *lst, t_map_ *data);
 
 /* --------------------------------- RAYCAST ----------------------------- */
 

@@ -39,15 +39,16 @@ CC = gcc
 W = -Wall -Werror -Wextra
 INC = libft.h
 NAME = libft.a
+PROJECT = libft
 
 all : title ${NAME}
 
 title:
-	@printf "\n${YEL}\033[4mEntering ${GRA}libft${YEL}'s makefile:${NNN} "
+	@printf "\n${YEL}\033[4mEntering ${GRA}${PROJECT}${YEL}'s makefile:${NC} "
 
 ${NAME} : ${OFILES} ${INC}
 	@ar -rcs ${NAME} ${OFILES}
-	@printf "$(CYN)Archive file $(GRA)libft.a$(CYN) created $(NC)\n"
+	@printf "$(CYN)Archive file $(GRA)$(NAME)$(CYN) created $(NC)\n"
 
 %.o:%.c
 	@${CC} ${W} -o $@ -c $<

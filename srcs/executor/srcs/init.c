@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sahafid <sahafid@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rel-fagr <rel-fagr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 13:09:18 by sahafid           #+#    #+#             */
-/*   Updated: 2022/09/05 16:43:14 by sahafid          ###   ########.fr       */
+/*   Updated: 2022/09/22 14:16:53 by rel-fagr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,48 +31,42 @@ void   init_raycast(t_graph *lst)
     lst->raycast.horiz_intersaction = 0;
 }
 
-void    init_map(t_graph *lst)
+void    init_map(t_graph *lst, t_map_ *data)
 {
-    lst->map.floor_color = 0xffffff;
+    lst->map.floor_color = data->floor_color;
     lst->map.wall_color = 0;
-    lst->map.player_color = 11393254;
+    lst->map.player_color = data->ceil_color;
     lst->map.unit = 64;
     lst->map.minimap = 0.2;
 }
 
-void    init_everything(t_graph *lst, int fd)
+void    init_everything(t_graph *lst, t_map_ *data)
 {
-	char	*line;
-
-    lst->y = 0;
-    lst->x = 0;
-    lst->first_time = 0;
-	fd = open("maps/lol.cub", O_RDONLY);
-    line = get_next_line1(fd);
-    lst->map.map = ft_split(line, '\n');
-    free(line);
-	while (lst->map.map[(int)lst->y])
-        lst->y++;
-    while (lst->map.map[0][(int)lst->x])
-        lst->x++;
-    lst->map.height = 1000;
-    lst->map.width = 1500;
+	lst->y = 0;
+	lst->x = 0;
+	lst->first_time = 0;
+	lst->map.map = data->map_d.map;
+	lst->map.height = 1000;
+	lst->map.width = 1500;
 	lst->mlx = mlx_init();
-    lst->wind = mlx_new_window(lst->mlx, lst->map.width, lst->map.height, "cub3d");
+	lst->wind = mlx_new_window(lst->mlx, \
+		lst->map.width, lst->map.height, "cub3d");
 	lst->map.img = NULL;
-    lst->map.addr = NULL;
-    lst->map.img = mlx_new_image(lst->mlx, lst->map.width, lst->map.height);
-    lst->map.addr = mlx_get_data_addr(lst->map.img, &lst->map.bpp, &lst->map.size_line, &lst->map.endian);
+	lst->map.addr = NULL;
+	lst->map.img = mlx_new_image(lst->mlx, lst->map.width, lst->map.height);
+	lst->map.addr = mlx_get_data_addr(lst->map.img, \
+		&lst->map.bpp, &lst->map.size_line, &lst->map.endian);
 }
 
-void    init_texture(t_graph *lst)
+void    init_texture(t_graph *lst, t_map_ *data)
 {
-    lst->texture.texture_img_N = mlx_xpm_file_to_image(lst->mlx, "img/hitler.xpm", &lst->texture.width_N, &lst->texture.height_N);
+	printf("%s\n%s\n%s\n%s\n", data->ea_t, data->no_t, data->so_t, data->we_t);
+    lst->texture.texture_img_N = mlx_xpm_file_to_image(lst->mlx, data->no_t, &lst->texture.width_N, &lst->texture.height_N);
     lst->texture.img_addr_N = (int *)mlx_get_data_addr(lst->texture.texture_img_N, &lst->texture.bpp, &lst->texture.size_line, &lst->texture.endian);
-    lst->texture.texture_img_S = mlx_xpm_file_to_image(lst->mlx, "img/wall4.xpm", &lst->texture.width_S, &lst->texture.height_S);
+    lst->texture.texture_img_S = mlx_xpm_file_to_image(lst->mlx, data->so_t, &lst->texture.width_S, &lst->texture.height_S);
     lst->texture.img_addr_S = (int *)mlx_get_data_addr(lst->texture.texture_img_S, &lst->texture.bpp, &lst->texture.size_line, &lst->texture.endian);
-    lst->texture.texture_img_E = mlx_xpm_file_to_image(lst->mlx, "img/wall4.xpm", &lst->texture.width_E, &lst->texture.height_E);
+    lst->texture.texture_img_E = mlx_xpm_file_to_image(lst->mlx, data->ea_t, &lst->texture.width_E, &lst->texture.height_E);
     lst->texture.img_addr_E = (int *)mlx_get_data_addr(lst->texture.texture_img_E, &lst->texture.bpp, &lst->texture.size_line, &lst->texture.endian);
-    lst->texture.texture_img_W = mlx_xpm_file_to_image(lst->mlx, "img/hitler.xpm", &lst->texture.width_W, &lst->texture.height_W);
+    lst->texture.texture_img_W = mlx_xpm_file_to_image(lst->mlx, data->we_t, &lst->texture.width_W, &lst->texture.height_W);
     lst->texture.img_addr_W = (int *)mlx_get_data_addr(lst->texture.texture_img_W, &lst->texture.bpp, &lst->texture.size_line, &lst->texture.endian);
 }

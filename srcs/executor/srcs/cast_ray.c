@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cast_ray.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sahafid <sahafid@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rel-fagr <rel-fagr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 16:46:05 by sahafid           #+#    #+#             */
-/*   Updated: 2022/09/05 16:20:26 by sahafid          ###   ########.fr       */
+/*   Updated: 2022/09/22 14:15:31 by rel-fagr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void    draw_rect(int x, int y, int x1, int y1, t_graph *lst, int i, double wall
 	int		height;
 	double		ds;
 
+	(void)x1;
 	pixel_color = 0;
 	width = 0;
 	height = 0;
@@ -96,7 +97,6 @@ void	draw_rays(t_graph *lst, int j, int i)
 
 void cast_rays(t_graph *lst)
 {
-	double	fov;
 	int		i;
 	int		rays_num;
 	int		j;

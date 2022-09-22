@@ -1,33 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   executor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sahafid <sahafid@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rel-fagr <rel-fagr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 07:57:18 by sahafid           #+#    #+#             */
-/*   Updated: 2022/09/05 11:50:39 by sahafid          ###   ########.fr       */
+/*   Updated: 2022/09/22 13:56:08 by rel-fagr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "../executor.h"
 
-#include <stdio.h>
-#include "executor.h"
-
-int main()
+void	executor(t_map_ *data)
 {
-    t_graph lst;
-    int     fd;
+	t_graph	lst;
 
-    fd = 0;
-    init_map(&lst);
-    init_player(&lst);
-    init_raycast(&lst);
-    init_everything(&lst, fd);
-    init_texture(&lst);
-    draw_map(lst.map.map, &lst);
-    draw_walls(&lst);
-    mlx_loop_hook(lst.mlx, routine, &lst);
-    mlx_loop(lst.mlx);
-    return (0);
+	init_map(&lst, data);
+	init_player(&lst);
+	init_raycast(&lst);
+	init_everything(&lst, data);
+	init_texture(&lst, data);
+	draw_map(lst.map.map, &lst);
+	draw_walls(&lst);
+	mlx_loop_hook(lst.mlx, routine, &lst);
+	mlx_loop(lst.mlx);
 }
