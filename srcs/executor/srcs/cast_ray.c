@@ -6,7 +6,7 @@
 /*   By: rel-fagr <rel-fagr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 16:46:05 by sahafid           #+#    #+#             */
-/*   Updated: 2022/09/22 14:33:38 by rel-fagr         ###   ########.fr       */
+/*   Updated: 2022/09/22 16:35:26 by rel-fagr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,20 +78,20 @@ void	draw_rays(t_graph *lst, int j, int i)
 	if (j == 1)
 	{
 		rendringwalls(lst, i, 1);
-		drawline(lst->map.minimap * lst->plyr.x_plyr,
-			lst->map.minimap * lst->plyr.y_plyr,
-			lst->map.minimap * lst->raycast.xintercept_vertic,
-			lst->map.minimap * lst->raycast.yintercept_vertic,
-			lst, lst->map.player_color);
+		// drawline(lst->map.minimap * lst->plyr.x_plyr,
+		// 	lst->map.minimap * lst->plyr.y_plyr,
+		// 	lst->map.minimap * lst->raycast.xintercept_vertic,
+		// 	lst->map.minimap * lst->raycast.yintercept_vertic,
+		// 	lst, lst->map.player_color);
 	}
 	else
 	{
 		rendringwalls(lst, i, 0);
-		drawline(lst->map.minimap * lst->plyr.x_plyr,
-			lst->map.minimap * lst->plyr.y_plyr,
-			lst->map.minimap * lst->raycast.xintercept_horiz,
-			lst->map.minimap * lst->raycast.yintercept_horiz,
-			lst, lst->map.player_color);
+		// drawline(lst->map.minimap * lst->plyr.x_plyr,
+		// 	lst->map.minimap * lst->plyr.y_plyr,
+		// 	lst->map.minimap * lst->raycast.xintercept_horiz,
+		// 	lst->map.minimap * lst->raycast.yintercept_horiz,
+		// 	lst, lst->map.player_color);
 	}
 }
 

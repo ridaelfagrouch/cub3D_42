@@ -6,7 +6,7 @@
 /*   By: rel-fagr <rel-fagr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 13:09:18 by sahafid           #+#    #+#             */
-/*   Updated: 2022/09/22 15:21:00 by rel-fagr         ###   ########.fr       */
+/*   Updated: 2022/09/22 16:33:43 by rel-fagr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,8 @@ void    init_map(t_graph *lst, t_map_ *data)
 
 void    init_everything(t_graph *lst, t_map_ *data)
 {
-	lst->y = 0;
-	lst->x = 0;
+	lst->y = data->map_d.map_hight;
+	lst->x = data->map_d.map_width;
 	lst->first_time = 0;
 	lst->map.map = data->map_d.map;
 	ft_print_split(lst->map.map);

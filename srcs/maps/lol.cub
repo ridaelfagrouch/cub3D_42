@@ -6,10 +6,10 @@ WE srcs/textures/hitler.xpm
 
 SO srcs/textures/wall4.xpm
 
-C 225     ,30    ,    0
+C 128,128,128
 
 
-F 220,100,0
+F 256,256,256
 
 
                          111111111

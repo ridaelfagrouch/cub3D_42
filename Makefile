@@ -6,7 +6,7 @@
 #    By: rel-fagr <rel-fagr@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/21 18:47:15 by rel-fagr          #+#    #+#              #
-#    Updated: 2022/09/22 16:16:13 by rel-fagr         ###   ########.fr        #
+#    Updated: 2022/09/22 16:25:33 by rel-fagr         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -70,7 +70,7 @@ title:
 
 ${NAME}: title ${LIBFT_ARCH} ${PARS_ARCH} ${EXEC_ARCH} ${HEADER}
 	@${CC} ${CC_FLAGS} ${MAIN} -o ${NAME} ${ARCHIVES} -lmlx -framework openGL -framework Appkit -g
-	@printf "\n${MGN}Executable ${GRA}${NAME}${MGN} created${NNN} :)\n\n"
+	@printf "\n${MGN}Executable ${GRA}${NAME}${MGN} created${NNN} 🚀\n\n"
 
 clean:
 	@make -C libft/ clean

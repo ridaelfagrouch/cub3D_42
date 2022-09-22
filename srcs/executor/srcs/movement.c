@@ -21,7 +21,7 @@ int routine(t_graph *lst)
 	lst->map.img = mlx_new_image(lst->mlx, lst->map.width, lst->map.height);
     lst->map.addr = mlx_get_data_addr(lst->map.img, &lst->map.bpp, &lst->map.size_line, &lst->map.endian);
 	draw_floor_ceilling(lst);
-	draw_map(lst->map.map, lst);
+	// draw_map(lst->map.map, lst);
     draw_walls(lst);
 	mlx_put_image_to_window(lst->mlx, lst->wind, lst->map.img, 0, 0);
 	return (0);
