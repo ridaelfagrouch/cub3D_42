@@ -38,13 +38,13 @@ int	get_texture(t_graph *lst, int y, int x, int i)
 	color = 0;
 	direction = get_direction(lst, i);
 	if (direction == 'N')
-		color = lst->texture.img_addr_N[(int)((y * lst->texture.width_N) + x)];
+		color = lst->texture.img_addr_N[(int)((abs(y) * lst->texture.width_N) + x)];
 	else if (direction == 'S')
-		color = lst->texture.img_addr_S[(int)((y * lst->texture.width_S) + x)];
+		color = lst->texture.img_addr_S[(int)((abs(y) * lst->texture.width_S) + x)];
 	else if (direction == 'E')
-		color = lst->texture.img_addr_E[(int)((y * lst->texture.width_E) + x)];
+		color = lst->texture.img_addr_E[(int)((abs(y) * lst->texture.width_E) + x)];
 	else if (direction == 'W')
-		color = lst->texture.img_addr_W[(int)((y * lst->texture.width_W) + x)];
+		color = lst->texture.img_addr_W[(int)((abs(y) * lst->texture.width_W) + x)];
 	return (color);
 }
 

@@ -16,7 +16,7 @@ void    init_player(t_graph *lst)
 {
     lst->plyr.rotationangle = M_PI / 2;
     lst->plyr.fov = 60 * (M_PI / 180);
-    lst->plyr.speed = 7;
+    lst->plyr.speed = 15;
     lst->plyr.rotationspeed = 4 * (M_PI / 180);
     lst->plyr.rotatedirection = 0;
     lst->plyr.walkdirection = 0;
@@ -51,7 +51,7 @@ void    init_everything(t_graph *lst, t_map_ *data)
 	lst->map.width = 1500;
 	lst->mlx = mlx_init();
 	lst->wind = mlx_new_window(lst->mlx, \
-		lst->map.width, lst->map.height, "cub3d");
+		lst->map.width, lst->map.height, "Cub3d");
 	lst->map.img = NULL;
 	lst->map.addr = NULL;
 	lst->map.img = mlx_new_image(lst->mlx, lst->map.width, lst->map.height);

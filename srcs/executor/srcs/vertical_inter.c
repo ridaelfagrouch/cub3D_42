@@ -14,6 +14,9 @@
 
 void	vertical_intersaction(t_graph *lst)
 {
+	int check;
+
+	check = 0;
 	lst->raycast.vertic_intersaction = 0;
 	lst->raycast.xintercept_vertic = floor(lst->plyr.x_plyr / lst->map.unit) * lst->map.unit;
 	if (lst->raycast.facingright)
@@ -28,10 +31,10 @@ void	vertical_intersaction(t_graph *lst)
 	if (lst->raycast.facingdown && lst->raycast.ystep < 0)
 		lst->raycast.ystep *= -1;
 	if (lst->raycast.facingleft)
-		lst->raycast.xintercept_vertic--;
+		check = 1;
 	while ((lst->raycast.xintercept_vertic >= 0 && lst->raycast.xintercept_vertic <= lst->map.unit * lst->map.width) && (lst->raycast.yintercept_vertic >= 0 && lst->raycast.yintercept_vertic <= lst->map.unit * lst->map.height))
 	{
-		if (check_wall(lst, lst->raycast.xintercept_vertic, lst->raycast.yintercept_vertic))
+		if (check_wall(lst, lst->raycast.xintercept_vertic - check, lst->raycast.yintercept_vertic))
 		{
 			lst->raycast.vertic_intersaction = 1;
 			return ;

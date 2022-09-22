@@ -14,6 +14,9 @@
 
 void	horizantal_intersaction(t_graph *lst)
 {
+	int check;
+
+	check = 0;
 	lst->raycast.horiz_intersaction = 0;
 	lst->raycast.yintercept_horiz = floor(lst->plyr.y_plyr / lst->map.unit) * lst->map.unit;
 	if (lst->raycast.facingdown)
@@ -28,10 +31,10 @@ void	horizantal_intersaction(t_graph *lst)
 	if (lst->raycast.facingright && lst->raycast.xstep < 0)
 		lst->raycast.xstep *= -1;
 	if (lst->raycast.facingup)
-		lst->raycast.yintercept_horiz--;
+		check = 1;
 	while ((lst->raycast.xintercept_horiz >= 0 && lst->raycast.xintercept_horiz <= lst->map.unit * lst->map.width) && (lst->raycast.yintercept_horiz >= 0 && lst->raycast.yintercept_horiz <= lst->map.unit * lst->map.height))
 	{
-		if (check_wall(lst, lst->raycast.xintercept_horiz, lst->raycast.yintercept_horiz))
+		if (check_wall(lst, lst->raycast.xintercept_horiz, lst->raycast.yintercept_horiz - check))
 		{
 			lst->raycast.horiz_intersaction = 1;
 			return ;
