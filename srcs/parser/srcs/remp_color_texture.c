@@ -6,7 +6,7 @@
 /*   By: rel-fagr <rel-fagr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 13:05:48 by rel-fagr          #+#    #+#             */
-/*   Updated: 2022/09/21 20:09:24 by rel-fagr         ###   ########.fr       */
+/*   Updated: 2022/09/22 21:13:47 by rel-fagr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,15 @@ void	check_color(char **split_color, int *i)
 void	remp_color(int *count, char *ptr, t_map_ *data, char *c)
 {
 	char	**split_color;
+	char	*str;
 	int		i;
 
 	i = 0;
 	split_color = ft_split(ft_strtrim(ft_strtrim(ptr, "F "), "C "), ',');
 	check_color(split_color, &i);
+	str = ft_strtrim(ft_strtrim(ptr, "\n"), " ");
+	if (ft_isdigit(str[ft_strlen(str) - 1]) == 0)
+		i = 4;
 	if (ft_strlen_split(split_color) == 3 && i == 3)
 	{
 		*count += 1;
@@ -107,7 +111,7 @@ int	process_data(char *str, t_map_ *data, int *count)
 	char	*ptr;
 	char	c[4];
 
-	ptr = ft_strtrim(ft_strtrim(str, " "), "\n");
+	ptr = ft_strtrim(ft_strtrim(str, "\n"), " ");
 	if (ft_strlen(ptr) == 0)
 		return (0);
 	ft_bzero(c, 4);

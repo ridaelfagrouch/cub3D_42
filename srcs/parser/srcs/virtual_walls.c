@@ -6,7 +6,7 @@
 /*   By: rel-fagr <rel-fagr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 16:09:16 by rel-fagr          #+#    #+#             */
-/*   Updated: 2022/09/21 17:00:43 by rel-fagr         ###   ########.fr       */
+/*   Updated: 2022/09/23 15:57:56 by rel-fagr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,41 +14,60 @@
 
 /* --------------------------------------------------------------- */
 
-void	check_vertual_left_right(t_map_ *data, int i, int j)
+void	check_vertual_up_down2(t_map_ *data, int i, int j)
 {
-	if (data->map_d.map[i][j - 1] == '0' && \
-		(data->map_d.map[i - 1][j - 1] == '1' || \
-		data->map_d.map[i + 1][j - 1] == '1'))
-		data->map_d.map[i][j - 1] = 'V';
-	if (data->map_d.map[i][j + 1] == '0' && \
-		(data->map_d.map[i - 1][j + 1] == '1' || \
-		data->map_d.map[i + 1][j + 1] == '1'))
-		data->map_d.map[i][j + 1] = 'V';
+	if (i != 0 && data->map_d.map[i - 1][j] == '1' && \
+		(data->map_d.map[i - 1][j + 1] == '0' || \
+		data->map_d.map[i - 1][j + 1] == 'V' || \
+		data->map_d.map[i - 1][j + 1] == 'L'))
+	{
+		data->map_d.map[i - 1][j + 1] = 'V';
+		data->map_d.map[i][j] = 'L';
+	}
+	if (i != 0 && data->map_d.map[i + 1][j] == '1' && \
+		(data->map_d.map[i + 1][j + 1] == '0' || \
+		data->map_d.map[i + 1][j + 1] == 'V' || \
+		data->map_d.map[i + 1][j + 1] == 'L'))
+	{
+		data->map_d.map[i + 1][j + 1] = 'V';
+		data->map_d.map[i][j] = 'L';
+	}
 }
 
 /* --------------------------------------------------------------- */
 
-void	check_vertual_up_down(t_map_ *data, int i, int j)
+void	check_vertual_up_down1(t_map_ *data, int i, int j)
 {
-	int	count;
+	if (i != 0 && data->map_d.map[i - 1][j] == '1' && \
+		(data->map_d.map[i - 1][j - 1] == '0' || \
+		data->map_d.map[i - 1][j - 1] == 'V' || \
+		data->map_d.map[i - 1][j - 1] == 'L'))
+	{
+		data->map_d.map[i - 1][j - 1] = 'V';
+		data->map_d.map[i][j] = 'L';
+	}
+	if (i != 0 && data->map_d.map[i + 1][j] == '1' && \
+		(data->map_d.map[i + 1][j - 1] == '0' || \
+		data->map_d.map[i + 1][j - 1] == 'V' || \
+		data->map_d.map[i + 1][j - 1] == 'L'))
+	{
+		data->map_d.map[i + 1][j - 1] = 'V';
+		data->map_d.map[i][j] = 'L';
+	}
+}
 
-	count = 0;
-	if (i != 0 && data->map_d.map[i - 1][j] == '0' && \
-		(data->map_d.map[i - 1][j - 1] == '1' || \
-		data->map_d.map[i - 1][j + 1] == '1'))
-	{
-		data->map_d.map[i - 1][j] = 'V';
-		count++;
-	}
-	if (i != 0 && data->map_d.map[i + 1][j] == '0' && \
-		(data->map_d.map[i + 1][j - 1] == '1' || \
-		data->map_d.map[i + 1][j + 1] == '1'))
-	{
-		data->map_d.map[i + 1][j] = 'V';
-		count++;
-	}
-	if (count > 0)
-		check_vertual_left_right(data, i, j);
+/* --------------------------------------------------------------- */
+
+int	check_condition(t_map_ *data, int i, int j)
+{
+	if ((data->map_d.map[i][j - 1] == '0' || \
+		data->map_d.map[i][j - 1] == 'L' || \
+		data->map_d.map[i][j - 1] == 'V') || \
+		(data->map_d.map[i][j + 1] == '0' || \
+		data->map_d.map[i][j + 1] == 'L' || \
+		data->map_d.map[i][j + 1] == 'V'))
+		return (1);
+	return (0);
 }
 
 /* --------------------------------------------------------------- */
@@ -59,21 +78,25 @@ void	virtual_wall(t_map_ *data)
 	int		j;
 	char	c;
 
-	i = 0;
-	while (data->map_d.map[i])
+	i = -1;
+	while (data->map_d.map[++i])
 	{
-		j = 0;
-		while (data->map_d.map[i][j])
+		j = -1;
+		while (data->map_d.map[i][++j])
 		{
 			c = data->map_d.map[i][j];
 			if (j != 0 && j < data->map_d.map_width - 1 && c == '1')
 			{
-				if (data->map_d.map[i][j - 1] == '0' || \
-					data->map_d.map[i][j + 1] == '0')
-					check_vertual_up_down(data, i, j);
+				if (check_condition(data, i, j))
+				{
+					if (data->map_d.map[i][j + 1] == '0' || \
+						data->map_d.map[i][j + 1] == 'L' || \
+						data->map_d.map[i][j + 1] == 'V')
+						check_vertual_up_down1(data, i, j + 1);
+					else
+						check_vertual_up_down2(data, i, j - 1);
+				}
 			}
-			j++;
 		}
-		i++;
 	}
 }
