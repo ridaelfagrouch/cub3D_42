@@ -46,7 +46,6 @@ void    init_everything(t_graph *lst, t_map_ *data)
 	lst->x = data->map_d.map_width;
 	lst->first_time = 0;
 	lst->map.map = data->map_d.map;
-	ft_print_split(lst->map.map);
 	lst->map.height = 1000;
 	lst->map.width = 1500;
 	lst->mlx = mlx_init();

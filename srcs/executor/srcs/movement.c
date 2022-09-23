@@ -63,22 +63,34 @@ int	check_wall(t_graph *lst, int x, int y)
 
 int	check_wall_movement(t_graph *lst, int x, int y, int x1, int y1)
 {
-	int i;
-	int	pos1;
-	int	pos2;
+	int	posPx;
+	int	posPy;
+	int	posDx;
+	int	posDy;
 
-	i = 0;
-	pos1 = x ;
-	pos2 = y ;
-	// x1 /= lst->map.unit;
-	// y1 /= lst->map.unit;
-	if ((pos1 >= 0 && pos1 < lst->x) && (pos2 >= 0 && pos2 < lst->y))
+	posPx = x / lst->map.unit;
+	posPy = y / lst->map.unit;
+	posDx = x1 / lst->map.unit;
+	posDy = y1 / lst->map.unit;
+
+	// if ((pos1 >= 0 && pos1 < lst->x) && (pos2 >= 0 && pos2 < lst->y))
+	// {
+	// 	if ((lst->map.map[pos2] && lst->map.map[pos2][pos1] && lst->map.map[pos2][pos1] == '1') || lst->map.map[pos2][pos1] == ' ')
+	// 		return (1);
+	// 	if (lst->map.map[y1][x1] == 'V' && lst->map.map[pos2][pos1] == 'L')
+	// 		return (1);
+	// 	if (lst->map.map[y1][x1] == 'L' && lst->map.map[pos2][pos1] == 'V')
+	// 		return (1);
+	// }
+	if ((posPx >= 0 && posPx < lst->x) && (posPy >= 0 && posPy < lst->y))
 	{
-		printf("%d   %d   %d  %d\n", pos1, pos2, x1, y1);
-		if ((lst->map.map[pos2] && lst->map.map[pos2][pos1] && lst->map.map[pos2][pos1] == '1') || lst->map.map[pos2][pos1] == ' ')
+		if (lst->map.map[posPy][posPx] == '1' || lst->map.map[posPy][posPx] == ' ')
 			return (1);
-		if (lst->map.map[y1][x1] == 'V' && lst->map.map[pos2][pos1] == 'V')
-			return (1);
+		if (!((posPx == posDx) && (posPy == posDy)))
+		{
+			if (lst->map.map[posPy][posPx] == 'V' && lst->map.map[posDy][posDx] == 'V')
+				return (1);
+		}
 	}
 	return (0);
 }

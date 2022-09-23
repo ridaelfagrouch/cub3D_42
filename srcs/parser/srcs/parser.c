@@ -6,7 +6,7 @@
 /*   By: rel-fagr <rel-fagr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/18 11:00:48 by rel-fagr          #+#    #+#             */
-/*   Updated: 2022/09/22 16:13:30 by rel-fagr         ###   ########.fr       */
+/*   Updated: 2022/09/23 14:09:50 by rel-fagr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	check_valid_line(t_map_ *data)
 			c = data->map_d.map[i][j];
 			if (c == '0' || c == 'W' || c == 'E' || c == 'N' || c == 'S')
 			{
-				if (check_left_right(data->map_d.map[i], j) && check_up_down(data, i, j))
+				if (check_left_right(data->map_d.map[i], j) || check_up_down(data, i, j))
 					free_garbage(data, "error!! unclosed map");
 			}
 			j++;
@@ -79,10 +79,6 @@ int	ft_check_map(t_map_	*data)
 	free(str);
 	if (data->map_d.count_player == 0 || data->map_d.count_player > 1)
 		return (write(1, "error!! bad player number\n", 26), 1);
-	// printf("|t_no : %s , fd_no : %d|\n|t_so : %s , fd_so : %d|\n|t_we : %s ,\
-	// fd_we : %d|\n|t_ea : %s , fd_ea : %d|\n", data->no_t, data->no_fd, \
-	// 	data->so_t, data->so_fd, data->we_t, data->we_fd, data->ea_t, data->ea_fd);
-	// printf("|color_F : %d|\n|color_C : %d|\n\n", data->floor_color, data->ceil_color);
 	return (0);
 }
 
@@ -121,6 +117,5 @@ int	parser(char **argv, t_map_ *data)
 	creat_map_array(data, argv);
 	check_valid_line(data);
 	virtual_wall(data);
-	// ft_print_split(data->map_d.map);
 	return (0);
 }
