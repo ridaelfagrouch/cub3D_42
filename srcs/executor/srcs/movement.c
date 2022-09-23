@@ -61,6 +61,28 @@ int	check_wall(t_graph *lst, int x, int y)
 	return (0);
 }
 
+int	check_wall_movement(t_graph *lst, int x, int y, int x1, int y1)
+{
+	int i;
+	int	pos1;
+	int	pos2;
+
+	i = 0;
+	pos1 = x ;
+	pos2 = y ;
+	// x1 /= lst->map.unit;
+	// y1 /= lst->map.unit;
+	if ((pos1 >= 0 && pos1 < lst->x) && (pos2 >= 0 && pos2 < lst->y))
+	{
+		printf("%d   %d   %d  %d\n", pos1, pos2, x1, y1);
+		if ((lst->map.map[pos2] && lst->map.map[pos2][pos1] && lst->map.map[pos2][pos1] == '1') || lst->map.map[pos2][pos1] == ' ')
+			return (1);
+		if (lst->map.map[y1][x1] == 'V' && lst->map.map[pos2][pos1] == 'V')
+			return (1);
+	}
+	return (0);
+}
+
 int	deal_key(int key, t_graph *var)
 {
 	if (key == 124)

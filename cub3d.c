@@ -23,6 +23,7 @@ int	main(int argc, char **argv)
 	{
 		if (parser(argv, data))
 			return (free(data), 0);
+		ft_print_split(data->map_d.map);
 		executor(data);
 	}
 	else

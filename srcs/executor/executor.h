@@ -107,7 +107,7 @@ typedef struct s_graph
 
 char	*get_next_line1(int fd);
 int		deal_key(int key, t_graph *var);
-
+int		check_wall_movement(t_graph *lst, int x, int y, int x1, int y1);
 int		check_wall(t_graph *lst, int x, int y);
 
 
