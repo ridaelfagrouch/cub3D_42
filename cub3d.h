@@ -6,7 +6,7 @@
 /*   By: rel-fagr <rel-fagr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 18:55:26 by rel-fagr          #+#    #+#             */
-/*   Updated: 2022/09/22 13:42:13 by rel-fagr         ###   ########.fr       */
+/*   Updated: 2022/09/23 16:54:07 by rel-fagr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ typedef struct s_mapdata
 	int		map_hight;
 	int		map_width;
 	int		fst_line;
+	int		player_x;
+	int		player_y;
 	int		count_player;
 }	t_mapData;
 

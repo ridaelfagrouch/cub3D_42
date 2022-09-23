@@ -6,7 +6,7 @@
 /*   By: rel-fagr <rel-fagr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 16:09:16 by rel-fagr          #+#    #+#             */
-/*   Updated: 2022/09/23 16:36:14 by rel-fagr         ###   ########.fr       */
+/*   Updated: 2022/09/23 16:49:26 by rel-fagr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	check_vertual_up_down1(t_map_ *data, int i, int j)
 {
 	if (i != 0 && data->map_d.map[i - 1][j] == '1' && \
 		(data->map_d.map[i - 1][j - 1] == '0' || \
-		data->map_d.map[i - 1][j - 1] == 'V'))
+		data->map_d.map[i - 1][j - 1] == 'V' ))
 	{
 		data->map_d.map[i - 1][j - 1] = 'V';
 		data->map_d.map[i][j] = 'V';

@@ -33,7 +33,7 @@ void drawline(double x0, double y0, int x1, int y1, t_graph *lst, int j)
 	double	y;
 	int		i;
 
-	dx = x1 - x0;
+	dx = x1 - x0; 
 	dy = y1 - y0;
 	i = 0;
     steps = 0;
@@ -121,7 +121,7 @@ void    turningleftright(t_graph *lst, int direction)
 		save1 = lst->plyr.x_plyr + (lst->plyr.speed * cos(newangle));
 		save2 = lst->plyr.y_plyr + (lst->plyr.speed * sin(newangle));
 	}
-    if (check_wall(lst, save1, save2))
+    if (check_wall_movement(lst, save1, save2, lst->plyr.x_plyr, lst->plyr.y_plyr))
 			return ;
 	lst->plyr.x_plyr = save1;
 	lst->plyr.y_plyr = save2;
@@ -138,8 +138,8 @@ void    player_movement(t_graph *lst)
     {
         save1 = lst->plyr.x_plyr - (lst->plyr.speed * cos(lst->plyr.rotationangle));
 		save2 = lst->plyr.y_plyr - (lst->plyr.speed * sin(lst->plyr.rotationangle));
-		if (check_wall(lst, save1, save2))
-			return ;
+		if (check_wall_movement(lst, save1, save2, lst->plyr.x_plyr, lst->plyr.y_plyr))
+		    return ;
 		lst->plyr.x_plyr = save1;
 		lst->plyr.y_plyr = save2;
 		lst->plyr.x1_plyr = lst->plyr.x_plyr + (lst->map.unit / 4);
@@ -149,7 +149,7 @@ void    player_movement(t_graph *lst)
     {
         save1 = lst->plyr.x_plyr + (lst->plyr.speed * cos(lst->plyr.rotationangle));
 		save2 = lst->plyr.y_plyr + (lst->plyr.speed * sin(lst->plyr.rotationangle));
-		if (check_wall(lst, save1, save2))
+		if (check_wall_movement(lst, save1, save2, lst->plyr.x_plyr, lst->plyr.y_plyr))
 			return ;
 		lst->plyr.x_plyr = save1;
 		lst->plyr.y_plyr = save2;

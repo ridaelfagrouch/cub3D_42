@@ -6,7 +6,7 @@
 /*   By: rel-fagr <rel-fagr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 15:22:32 by rel-fagr          #+#    #+#             */
-/*   Updated: 2022/09/21 14:12:20 by rel-fagr         ###   ########.fr       */
+/*   Updated: 2022/09/23 17:04:56 by rel-fagr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,20 +32,28 @@ void	read_first_lines(t_map_ *data)
 
 /* --------------------------------------------------------------- */
 
-void	filling_array(char *array, char *str, t_map_ *data)
+void	filling_array(char *array, char *str, t_map_ *data, int i)
 {
 	char	*ptr;
-	int		i;
+	int		j;
 
-	i = 0;
+	j = 0;
 	ptr = ft_strtrim(str, "\n");
-	while (i < data->map_d.map_width)
+	while (j < data->map_d.map_width)
 	{
-		if (i < (int)ft_strlen(ptr))
-			array[i] = ptr[i];
+		if (j < (int)ft_strlen(ptr))
+		{
+			array[j] = ptr[j];
+			if (ptr[j] == 'S' || ptr[j] == 'W' || \
+				ptr[j] == 'E' || ptr[j] == 'N')
+			{
+				data->map_d.player_x = j;
+				data->map_d.player_y = i;
+			}
+		}
 		else
-			array[i] = ' ';
-		i++;
+			array[j] = ' ';
+		j++;
 	}
 }
 
@@ -71,7 +79,7 @@ void	creat_map_array(t_map_ *data, char **argv)
 			exit (1);
 		data->map_d.map[i][data->map_d.map_width] = '\0';
 		str = get_next_line(data->fd);
-		filling_array(data->map_d.map[i], str, data);
+		filling_array(data->map_d.map[i], str, data, i);
 		free(str);
 		i++;
 	}
