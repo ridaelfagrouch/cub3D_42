@@ -17,12 +17,12 @@ void	executor(t_map_ *data)
 	t_graph	lst;
 
 	init_map(&lst, data);
-	init_player(&lst);
+	init_player(&lst, data);
 	init_raycast(&lst);
 	init_everything(&lst, data);
 	init_texture(&lst, data);
-	draw_map(lst.map.map, &lst);
-	draw_walls(&lst);
+	// draw_map(lst.map.map, &lst);
+	// draw_walls(&lst);
 	mlx_loop_hook(lst.mlx, routine, &lst);
 	mlx_loop(lst.mlx);
 }

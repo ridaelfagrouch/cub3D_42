@@ -12,9 +12,22 @@
 
 #include "../executor.h"
 
-void    init_player(t_graph *lst)
+static void	direction(t_graph *lst, t_map_ *data)
 {
-    lst->plyr.rotationangle = M_PI / 2;
+	if (data->map_d.map[data->map_d.player_y][data->map_d.player_x] == 'N')
+		lst->plyr.rotationangle = 3 * M_PI / 2;
+	else if  (data->map_d.map[data->map_d.player_y][data->map_d.player_x] == 'S')
+		lst->plyr.rotationangle = M_PI / 2;
+	else if  (data->map_d.map[data->map_d.player_y][data->map_d.player_x] == 'E')
+		lst->plyr.rotationangle = 0;
+	else if  (data->map_d.map[data->map_d.player_y][data->map_d.player_x] == 'W')
+		lst->plyr.rotationangle = M_PI;
+} 
+
+void    init_player(t_graph *lst, t_map_ *data)
+{
+	direction(lst, data);
+    // lst->plyr.rotationangle = M_PI / 2;
     lst->plyr.fov = 60 * (M_PI / 180);
     lst->plyr.speed = 15;
     lst->plyr.rotationspeed = 4 * (M_PI / 180);
@@ -38,6 +51,8 @@ void    init_map(t_graph *lst, t_map_ *data)
 	lst->map.player_color = data->ceil_color;
 	lst->map.unit = 64;
 	lst->map.minimap = 0.2;
+	lst->plyr.x_plyr = data->map_d.player_x * lst->map.unit;
+	lst->plyr.y_plyr = data->map_d.player_y * lst->map.unit;
 }
 
 void    init_everything(t_graph *lst, t_map_ *data)

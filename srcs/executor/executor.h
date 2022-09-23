@@ -35,8 +35,6 @@ typedef struct s_player
 {
 	double	x_plyr;
 	double	y_plyr;
-	double	x1_plyr;
-	double	y1_plyr;
 	double	rotationangle;
 	double	speed;
 	double	fov;
@@ -113,7 +111,7 @@ int		check_wall(t_graph *lst, int x, int y);
 
 /* --------------------------------- INIT ------------------------------- */
 
-void	init_player(t_graph *lst);
+void	init_player(t_graph *lst, t_map_ *data);
 void	init_raycast(t_graph *lst);
 void	init_map(t_graph *lst, t_map_ *data);
 void	init_everything(t_graph *lst, t_map_ *data);

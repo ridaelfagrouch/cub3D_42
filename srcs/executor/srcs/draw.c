@@ -125,8 +125,6 @@ void    turningleftright(t_graph *lst, int direction)
 			return ;
 	lst->plyr.x_plyr = save1;
 	lst->plyr.y_plyr = save2;
-	lst->plyr.x1_plyr = lst->plyr.x_plyr + (lst->map.unit / 4);
-	lst->plyr.y1_plyr = lst->plyr.y_plyr + (lst->map.unit / 4);
 }
 
 void    player_movement(t_graph *lst)
@@ -142,8 +140,6 @@ void    player_movement(t_graph *lst)
 		    return ;
 		lst->plyr.x_plyr = save1;
 		lst->plyr.y_plyr = save2;
-		lst->plyr.x1_plyr = lst->plyr.x_plyr + (lst->map.unit / 4);
-		lst->plyr.y1_plyr = lst->plyr.y_plyr + (lst->map.unit / 4);
     }
     else if (lst->plyr.walkdirection == 1)
     {
@@ -153,8 +149,6 @@ void    player_movement(t_graph *lst)
 			return ;
 		lst->plyr.x_plyr = save1;
 		lst->plyr.y_plyr = save2;
-		lst->plyr.x1_plyr = lst->plyr.x_plyr + (lst->map.unit / 4);
-		lst->plyr.y1_plyr = lst->plyr.y_plyr + (lst->map.unit / 4);
     }
     else if (lst->plyr.walkdirection == 2)
         turningleftright(lst, 0);
@@ -197,8 +191,6 @@ void    draw_map(char	**map, t_graph *lst)
                 {
                     lst->plyr.x_plyr = x + lst->map.unit / 4;
                     lst->plyr.y_plyr = y + lst->map.unit / 4;
-                    lst->plyr.x1_plyr = lst->plyr.x_plyr + (lst->map.unit / 4);
-                    lst->plyr.y1_plyr = lst->plyr.y_plyr + (lst->map.unit / 4);
                 }
             }
             else
