@@ -6,7 +6,7 @@
 /*   By: rel-fagr <rel-fagr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 16:09:16 by rel-fagr          #+#    #+#             */
-/*   Updated: 2022/09/23 15:57:56 by rel-fagr         ###   ########.fr       */
+/*   Updated: 2022/09/23 16:36:14 by rel-fagr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,19 +18,17 @@ void	check_vertual_up_down2(t_map_ *data, int i, int j)
 {
 	if (i != 0 && data->map_d.map[i - 1][j] == '1' && \
 		(data->map_d.map[i - 1][j + 1] == '0' || \
-		data->map_d.map[i - 1][j + 1] == 'V' || \
-		data->map_d.map[i - 1][j + 1] == 'L'))
+		data->map_d.map[i - 1][j + 1] == 'V'))
 	{
 		data->map_d.map[i - 1][j + 1] = 'V';
-		data->map_d.map[i][j] = 'L';
+		data->map_d.map[i][j] = 'V';
 	}
 	if (i != 0 && data->map_d.map[i + 1][j] == '1' && \
 		(data->map_d.map[i + 1][j + 1] == '0' || \
-		data->map_d.map[i + 1][j + 1] == 'V' || \
-		data->map_d.map[i + 1][j + 1] == 'L'))
+		data->map_d.map[i + 1][j + 1] == 'V'))
 	{
 		data->map_d.map[i + 1][j + 1] = 'V';
-		data->map_d.map[i][j] = 'L';
+		data->map_d.map[i][j] = 'V';
 	}
 }
 
@@ -40,19 +38,17 @@ void	check_vertual_up_down1(t_map_ *data, int i, int j)
 {
 	if (i != 0 && data->map_d.map[i - 1][j] == '1' && \
 		(data->map_d.map[i - 1][j - 1] == '0' || \
-		data->map_d.map[i - 1][j - 1] == 'V' || \
-		data->map_d.map[i - 1][j - 1] == 'L'))
+		data->map_d.map[i - 1][j - 1] == 'V'))
 	{
 		data->map_d.map[i - 1][j - 1] = 'V';
-		data->map_d.map[i][j] = 'L';
+		data->map_d.map[i][j] = 'V';
 	}
 	if (i != 0 && data->map_d.map[i + 1][j] == '1' && \
 		(data->map_d.map[i + 1][j - 1] == '0' || \
-		data->map_d.map[i + 1][j - 1] == 'V' || \
-		data->map_d.map[i + 1][j - 1] == 'L'))
+		data->map_d.map[i + 1][j - 1] == 'V'))
 	{
 		data->map_d.map[i + 1][j - 1] = 'V';
-		data->map_d.map[i][j] = 'L';
+		data->map_d.map[i][j] = 'V';
 	}
 }
 
@@ -61,10 +57,8 @@ void	check_vertual_up_down1(t_map_ *data, int i, int j)
 int	check_condition(t_map_ *data, int i, int j)
 {
 	if ((data->map_d.map[i][j - 1] == '0' || \
-		data->map_d.map[i][j - 1] == 'L' || \
 		data->map_d.map[i][j - 1] == 'V') || \
 		(data->map_d.map[i][j + 1] == '0' || \
-		data->map_d.map[i][j + 1] == 'L' || \
 		data->map_d.map[i][j + 1] == 'V'))
 		return (1);
 	return (0);
@@ -90,7 +84,6 @@ void	virtual_wall(t_map_ *data)
 				if (check_condition(data, i, j))
 				{
 					if (data->map_d.map[i][j + 1] == '0' || \
-						data->map_d.map[i][j + 1] == 'L' || \
 						data->map_d.map[i][j + 1] == 'V')
 						check_vertual_up_down1(data, i, j + 1);
 					else

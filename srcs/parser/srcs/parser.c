@@ -6,7 +6,7 @@
 /*   By: rel-fagr <rel-fagr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/18 11:00:48 by rel-fagr          #+#    #+#             */
-/*   Updated: 2022/09/23 14:09:50 by rel-fagr         ###   ########.fr       */
+/*   Updated: 2022/09/23 16:38:03 by rel-fagr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,6 +117,6 @@ int	parser(char **argv, t_map_ *data)
 	creat_map_array(data, argv);
 	check_valid_line(data);
 	virtual_wall(data);
-	ft_print_split(data->map_d.map);
+	// ft_print_split(data->map_d.map);
 	return (0);
 }
