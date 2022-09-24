@@ -76,26 +76,32 @@ void	rendringwalls(t_graph *lst, int i, int j)
 void	draw_rays(t_graph *lst, int j, int i)
 {
 	if (j == 1)
-	{
 		rendringwalls(lst, i, 1);
-		// drawline(lst->map.minimap * lst->plyr.x_plyr,
-		// 	lst->map.minimap * lst->plyr.y_plyr,
-		// 	lst->map.minimap * lst->raycast.xintercept_vertic,
-		// 	lst->map.minimap * lst->raycast.yintercept_vertic,
-		// 	lst, lst->map.player_color);
+	else
+		rendringwalls(lst, i, 0);
+}
+
+void	draw_rays1(t_graph *lst, int j)
+{
+	if (j == 1)
+	{
+		drawline(lst->map.minimap * lst->plyr.x_plyr,\
+			lst->map.minimap * lst->plyr.y_plyr,\
+			lst->map.minimap * lst->raycast.xintercept_vertic,\
+			lst->map.minimap * lst->raycast.yintercept_vertic,\
+			lst, 0x00FF00);
 	}
 	else
 	{
-		rendringwalls(lst, i, 0);
-		// drawline(lst->map.minimap * lst->plyr.x_plyr,
-		// 	lst->map.minimap * lst->plyr.y_plyr,
-		// 	lst->map.minimap * lst->raycast.xintercept_horiz,
-		// 	lst->map.minimap * lst->raycast.yintercept_horiz,
-		// 	lst, lst->map.player_color);
+		drawline(lst->map.minimap * lst->plyr.x_plyr,\
+			lst->map.minimap * lst->plyr.y_plyr,\
+			lst->map.minimap * lst->raycast.xintercept_horiz,\
+			lst->map.minimap * lst->raycast.yintercept_horiz,\
+			lst, 0x00FF00);
 	}
 }
 
-void cast_rays(t_graph *lst)
+void cast_rays(t_graph *lst, int k)
 {
 	int		i;
 	int		rays_num;
@@ -114,7 +120,10 @@ void cast_rays(t_graph *lst)
 		horizantal_intersaction(lst);
 		vertical_intersaction(lst);
 		j = calculate_intersactions(lst);
-		draw_rays(lst, j, i);
+		if (k == 0)
+			draw_rays(lst, j, i);
+		if (k == 1)
+			draw_rays1(lst, j);
 		lst->raycast.ray_angle += lst->plyr.fov / rays_num;
 		i++;
 	}

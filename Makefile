@@ -38,7 +38,8 @@ export TITLE
 
 # ---------------------------------------------------------------------------- #
 CC			:= gcc
-CC_FLAGS	:= -Wall -Wextra -Werror -static-libsan -fsanitize=address -lm
+CC_FLAGS	:= -Wall -Wextra -Werror -static-libsan -fsanitize=address  -lm
+# -fno-signed-zeros -mtune=intel -Ofast -march=native -fno-trapping-math
 NAME		:= cub3D
 MAIN		:= cub3d.c
 HEADER		:= cub3d.h

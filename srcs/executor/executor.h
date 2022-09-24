@@ -26,6 +26,8 @@ typedef struct s_map
 	int		endian;
 	void	*img;
 	char	*addr;
+	void	*img1;
+	char	*addr1;
 	int		height;
 	int		width;
 } t_map;
@@ -94,7 +96,6 @@ typedef struct s_graph
 	int					y;
 	int					x1;
 	int					y1;
-	int					first_time;
 	struct s_player		plyr;
 	struct s_raycasting raycast;
 	struct s_map		map;
@@ -103,7 +104,6 @@ typedef struct s_graph
 
 /* --------------------------------- PARSING ------------------------------- */
 
-char	*get_next_line1(int fd);
 int		deal_key(int key, t_graph *var);
 int		check_wall_movement(t_graph *lst, int x, int y, int x1, int y1);
 int		check_wall(t_graph *lst, int x, int y);
@@ -120,7 +120,7 @@ void	init_texture(t_graph *lst, t_map_ *data);
 /* --------------------------------- RAYCAST ----------------------------- */
 
 
-void	cast_rays(t_graph *lst);
+void	cast_rays(t_graph *lst, int k);
 void	normilizeAngle(double *ray_angle);
 void	vertical_intersaction(t_graph *lst);
 void	horizantal_intersaction(t_graph *lst);
@@ -151,5 +151,6 @@ void	get_width_height(t_graph *lst, int *width, int *height, int i);
 int		get_texture(t_graph *lst, int y, int x, int i);
 
 /* --------------------------------- PROTOTYPES ----------------------------- */
+
 
 #endif

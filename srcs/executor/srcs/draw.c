@@ -6,7 +6,7 @@
 /*   By: rel-fagr <rel-fagr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 14:48:25 by sahafid           #+#    #+#             */
-/*   Updated: 2022/09/22 13:57:14 by rel-fagr         ###   ########.fr       */
+/*   Updated: 2022/09/23 18:38:06 by rel-fagr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void drawline(double x0, double y0, int x1, int y1, t_graph *lst, int j)
 	double	y;
 	int		i;
 
-	dx = x1 - x0; 
+	dx = x1 - x0;
 	dy = y1 - y0;
 	i = 0;
     steps = 0;
@@ -45,7 +45,8 @@ void drawline(double x0, double y0, int x1, int y1, t_graph *lst, int j)
 	y = dy / steps;
 	while (i < steps)
 	{
-        my_mlx_pixel_put(lst , x0, y0, j);
+        if (x0 >= 0 && x0 <= 400 && y0 >= 0 && y0 <= 500)
+            my_mlx_pixel_put(lst , x0, y0, j);
 		x0 = x0 + x;
 		y0 = y0 + y;
 		i++;
@@ -61,7 +62,9 @@ void    draw_cub(int x, int y, int x1, int y1, t_graph *lst, int i)
     {
         while (j <= x1)
 		{
-            my_mlx_pixel_put(lst ,lst->map.minimap * j, lst->map.minimap * y, i);
+            if ((j * lst->map.minimap) > 0 && (j * lst->map.minimap) < 400 && \
+                (y * lst->map.minimap) > 0 && (y * lst->map.minimap) < 500)
+                my_mlx_pixel_put(lst ,lst->map.minimap * j, lst->map.minimap * y, i);
 			j++;
 		}
 		j = x;
@@ -93,7 +96,7 @@ void    rotate_player(t_graph *lst)
         lst->plyr.rotationangle += (-1 *  lst->plyr.rotationspeed);
 		normilizeAngle(&lst->plyr.rotationangle);
     }
-    else if (lst->plyr.rotatedirection == 1)
+    if (lst->plyr.rotatedirection == 1)
     {
         lst->plyr.rotationangle +=  lst->plyr.rotationspeed;
 		normilizeAngle(&lst->plyr.rotationangle);
@@ -141,7 +144,7 @@ void    player_movement(t_graph *lst)
 		lst->plyr.x_plyr = save1;
 		lst->plyr.y_plyr = save2;
     }
-    else if (lst->plyr.walkdirection == 1)
+    if (lst->plyr.walkdirection == 1)
     {
         save1 = lst->plyr.x_plyr + (lst->plyr.speed * cos(lst->plyr.rotationangle));
 		save2 = lst->plyr.y_plyr + (lst->plyr.speed * sin(lst->plyr.rotationangle));
@@ -150,9 +153,9 @@ void    player_movement(t_graph *lst)
 		lst->plyr.x_plyr = save1;
 		lst->plyr.y_plyr = save2;
     }
-    else if (lst->plyr.walkdirection == 2)
+    if (lst->plyr.walkdirection == 2)
         turningleftright(lst, 0);
-    else if (lst->plyr.walkdirection == 3)
+    if (lst->plyr.walkdirection == 3)
         turningleftright(lst, 1);
 }
 
@@ -160,7 +163,13 @@ void    draw_walls(t_graph *lst)
 {
     rotate_player(lst);
     player_movement(lst);
-    cast_rays(lst);
+    cast_rays(lst, 0);
+    drawline(0, 0, 400, 0, lst, 0);
+    drawline(0, 0, 0, 500, lst, 0);
+    drawline(400, 0, 400, 500, lst, 0);
+    drawline(0, 500, 400, 500, lst, 0);
+    draw_map(lst->map.map, lst);
+    cast_rays(lst, 1);
 }
 
 void    draw_map(char	**map, t_graph *lst)
@@ -183,18 +192,9 @@ void    draw_map(char	**map, t_graph *lst)
             if (map[i][j] == '0' || map[i][j] == 'V')
                 draw_cub(x, y, lst->x1, lst->y1, lst, lst->map.floor_color);
             else if (map[i][j] == '1')
-				draw_cub(x, y, lst->x1, lst->y1, lst, lst->map.wall_color);
+				draw_cub(x, y, lst->x1, lst->y1, lst, 0);
             else if (map[i][j] == 'S' || map[i][j] == 'W' || map[i][j] == 'N' || map[i][j] == 'E')
-            {
                 draw_cub(x, y, lst->x1, lst->y1, lst, lst->map.floor_color);
-                if (lst->first_time == 0)
-                {
-                    lst->plyr.x_plyr = x + lst->map.unit / 4;
-                    lst->plyr.y_plyr = y + lst->map.unit / 4;
-                }
-            }
-            else
-                draw_cub(x, y, lst->x1, lst->y1, lst, 20);
             x += lst->map.unit;
             lst->x1 += lst->map.unit;
             j++;
@@ -206,4 +206,5 @@ void    draw_map(char	**map, t_graph *lst)
         j = 0;
         i++;
     }
+    // draw_cub(lst->plyr.x_plyr, lst->plyr.y_plyr, lst->plyr.x_plyr + lst->map.unit, lst->plyr.y_plyr + lst->map.unit, lst, 0xFF0707);
 }
