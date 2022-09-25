@@ -45,26 +45,33 @@ void drawline(double x0, double y0, int x1, int y1, t_graph *lst, int j)
 	y = dy / steps;
 	while (i < steps)
 	{
-        if (x0 >= 0 && x0 <= 400 && y0 >= 0 && y0 <= 500)
-            my_mlx_pixel_put(lst , x0, y0, j);
+        my_mlx_pixel_put(lst , x0, y0, j);
 		x0 = x0 + x;
 		y0 = y0 + y;
 		i++;
 	}
 }
 
+void    new_x_y(int *new_x, int *new_y, int j, int y, t_graph *lst)
+{
+    *new_x = j - (lst->plyr.x_plyr - 150);
+    *new_y = y - (lst->plyr.y_plyr - 150);
+}
+
 void    draw_cub(int x, int y, int x1, int y1, t_graph *lst, int i)
 {
 	int	j;
+    int new_x;
+    int new_y;
 
 	j = x;
 	while (y < y1)
     {
         while (j <= x1)
 		{
-            if ((j * lst->map.minimap) > 0 && (j * lst->map.minimap) < 400 && \
-                (y * lst->map.minimap) > 0 && (y * lst->map.minimap) < 500)
-                my_mlx_pixel_put(lst ,lst->map.minimap * j, lst->map.minimap * y, i);
+            new_x_y(&new_x, &new_y, j, y, lst);
+            if (new_x > 0 && new_x < 300 && new_y > 0 && new_y < 300)
+                my_mlx_pixel_put(lst , new_x, new_y, i);
 			j++;
 		}
 		j = x;
@@ -87,6 +94,32 @@ void    draw_cub1(int x, int y, int x1, int y1, t_graph *lst, int i)
 		j = x;
         y++;
     }
+}
+
+void    draw_player(t_graph *lst)
+{
+	drawline(150, 150, 155, 150, lst, 0x008000);
+    drawline(150, 151, 155, 151, lst, 0x008000);
+    drawline(150, 152, 155, 152, lst, 0x008000);
+    drawline(150, 153, 155, 153, lst, 0x008000);
+    drawline(150, 154, 155, 154, lst, 0x008000);
+    drawline(150, 155, 155, 155, lst, 0x008000);
+}
+
+void    draw_minimap_border(t_graph *lst)
+{
+    drawline(0, 0, 300, 0, lst, 0);
+    drawline(0, 1, 300, 0, lst, 0);
+    drawline(0, 2, 300, 0, lst, 0);
+    drawline(0, 0, 0, 300, lst, 0);
+    drawline(1, 0, 0, 300, lst, 0);
+    drawline(2, 0, 0, 300, lst, 0);
+    drawline(300, 0, 300, 302, lst, 0);
+    drawline(301, 0, 301, 302, lst, 0);
+    drawline(302, 0, 302, 302, lst, 0);
+    drawline(0, 300, 300, 300, lst, 0);
+    drawline(0, 301, 302, 301, lst, 0);
+    drawline(0, 302, 302, 302, lst, 0);
 }
 
 void    rotate_player(t_graph *lst)
@@ -163,13 +196,10 @@ void    draw_walls(t_graph *lst)
 {
     rotate_player(lst);
     player_movement(lst);
-    cast_rays(lst, 0);
-    drawline(0, 0, 400, 0, lst, 0);
-    drawline(0, 0, 0, 500, lst, 0);
-    drawline(400, 0, 400, 500, lst, 0);
-    drawline(0, 500, 400, 500, lst, 0);
+    cast_rays(lst);
+    draw_minimap_border(lst);
     draw_map(lst->map.map, lst);
-    cast_rays(lst, 1);
+    draw_player(lst);
 }
 
 void    draw_map(char	**map, t_graph *lst)
@@ -195,6 +225,8 @@ void    draw_map(char	**map, t_graph *lst)
 				draw_cub(x, y, lst->x1, lst->y1, lst, 0);
             else if (map[i][j] == 'S' || map[i][j] == 'W' || map[i][j] == 'N' || map[i][j] == 'E')
                 draw_cub(x, y, lst->x1, lst->y1, lst, lst->map.floor_color);
+            else
+                draw_cub(x, y, lst->x1, lst->y1, lst, 0x2F4F4F);
             x += lst->map.unit;
             lst->x1 += lst->map.unit;
             j++;
@@ -206,5 +238,4 @@ void    draw_map(char	**map, t_graph *lst)
         j = 0;
         i++;
     }
-    // draw_cub(lst->plyr.x_plyr, lst->plyr.y_plyr, lst->plyr.x_plyr + lst->map.unit, lst->plyr.y_plyr + lst->map.unit, lst, 0xFF0707);
 }

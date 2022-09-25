@@ -120,7 +120,7 @@ void	init_texture(t_graph *lst, t_map_ *data);
 /* --------------------------------- RAYCAST ----------------------------- */
 
 
-void	cast_rays(t_graph *lst, int k);
+void	cast_rays(t_graph *lst);
 void	normilizeAngle(double *ray_angle);
 void	vertical_intersaction(t_graph *lst);
 void	horizantal_intersaction(t_graph *lst);
@@ -151,6 +151,10 @@ void	get_width_height(t_graph *lst, int *width, int *height, int i);
 int		get_texture(t_graph *lst, int y, int x, int i);
 
 /* --------------------------------- PROTOTYPES ----------------------------- */
+
+
+
+void    new_x_y(int *new_x, int *new_y, int j, int y, t_graph *lst);
 
 
 #endif
