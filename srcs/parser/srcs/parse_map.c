@@ -24,7 +24,7 @@ int	check_map_error(char *str, t_map_ *data)
 	{
 		c = str[i];
 		if (c == '0' || c == '1' || c == ' ' || c == 'N' || c == 'S' \
-			|| c == 'W' || c == 'E')
+			|| c == 'W' || c == 'E' || c =='C')
 		{
 			i++;
 			if (c == 'N' || c == 'S' || c == 'W' || c == 'E')

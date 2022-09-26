@@ -163,13 +163,14 @@ void    draw_walls(t_graph *lst)
 {
     rotate_player(lst);
     player_movement(lst);
+    checkcollectible(lst);
     cast_rays(lst, 0);
-    drawline(0, 0, 400, 0, lst, 0);
-    drawline(0, 0, 0, 500, lst, 0);
-    drawline(400, 0, 400, 500, lst, 0);
-    drawline(0, 500, 400, 500, lst, 0);
-    draw_map(lst->map.map, lst);
-    cast_rays(lst, 1);
+    // drawline(0, 0, 400, 0, lst, 0);
+    // drawline(0, 0, 0, 500, lst, 0);
+    // drawline(400, 0, 400, 500, lst, 0);
+    // drawline(0, 500, 400, 500, lst, 0);
+    // draw_map(lst->map.map, lst);
+    // cast_rays(lst, 1);
 }
 
 void    draw_map(char	**map, t_graph *lst)

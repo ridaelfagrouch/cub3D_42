@@ -6,7 +6,7 @@
 /*   By: sahafid <sahafid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 18:25:36 by sahafid           #+#    #+#             */
-/*   Updated: 2022/09/03 12:05:49 by sahafid          ###   ########.fr       */
+/*   Updated: 2022/09/26 15:38:56 by sahafid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,11 @@
 void	vertical_intersaction(t_graph *lst)
 {
 	int check;
+	int sprite;
 
 	check = 0;
+	sprite = 1;
+	lst->sprite.vertic_intersaction = 0;
 	lst->raycast.vertic_intersaction = 0;
 	lst->raycast.xintercept_vertic = floor(lst->plyr.x_plyr / lst->map.unit) * lst->map.unit;
 	if (lst->raycast.facingright)
@@ -39,6 +42,16 @@ void	vertical_intersaction(t_graph *lst)
 			lst->raycast.vertic_intersaction = 1;
 			return ;
 		}
+		else if (check_sprite(lst, lst->raycast.xintercept_vertic - check, lst->raycast.yintercept_vertic) == 1 && sprite == 1)
+		{
+			sprite = 0;
+			lst->sprite.vertic_intersaction = 1;
+			lst->sprite.spritefoundvert = 1;
+			lst->sprite.xintercept_vertic = lst->raycast.xintercept_vertic;
+			lst->sprite.yintercept_vertic = lst->raycast.yintercept_vertic;
+			lst->raycast.xintercept_vertic += lst->raycast.xstep;
+			lst->raycast.yintercept_vertic += lst->raycast.ystep;
+		}
 		else
 		{
 			lst->raycast.xintercept_vertic += lst->raycast.xstep;
@@ -46,4 +59,9 @@ void	vertical_intersaction(t_graph *lst)
 		}
 	}
 	lst->raycast.vertic_intersaction = 0;
+	if (sprite)
+	{
+		lst->sprite.vertic_intersaction = 0;
+		lst->sprite.spritefoundvert = 0;
+	}
 }

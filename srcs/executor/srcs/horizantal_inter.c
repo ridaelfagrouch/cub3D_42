@@ -6,7 +6,7 @@
 /*   By: sahafid <sahafid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 18:30:13 by sahafid           #+#    #+#             */
-/*   Updated: 2022/09/03 12:05:49 by sahafid          ###   ########.fr       */
+/*   Updated: 2022/09/26 15:38:52 by sahafid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,11 @@
 void	horizantal_intersaction(t_graph *lst)
 {
 	int check;
+	int	sprite;
 
 	check = 0;
+	sprite = 1;
+	lst->sprite.horiz_intersaction = 0;
 	lst->raycast.horiz_intersaction = 0;
 	lst->raycast.yintercept_horiz = floor(lst->plyr.y_plyr / lst->map.unit) * lst->map.unit;
 	if (lst->raycast.facingdown)
@@ -39,6 +42,16 @@ void	horizantal_intersaction(t_graph *lst)
 			lst->raycast.horiz_intersaction = 1;
 			return ;
 		}
+		else if (check_sprite(lst, lst->raycast.xintercept_horiz, lst->raycast.yintercept_horiz - check) == 1 && sprite == 1)
+		{
+			lst->sprite.horiz_intersaction = 1;
+			lst->sprite.spritefoundhorz = 1;
+			sprite = 0;
+			lst->sprite.xintercept_horiz = lst->raycast.xintercept_horiz;
+			lst->sprite.yintercept_horiz = lst->raycast.yintercept_horiz;
+			lst->raycast.xintercept_horiz += lst->raycast.xstep;
+			lst->raycast.yintercept_horiz += lst->raycast.ystep;
+		}
 		else
 		{
 			lst->raycast.xintercept_horiz += lst->raycast.xstep;
@@ -46,4 +59,9 @@ void	horizantal_intersaction(t_graph *lst)
 		}
 	}
 	lst->raycast.horiz_intersaction = 0;
+	if (sprite)
+	{
+		lst->sprite.horiz_intersaction = 0;
+		lst->sprite.spritefoundhorz = 0;
+	}
 }

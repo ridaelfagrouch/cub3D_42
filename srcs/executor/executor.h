@@ -11,7 +11,23 @@
 
 /* --------------------------------- MACROS --------------------------------- */
 
-
+typedef struct s_sprite
+{
+	int i;
+	double	distancetowall;
+	int		width_sprite;
+	int		height_sprite;
+	void	*sprite;
+	int		*addrsprite;
+	double	xintercept_horiz;
+	double	yintercept_horiz;
+	double	xintercept_vertic;
+	double	yintercept_vertic;
+	int		horiz_intersaction;
+	int		vertic_intersaction;
+	int		spritefoundhorz;
+	int		spritefoundvert;
+} t_sprite;
 
 typedef struct s_map
 {
@@ -100,6 +116,7 @@ typedef struct s_graph
 	struct s_raycasting raycast;
 	struct s_map		map;
 	struct s_texture	texture;
+	struct s_sprite		sprite;
 } t_graph;
 
 /* --------------------------------- PARSING ------------------------------- */
@@ -108,6 +125,7 @@ int		deal_key(int key, t_graph *var);
 int		check_wall_movement(t_graph *lst, int x, int y, int x1, int y1);
 int		check_wall(t_graph *lst, int x, int y);
 
+void    checkcollectible(t_graph *lst);
 
 /* --------------------------------- INIT ------------------------------- */
 
@@ -151,6 +169,14 @@ void	get_width_height(t_graph *lst, int *width, int *height, int i);
 int		get_texture(t_graph *lst, int y, int x, int i);
 
 /* --------------------------------- PROTOTYPES ----------------------------- */
+
+
+int	horizantal_intersaction_sprite(t_graph *lst);
+int	vertical_intersaction_sprite(t_graph *lst);
+int	check_sprite(t_graph *lst, int x, int y);
+void	draw_rays_sprite(t_graph *lst, int j, int i);
+double	get_x_of_texture_sprite(t_graph *lst, int i, int width);
+double	calculate_intersactions_sprite(t_graph *lst);
 
 
 #endif

@@ -61,6 +61,27 @@ int	check_wall(t_graph *lst, int x, int y)
 	return (0);
 }
 
+int	check_sprite(t_graph *lst, int x, int y)
+{
+	int i;
+	int	pos1;
+	int	pos2;
+
+	i = 0;
+	pos1 = x / lst->map.unit;
+	pos2 = y / lst->map.unit;
+	if ((pos1 >= 0 && pos1 < lst->x) && (pos2 >= 0 && pos2 < lst->y))
+	{
+		if (lst->map.map[pos2] && lst->map.map[pos2][pos1] && \
+			lst->map.map[pos2][pos1] == '1')
+			return (2);
+		if (lst->map.map[pos2] && lst->map.map[pos2][pos1] && \
+			lst->map.map[pos2][pos1] == 'C')
+			return (1);
+	}
+	return (0);
+}
+
 int	check_wall_movement(t_graph *lst, int x, int y, int x1, int y1)
 {
 	int	posPx;
@@ -72,6 +93,7 @@ int	check_wall_movement(t_graph *lst, int x, int y, int x1, int y1)
 	posPy = y / lst->map.unit;
 	posDx = x1 / lst->map.unit;
 	posDy = y1 / lst->map.unit;
+
 	if ((posPx >= 0 && posPx < lst->x) && (posPy >= 0 && posPy < lst->y))
 	{
 		if (lst->map.map[posPy][posPx] == '1' || \
