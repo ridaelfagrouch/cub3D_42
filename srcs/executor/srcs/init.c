@@ -6,7 +6,7 @@
 /*   By: rel-fagr <rel-fagr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 13:09:18 by sahafid           #+#    #+#             */
-/*   Updated: 2022/09/23 17:38:59 by rel-fagr         ###   ########.fr       */
+/*   Updated: 2022/09/26 15:15:55 by rel-fagr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void    init_everything(t_graph *lst, t_map_ *data)
 	lst->x = data->map_d.map_width;
 	lst->map.map = data->map_d.map;
 	lst->map.height = 1000;
-	lst->map.width = 1500;
+	lst->map.width = 1300;
 	lst->mlx = mlx_init();
 	lst->wind = mlx_new_window(lst->mlx, \
 		lst->map.width, lst->map.height, "Cub3d");

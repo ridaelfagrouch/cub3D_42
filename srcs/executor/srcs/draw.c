@@ -6,7 +6,7 @@
 /*   By: rel-fagr <rel-fagr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 14:48:25 by sahafid           #+#    #+#             */
-/*   Updated: 2022/09/23 18:38:06 by rel-fagr         ###   ########.fr       */
+/*   Updated: 2022/09/26 15:34:54 by rel-fagr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,8 @@ void drawline(double x0, double y0, int x1, int y1, t_graph *lst, int j)
 
 void    new_x_y(int *new_x, int *new_y, int j, int y, t_graph *lst)
 {
-    *new_x = j - (lst->plyr.x_plyr - 150);
-    *new_y = y - (lst->plyr.y_plyr - 150);
+    *new_x = j - (lst->plyr.x_plyr - 100);
+    *new_y = y - (lst->plyr.y_plyr - 100);
 }
 
 void    draw_cub(int x, int y, int x1, int y1, t_graph *lst, int i)
@@ -70,7 +70,7 @@ void    draw_cub(int x, int y, int x1, int y1, t_graph *lst, int i)
         while (j <= x1)
 		{
             new_x_y(&new_x, &new_y, j, y, lst);
-            if (new_x > 0 && new_x < 300 && new_y > 0 && new_y < 300)
+            if (new_x > 0 && new_x < 200 && new_y > 0 && new_y < 200)
                 my_mlx_pixel_put(lst , new_x, new_y, i);
 			j++;
 		}
@@ -98,28 +98,22 @@ void    draw_cub1(int x, int y, int x1, int y1, t_graph *lst, int i)
 
 void    draw_player(t_graph *lst)
 {
-	drawline(150, 150, 155, 150, lst, 0x008000);
-    drawline(150, 151, 155, 151, lst, 0x008000);
-    drawline(150, 152, 155, 152, lst, 0x008000);
-    drawline(150, 153, 155, 153, lst, 0x008000);
-    drawline(150, 154, 155, 154, lst, 0x008000);
-    drawline(150, 155, 155, 155, lst, 0x008000);
+	drawline(100, 100, 105, 100, lst, 0xFF0000);
+    drawline(100, 101, 105, 101, lst, 0xFF0000);
+    drawline(100, 102, 105, 102, lst, 0xFF0000);
+    drawline(100, 103, 105, 103, lst, 0xFF0000);
+    drawline(100, 104, 105, 104, lst, 0xFF0000);
+    drawline(100, 105, 105, 105, lst, 0xFF0000);
 }
 
 void    draw_minimap_border(t_graph *lst)
 {
-    drawline(0, 0, 300, 0, lst, 0);
-    drawline(0, 1, 300, 0, lst, 0);
-    drawline(0, 2, 300, 0, lst, 0);
-    drawline(0, 0, 0, 300, lst, 0);
-    drawline(1, 0, 0, 300, lst, 0);
-    drawline(2, 0, 0, 300, lst, 0);
-    drawline(300, 0, 300, 302, lst, 0);
-    drawline(301, 0, 301, 302, lst, 0);
-    drawline(302, 0, 302, 302, lst, 0);
-    drawline(0, 300, 300, 300, lst, 0);
-    drawline(0, 301, 302, 301, lst, 0);
-    drawline(0, 302, 302, 302, lst, 0);
+    drawline(200, 0, 200, 202, lst, 0);
+    drawline(201, 0, 201, 202, lst, 0);
+    drawline(202, 0, 202, 202, lst, 0);
+    drawline(0, 200, 200, 200, lst, 0);
+    drawline(0, 201, 202, 201, lst, 0);
+    drawline(0, 202, 202, 202, lst, 0);
 }
 
 void    rotate_player(t_graph *lst)
