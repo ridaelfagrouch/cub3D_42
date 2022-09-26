@@ -6,7 +6,7 @@
 /*   By: sahafid <sahafid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 16:46:05 by sahafid           #+#    #+#             */
-/*   Updated: 2022/09/26 15:43:38 by sahafid          ###   ########.fr       */
+/*   Updated: 2022/09/26 16:26:50 by sahafid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,10 @@ void    draw_rect(int x, int y, int x1, int y1, t_graph *lst, int i, double wall
     {
 		ds = y + (wallheight / 2) - ((lst->map.height) / 2);
 		posY = ds * (double)height / wallheight;
-		pixel_color = get_texture(lst, posY, posX, i);
+		if (!lst->door.foundoor)
+			pixel_color = get_texture(lst, posY, posX, i);
+		else
+			pixel_color = 16711680;
         my_mlx_pixel_put(lst , x, y, pixel_color);
 		s++;
         y++;
@@ -70,6 +73,14 @@ void    draw_rect_sprite(int x, int y, int x1, int y1, t_graph *lst, int i, doub
 	}
 }
 
+int	checkdoorstatus(t_graph *lst, double *distance)
+{
+	if (!lst->door.foundoor)
+		return (0);
+	if (*distance < 50.0)
+		return (1);
+	return (0);
+}
 
 void	rendringwalls(t_graph *lst, int i, int j)
 {
@@ -86,6 +97,8 @@ void	rendringwalls(t_graph *lst, int i, int j)
 	else
 		distance = distance_points(lst->plyr.x_plyr, lst->raycast.xintercept_vertic, lst->plyr.y_plyr, lst->raycast.yintercept_vertic);
 	lst->sprite.distancetowall = distance;
+	if (checkdoorstatus(lst, &distance))
+		return ;
 	distance = distance * cos(lst->raycast.ray_angle - lst->plyr.rotationangle);
 	distanceprojectionplane = ((lst->map.width) / 2) / tan(lst->plyr.fov / 2);
 	wallstripeheight = (lst->map.unit / distance) * distanceprojectionplane;
@@ -102,7 +115,7 @@ void	rendringwalls(t_graph *lst, int i, int j)
 			endpointy, lst, j, wallstripeheight);
 }
 
-void	rendringwallsprite(t_graph *lst, int i, int j)
+void	rendringsprite(t_graph *lst, int i, int j)
 {
 	double	distanceprojectionplane;
 	double	wallstripeheight;
@@ -122,7 +135,7 @@ void	rendringwallsprite(t_graph *lst, int i, int j)
 		return ;
 	distance = distance * cos(lst->raycast.ray_angle - lst->plyr.rotationangle);
 	distanceprojectionplane = ((lst->map.width) / 2) / tan(lst->plyr.fov / 2);
-	wallstripeheight = (lst->map.unit / distance) * distanceprojectionplane;
+	wallstripeheight = ((lst->map.unit / 2) / distance) * distanceprojectionplane;
 	x = 1;
 	startpointy = (lst->map.height / 2) - (wallstripeheight / 2);
 	if (startpointy < 0)
@@ -158,14 +171,17 @@ void cast_rays(t_graph *lst)
 	rays_num = lst->map.width;
 	while (i < rays_num)
 	{
+		lst->door.foundoor = 0;
 		normilizeAngle(&lst->raycast.ray_angle);
 		checking_where_plyr_facing(lst);
 		horizantal_intersaction(lst);
 		vertical_intersaction(lst);
 		j = calculate_intersactions(lst);
 		draw_rays(lst, j, i);
+		j = calculate_intersactions_door(lst);
+		draw_rays(lst, j, i);
 		j = calculate_intersactions_sprite(lst);
-		rendringwallsprite(lst, i, j);
+		rendringsprite(lst, i, j);
 		lst->sprite.spritefoundvert = 0;
 		lst->sprite.spritefoundhorz = 0;
 		lst->raycast.ray_angle += lst->plyr.fov / rays_num;

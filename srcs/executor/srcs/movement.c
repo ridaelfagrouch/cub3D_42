@@ -74,10 +74,13 @@ int	check_sprite(t_graph *lst, int x, int y)
 	{
 		if (lst->map.map[pos2] && lst->map.map[pos2][pos1] && \
 			lst->map.map[pos2][pos1] == '1')
-			return (2);
+			return (0);
 		if (lst->map.map[pos2] && lst->map.map[pos2][pos1] && \
 			lst->map.map[pos2][pos1] == 'C')
 			return (1);
+		if (lst->map.map[pos2] && lst->map.map[pos2][pos1] && \
+			lst->map.map[pos2][pos1] == 'B')
+			return (2);
 	}
 	return (0);
 }

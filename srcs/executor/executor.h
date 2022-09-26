@@ -11,9 +11,19 @@
 
 /* --------------------------------- MACROS --------------------------------- */
 
+typedef struct s_door
+{
+	double	xintercept_horiz;
+	double	yintercept_horiz;
+	double	xintercept_vertic;
+	double	yintercept_vertic;
+	int		horiz_intersaction;
+	int		vertic_intersaction;
+	int		foundoor;
+} t_door;
+
 typedef struct s_sprite
 {
-	int i;
 	double	distancetowall;
 	int		width_sprite;
 	int		height_sprite;
@@ -117,6 +127,7 @@ typedef struct s_graph
 	struct s_map		map;
 	struct s_texture	texture;
 	struct s_sprite		sprite;
+	struct s_door		door;
 } t_graph;
 
 /* --------------------------------- PARSING ------------------------------- */
@@ -124,7 +135,6 @@ typedef struct s_graph
 int		deal_key(int key, t_graph *var);
 int		check_wall_movement(t_graph *lst, int x, int y, int x1, int y1);
 int		check_wall(t_graph *lst, int x, int y);
-
 void    checkcollectible(t_graph *lst);
 
 /* --------------------------------- INIT ------------------------------- */
@@ -179,6 +189,7 @@ double	get_x_of_texture_sprite(t_graph *lst, int i, int width);
 double	calculate_intersactions_sprite(t_graph *lst);
 
 void    new_x_y(int *new_x, int *new_y, int j, int y, t_graph *lst);
+double	calculate_intersactions_door(t_graph *lst);
 
 
 #endif

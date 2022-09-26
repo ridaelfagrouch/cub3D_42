@@ -6,7 +6,7 @@
 /*   By: sahafid <sahafid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 18:27:30 by sahafid           #+#    #+#             */
-/*   Updated: 2022/09/26 15:11:43 by sahafid          ###   ########.fr       */
+/*   Updated: 2022/09/26 16:17:52 by sahafid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,37 @@ double	calculate_intersactions_sprite(t_graph *lst)
 		distance_horiz = -1;
 	if (lst->sprite.vertic_intersaction)
 		distance_vertic = distance_points(lst->plyr.x_plyr, lst->sprite.xintercept_vertic, lst->plyr.y_plyr, lst->sprite.yintercept_vertic);
+	else
+		distance_vertic = -1;
+	if (distance_horiz == -1)
+		return (1);
+	else if (distance_vertic == -1)
+		return (0);
+	if (distance_horiz > distance_vertic)
+		return (1);
+	else
+		return (0);
+}
+
+double	calculate_intersactions_door(t_graph *lst)
+{
+	double	distance_horiz;
+	double	distance_vertic;
+
+	distance_horiz = 0;
+	distance_vertic = 0;
+	if (!lst->door.horiz_intersaction && !lst->door.vertic_intersaction)
+	{
+		lst->door.foundoor = 0;
+		return (3);
+	}
+	lst->door.foundoor = 1;
+	if (lst->sprite.horiz_intersaction)
+		distance_horiz = distance_points(lst->plyr.x_plyr, lst->door.xintercept_horiz, lst->plyr.y_plyr, lst->door.yintercept_horiz);
+	else
+		distance_horiz = -1;
+	if (lst->sprite.vertic_intersaction)
+		distance_vertic = distance_points(lst->plyr.x_plyr, lst->door.xintercept_vertic, lst->plyr.y_plyr, lst->door.yintercept_vertic);
 	else
 		distance_vertic = -1;
 	if (distance_horiz == -1)
