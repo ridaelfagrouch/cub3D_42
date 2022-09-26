@@ -6,7 +6,7 @@
 #    By: rel-fagr <rel-fagr@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/22 13:34:55 by rel-fagr          #+#    #+#              #
-#    Updated: 2022/09/26 15:38:29 by rel-fagr         ###   ########.fr        #
+#    Updated: 2022/09/26 15:51:07 by rel-fagr         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ CC_FLAGS	:= -Wall -Wextra -Werror
 
 SRCS_DIR := srcs/
 SRCS_LST := executor.c draw.c movement.c cast_ray.c vertical_inter.c ray_cast_utils.c \
-			horizantal_inter.c init.c draw_ceilling.c texture.c
+			horizantal_inter.c init.c draw_ceilling.c texture.c checkcollectible.c
 SRCS := ${addprefix ${SRCS_DIR}, ${SRCS_LST}}
 
 OBJS_DIR := objs/

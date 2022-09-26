@@ -6,11 +6,19 @@
 /*   By: rel-fagr <rel-fagr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/18 11:00:48 by rel-fagr          #+#    #+#             */
-/*   Updated: 2022/09/23 17:14:44 by rel-fagr         ###   ########.fr       */
+/*   Updated: 2022/09/26 16:19:51 by rel-fagr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../parser.h"
+
+void	check_door(t_map_ *data, int i, int j)
+{
+	if (data->map_d.map[i][j + 1] == '1' && data->map_d.map[i][j - 1] == '1')
+		data->map_d.map[i][j] = 'B';
+	if (data->map_d.map[i + 1][j] == '1' && data->map_d.map[i - 1][j] == '1')
+		data->map_d.map[i][j] = 'B';
+}
 
 /* --------------------------------------------------------------- */
 
@@ -33,6 +41,8 @@ void	check_valid_line(t_map_ *data)
 				if (check_left_right(data->map_d.map[i], j) || \
 					check_up_down(data, i, j))
 					free_garbage(data, "error!! unclosed map");
+			if (c == '0')
+				check_door(data, i, j);
 			j++;
 		}
 	}

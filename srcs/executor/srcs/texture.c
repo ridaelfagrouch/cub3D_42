@@ -6,7 +6,7 @@
 /*   By: sahafid <sahafid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 12:28:46 by sahafid           #+#    #+#             */
-/*   Updated: 2022/09/05 16:47:35 by sahafid          ###   ########.fr       */
+/*   Updated: 2022/09/26 14:58:19 by sahafid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,25 @@ double	get_x_of_texture(t_graph *lst, int i, int width)
 	else
 	{
 		x_offset = (lst->raycast.yintercept_vertic / lst->map.unit);
+		x_offset = (x_offset - (int)x_offset);
+	}
+	x_offset *= width;
+	return (x_offset);
+}
+
+double	get_x_of_texture_sprite(t_graph *lst, int i, int width)
+{
+	double	x_offset;
+
+	x_offset = 0;
+	if (i == 0)
+	{
+		x_offset = (lst->sprite.xintercept_horiz / lst->map.unit);
+		x_offset = (x_offset - (int)x_offset);
+	}
+	else
+	{
+		x_offset = (lst->sprite.yintercept_vertic / lst->map.unit);
 		x_offset = (x_offset - (int)x_offset);
 	}
 	x_offset *= width;

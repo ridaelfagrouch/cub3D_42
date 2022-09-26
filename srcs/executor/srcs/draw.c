@@ -6,7 +6,7 @@
 /*   By: rel-fagr <rel-fagr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 14:48:25 by sahafid           #+#    #+#             */
-/*   Updated: 2022/09/26 15:34:54 by rel-fagr         ###   ########.fr       */
+/*   Updated: 2022/09/26 16:00:30 by rel-fagr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -190,6 +190,8 @@ void    draw_walls(t_graph *lst)
 {
     rotate_player(lst);
     player_movement(lst);
+    checkcollectible(lst);
+    // cast_rays(lst, 0);
     cast_rays(lst);
     draw_minimap_border(lst);
     draw_map(lst->map.map, lst);
@@ -219,6 +221,8 @@ void    draw_map(char	**map, t_graph *lst)
 				draw_cub(x, y, lst->x1, lst->y1, lst, 0);
             else if (map[i][j] == 'S' || map[i][j] == 'W' || map[i][j] == 'N' || map[i][j] == 'E')
                 draw_cub(x, y, lst->x1, lst->y1, lst, lst->map.floor_color);
+            else if (map[i][j] == 'C')
+                draw_cub(x, y, lst->x1, lst->y1, lst, 0xFFFF00);
             else
                 draw_cub(x, y, lst->x1, lst->y1, lst, 0x2F4F4F);
             x += lst->map.unit;
