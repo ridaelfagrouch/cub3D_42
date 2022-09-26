@@ -6,7 +6,7 @@
 /*   By: sahafid <sahafid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 18:30:13 by sahafid           #+#    #+#             */
-/*   Updated: 2022/09/26 16:42:37 by sahafid          ###   ########.fr       */
+/*   Updated: 2022/09/26 23:06:22 by sahafid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,13 @@ void	horizantal_intersaction(t_graph *lst)
 {
 	int check;
 	int	sprite;
+	int	door;
 
 	check = 0;
+	door = 1;
 	sprite = 1;
 	lst->sprite.horiz_intersaction = 0;
+	lst->door.horiz_intersaction = 0;
 	lst->raycast.horiz_intersaction = 0;
 	lst->raycast.yintercept_horiz = floor(lst->plyr.y_plyr / lst->map.unit) * lst->map.unit;
 	if (lst->raycast.facingdown)
@@ -35,7 +38,7 @@ void	horizantal_intersaction(t_graph *lst)
 		lst->raycast.xstep *= -1;
 	if (lst->raycast.facingup)
 		check = 1;
-	while ((lst->raycast.xintercept_horiz >= 0 && lst->raycast.xintercept_horiz <= lst->map.unit * lst->map.width) && (lst->raycast.yintercept_horiz >= 0 && lst->raycast.yintercept_horiz <= lst->map.unit * lst->map.height))
+	while ((lst->raycast.xintercept_horiz >= 0 && lst->raycast.xintercept_horiz <= lst->map.width) && (lst->raycast.yintercept_horiz >= 0 && lst->raycast.yintercept_horiz <= lst->map.height))
 	{
 		if (check_wall(lst, lst->raycast.xintercept_horiz, lst->raycast.yintercept_horiz - check))
 		{
@@ -52,10 +55,10 @@ void	horizantal_intersaction(t_graph *lst)
 			lst->raycast.xintercept_horiz += lst->raycast.xstep;
 			lst->raycast.yintercept_horiz += lst->raycast.ystep;
 		}
-		else if (check_sprite(lst, lst->raycast.xintercept_horiz, lst->raycast.yintercept_horiz - check) == 2)
+		else if (check_sprite(lst, lst->raycast.xintercept_horiz, lst->raycast.yintercept_horiz - check) == 2 && door == 1)
 		{
+			door = 0;
 			lst->door.horiz_intersaction = 1;
-			lst->door.foundoor = 1;
 			lst->door.xintercept_horiz = lst->raycast.xintercept_horiz;
 			lst->door.yintercept_horiz = lst->raycast.yintercept_horiz;
 			lst->raycast.xintercept_horiz += lst->raycast.xstep;

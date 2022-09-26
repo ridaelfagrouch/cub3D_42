@@ -189,7 +189,7 @@ double	get_x_of_texture_sprite(t_graph *lst, int i, int width);
 double	calculate_intersactions_sprite(t_graph *lst);
 
 void    new_x_y(int *new_x, int *new_y, int j, int y, t_graph *lst);
-double	calculate_intersactions_door(t_graph *lst);
+int	calculate_intersactions_door(t_graph *lst);
 
 
 #endif

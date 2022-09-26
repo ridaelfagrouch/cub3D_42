@@ -6,7 +6,7 @@
 /*   By: sahafid <sahafid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 18:27:30 by sahafid           #+#    #+#             */
-/*   Updated: 2022/09/26 17:13:38 by sahafid          ###   ########.fr       */
+/*   Updated: 2022/09/26 20:43:50 by sahafid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ double	calculate_intersactions_sprite(t_graph *lst)
 		return (0);
 }
 
-double	calculate_intersactions_door(t_graph *lst)
+int	calculate_intersactions_door(t_graph *lst)
 {
 	double	distance_horiz;
 	double	distance_vertic;
@@ -85,11 +85,11 @@ double	calculate_intersactions_door(t_graph *lst)
 		lst->door.foundoor = 0;
 		return (3);
 	}
-	if (lst->sprite.horiz_intersaction)
+	if (lst->door.horiz_intersaction)
 		distance_horiz = distance_points(lst->plyr.x_plyr, lst->door.xintercept_horiz, lst->plyr.y_plyr, lst->door.yintercept_horiz);
 	else
 		distance_horiz = -1;
-	if (lst->sprite.vertic_intersaction)
+	if (lst->door.vertic_intersaction)
 		distance_vertic = distance_points(lst->plyr.x_plyr, lst->door.xintercept_vertic, lst->plyr.y_plyr, lst->door.yintercept_vertic);
 	else
 		distance_vertic = -1;
