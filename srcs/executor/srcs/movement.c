@@ -80,7 +80,10 @@ int	check_sprite(t_graph *lst, int x, int y)
 			return (1);
 		if (lst->map.map[pos2] && lst->map.map[pos2][pos1] && \
 			lst->map.map[pos2][pos1] == 'B')
+		{
+			printf("l9it b\n");
 			return (2);
+		}
 	}
 	return (0);
 }

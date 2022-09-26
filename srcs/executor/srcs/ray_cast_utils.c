@@ -6,7 +6,7 @@
 /*   By: sahafid <sahafid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 18:27:30 by sahafid           #+#    #+#             */
-/*   Updated: 2022/09/26 16:17:52 by sahafid          ###   ########.fr       */
+/*   Updated: 2022/09/26 17:13:38 by sahafid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,6 @@ double	calculate_intersactions_door(t_graph *lst)
 		lst->door.foundoor = 0;
 		return (3);
 	}
-	lst->door.foundoor = 1;
 	if (lst->sprite.horiz_intersaction)
 		distance_horiz = distance_points(lst->plyr.x_plyr, lst->door.xintercept_horiz, lst->plyr.y_plyr, lst->door.yintercept_horiz);
 	else
