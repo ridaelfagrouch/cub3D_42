@@ -6,7 +6,7 @@
 /*   By: rel-fagr <rel-fagr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 14:48:25 by sahafid           #+#    #+#             */
-/*   Updated: 2022/09/26 16:00:30 by rel-fagr         ###   ########.fr       */
+/*   Updated: 2022/09/26 17:44:18 by rel-fagr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -223,6 +223,8 @@ void    draw_map(char	**map, t_graph *lst)
                 draw_cub(x, y, lst->x1, lst->y1, lst, lst->map.floor_color);
             else if (map[i][j] == 'C')
                 draw_cub(x, y, lst->x1, lst->y1, lst, 0xFFFF00);
+            else if (map[i][j] == 'B')
+                draw_cub(x, y, lst->x1, lst->y1, lst, 0xCD853F);
             else
                 draw_cub(x, y, lst->x1, lst->y1, lst, 0x2F4F4F);
             x += lst->map.unit;
