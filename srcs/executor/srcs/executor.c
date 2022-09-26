@@ -21,8 +21,6 @@ void	executor(t_map_ *data)
 	init_raycast(&lst);
 	init_everything(&lst, data);
 	init_texture(&lst, data);
-	draw_floor_ceilling(&lst);
-    draw_walls(&lst);
 	mlx_loop_hook(lst.mlx, routine, &lst);
 	mlx_loop(lst.mlx);
 }

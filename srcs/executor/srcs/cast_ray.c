@@ -6,7 +6,7 @@
 /*   By: sahafid <sahafid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 16:46:05 by sahafid           #+#    #+#             */
-/*   Updated: 2022/09/26 15:39:04 by sahafid          ###   ########.fr       */
+/*   Updated: 2022/09/26 15:43:38 by sahafid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,7 +144,7 @@ void	draw_rays(t_graph *lst, int j, int i)
 		rendringwalls(lst, i, 0);
 }
 
-void cast_rays(t_graph *lst, int k)
+void cast_rays(t_graph *lst)
 {
 	int		i;
 	int		rays_num;
@@ -156,7 +156,6 @@ void cast_rays(t_graph *lst, int k)
 	i = 0;
 	j = 0;
 	rays_num = lst->map.width;
-	k = 0;
 	while (i < rays_num)
 	{
 		normilizeAngle(&lst->raycast.ray_angle);

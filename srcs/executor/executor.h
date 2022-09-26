@@ -138,7 +138,7 @@ void	init_texture(t_graph *lst, t_map_ *data);
 /* --------------------------------- RAYCAST ----------------------------- */
 
 
-void	cast_rays(t_graph *lst, int k);
+void	cast_rays(t_graph *lst);
 void	normilizeAngle(double *ray_angle);
 void	vertical_intersaction(t_graph *lst);
 void	horizantal_intersaction(t_graph *lst);
@@ -177,6 +177,8 @@ int	check_sprite(t_graph *lst, int x, int y);
 void	draw_rays_sprite(t_graph *lst, int j, int i);
 double	get_x_of_texture_sprite(t_graph *lst, int i, int width);
 double	calculate_intersactions_sprite(t_graph *lst);
+
+void    new_x_y(int *new_x, int *new_y, int j, int y, t_graph *lst);
 
 
 #endif

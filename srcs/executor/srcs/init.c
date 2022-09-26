@@ -6,7 +6,7 @@
 /*   By: sahafid <sahafid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 13:09:18 by sahafid           #+#    #+#             */
-/*   Updated: 2022/09/26 15:09:59 by sahafid          ###   ########.fr       */
+/*   Updated: 2022/09/26 15:43:57 by sahafid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void    init_player(t_graph *lst, t_map_ *data)
 {
 	direction(lst, data);
     lst->plyr.fov = 60 * (M_PI / 180);
-    lst->plyr.speed = 7;
+    lst->plyr.speed = 5;
     lst->plyr.rotationspeed = 4 * (M_PI / 180);
     lst->plyr.rotatedirection = 0;
     lst->plyr.walkdirection = 0;
@@ -52,8 +52,7 @@ void    init_map(t_graph *lst, t_map_ *data)
 	lst->map.floor_color = data->floor_color;
 	lst->map.wall_color = 0;
 	lst->map.player_color = data->ceil_color;
-	lst->map.unit = 32;
-	lst->map.minimap = 0.2;
+	lst->map.unit = 25;
 	lst->plyr.x_plyr = data->map_d.player_x * lst->map.unit;
 	lst->plyr.y_plyr = data->map_d.player_y * lst->map.unit;
 	lst->sprite.spritefoundhorz = 0;
