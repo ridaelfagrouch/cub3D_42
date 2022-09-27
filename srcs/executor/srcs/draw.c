@@ -6,7 +6,7 @@
 /*   By: rel-fagr <rel-fagr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 14:48:25 by sahafid           #+#    #+#             */
-/*   Updated: 2022/09/26 19:21:41 by rel-fagr         ###   ########.fr       */
+/*   Updated: 2022/09/27 17:00:18 by rel-fagr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,15 +119,10 @@ void    draw_minimap_border(t_graph *lst)
 void    rotate_player(t_graph *lst)
 {
     if (lst->plyr.rotatedirection == -1)
-    {
         lst->plyr.rotationangle += (-1 *  lst->plyr.rotationspeed);
-		normilizeAngle(&lst->plyr.rotationangle);
-    }
     if (lst->plyr.rotatedirection == 1)
-    {
         lst->plyr.rotationangle +=  lst->plyr.rotationspeed;
-		normilizeAngle(&lst->plyr.rotationangle);
-    }
+	normilizeAngle(&lst->plyr.rotationangle);
 }
 
 

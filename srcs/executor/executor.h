@@ -11,9 +11,36 @@
 
 /* --------------------------------- MACROS --------------------------------- */
 
+typedef struct s_door
+{
+	double	xintercept_horiz;
+	double	yintercept_horiz;
+	double	xintercept_vertic;
+	double	yintercept_vertic;
+	int		horiz_intersaction;
+	int		vertic_intersaction;
+	int		foundoor;
+	void	*door1_img;
+	int		*door1_txtr;
+	void	*door2_img;
+	int		*door2_txtr;
+	void	*door3_img;
+	int		*door3_txtr;
+	void	*door4_img;
+	int		*door4_txtr;
+	int		width_door1;
+	int		height_door1;
+	int		width_door2;
+	int		height_door2;
+	int		width_door3;
+	int		height_door3;
+	int		width_door4;
+	int		height_door4;
+	int		door_number;
+} t_door;
+
 typedef struct s_sprite
 {
-	int i;
 	double	distancetowall;
 	int		width_sprite;
 	int		height_sprite;
@@ -112,11 +139,15 @@ typedef struct s_graph
 	int					y;
 	int					x1;
 	int					y1;
+	int					mouse_click;
+	int					old_x;
+	int					new_x;
 	struct s_player		plyr;
 	struct s_raycasting raycast;
 	struct s_map		map;
 	struct s_texture	texture;
 	struct s_sprite		sprite;
+	struct s_door		door;
 } t_graph;
 
 /* --------------------------------- PARSING ------------------------------- */
@@ -124,7 +155,6 @@ typedef struct s_graph
 int		deal_key(int key, t_graph *var);
 int		check_wall_movement(t_graph *lst, int x, int y, int x1, int y1);
 int		check_wall(t_graph *lst, int x, int y);
-
 void    checkcollectible(t_graph *lst);
 
 /* --------------------------------- INIT ------------------------------- */
@@ -179,6 +209,8 @@ double	get_x_of_texture_sprite(t_graph *lst, int i, int width);
 double	calculate_intersactions_sprite(t_graph *lst);
 
 void    new_x_y(int *new_x, int *new_y, int j, int y, t_graph *lst);
-
+int	calculate_intersactions_door(t_graph *lst);
+double	get_x_of_texture_doors(t_graph *lst, int i, int width);
+int	get_texture_door(t_graph *lst, int y, int x);
 
 #endif

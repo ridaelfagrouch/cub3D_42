@@ -12,21 +12,49 @@
 
 #include "../executor.h"
 
-// int	mouse(int key, int x, int y, t_graph *lst)
-// {
-// 		if (key == 1)
-// 		{
-	
-// 		}
-		
-// 	return (0);
-// }
+int	mouse_press(int key, int x, int y, t_graph *lst)
+{
+	(void)y;
+	if (key == 1 && x > 0 && x < lst->map.width && y > 0 && y < lst->map.height)
+	{
+		lst->old_x = x;
+		lst->mouse_click = 1;
+	}
+	return (0);
+}
+
+int	mouse_release(int key, int x, int y, t_graph *lst)
+{
+	(void)x;
+	(void)y;
+	(void)key;
+	lst->mouse_click = -1;
+	return (0);
+}
+
+int	mouse_houver(int x, int y, t_graph *lst)
+{
+	if (lst->mouse_click != 1)
+		return (0);
+	lst->new_x = x;
+	if (x > 0 && x < lst->map.width && y > 0 && y < lst->map.height)
+	{
+		if (lst->old_x - lst->new_x > 0)
+			lst->plyr.rotationangle += lst->plyr.rotationspeed/2;
+		else if (lst->old_x - lst->new_x < 0)
+			lst->plyr.rotationangle -= lst->plyr.rotationspeed/2;
+		lst->old_x = x;
+	}
+	return (0);
+}
 
 int routine(t_graph *lst)
 {
     mlx_hook(lst->wind, 2, 0L, deal_key, lst);
 	mlx_hook(lst->wind, 3, 0L, reset, lst);
-	// mlx_mouse_hook(lst->wind, mouse, lst);
+	mlx_hook(lst->wind, 4, 1L<<8, mouse_press, lst);
+	mlx_hook(lst->wind, 5, 1L<<8, mouse_release, lst);
+	mlx_hook(lst->wind, 6, 1L<<6, mouse_houver, lst);
 	mlx_destroy_image(lst->mlx, lst->map.img);
 	mlx_clear_window(lst->mlx, lst->wind);
 	lst->map.img = mlx_new_image(lst->mlx, lst->map.width, lst->map.height);
@@ -83,12 +111,15 @@ int	check_sprite(t_graph *lst, int x, int y)
 	pos2 = y / lst->map.unit;
 	if ((pos1 >= 0 && pos1 < lst->x) && (pos2 >= 0 && pos2 < lst->y))
 	{
-		if (lst->map.map[pos2] && lst->map.map[pos2][pos1] && \
-			lst->map.map[pos2][pos1] == '1')
-			return (2);
+		// if (lst->map.map[pos2] && lst->map.map[pos2][pos1] && \
+		// 	lst->map.map[pos2][pos1] == '1')
+		// 	return (0);
 		if (lst->map.map[pos2] && lst->map.map[pos2][pos1] && \
 			lst->map.map[pos2][pos1] == 'C')
 			return (1);
+		else if (lst->map.map[pos2] && lst->map.map[pos2][pos1] && \
+			lst->map.map[pos2][pos1] == 'B')
+			return (2);
 	}
 	return (0);
 }
