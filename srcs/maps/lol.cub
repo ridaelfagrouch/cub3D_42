@@ -3,10 +3,10 @@ EA srcs/textures/west.xpm
 WE srcs/textures/west.xpm
 SO srcs/textures/west.xpm
 
-C 128,128,128
+C 0,0,0
 
 
-F 255,255,255
+F 255,235,205
 
 
                          111111111
