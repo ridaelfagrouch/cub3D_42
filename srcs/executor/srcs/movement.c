@@ -37,9 +37,9 @@ int	reset(int key, t_graph *var)
 	if (key == 1)
 		var->plyr.walkdirection = 0;
 	if (key == 2)
-		var->plyr.walkdirection = 0;
+		var->plyr.walkdirectionleftright = 0;
 	if (key == 0)
-		var->plyr.walkdirection = 0;
+		var->plyr.walkdirectionleftright = 0;
 	return (0);
 }
 
@@ -52,7 +52,7 @@ int	check_wall(t_graph *lst, int x, int y)
 	i = 0;
 	pos1 = x / lst->map.unit;
 	pos2 = y / lst->map.unit;
-	if ((pos1 >= 0 && pos1 < lst->x) && (pos2 >= 0 && pos2 < lst->y))
+	if ((pos1 >= 0 && pos1 <= lst->x) && (pos2 >= 0 && pos2 <= lst->y))
 	{
 		if (lst->map.map[pos2] && lst->map.map[pos2][pos1] && \
 			lst->map.map[pos2][pos1] == '1')
@@ -94,7 +94,7 @@ int	check_wall_movement(t_graph *lst, int x, int y, int x1, int y1)
 	posDx = x1 / lst->map.unit;
 	posDy = y1 / lst->map.unit;
 
-	if ((posPx >= 0 && posPx < lst->x) && (posPy >= 0 && posPy < lst->y))
+	if ((posPx >= 0 && posPx <= lst->x) && (posPy >= 0 && posPy <= lst->y))
 	{
 		if (lst->map.map[posPy][posPx] == '1' || \
 			lst->map.map[posPy][posPx] == ' ')
@@ -120,9 +120,9 @@ int	deal_key(int key, t_graph *var)
 	if (key == 1)
 		var->plyr.walkdirection = -1;
 	if (key == 2)
-		var->plyr.walkdirection = 2;
+		var->plyr.walkdirectionleftright = 1;
 	if (key == 0)
-		var->plyr.walkdirection = 3;
+		var->plyr.walkdirectionleftright = -1;
 	if (key == 53)
 		exit(0);
 	return (0);

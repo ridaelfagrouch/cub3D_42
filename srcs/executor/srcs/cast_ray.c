@@ -6,7 +6,7 @@
 /*   By: sahafid <sahafid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 16:46:05 by sahafid           #+#    #+#             */
-/*   Updated: 2022/09/27 16:49:44 by sahafid          ###   ########.fr       */
+/*   Updated: 2022/09/27 17:02:05 by sahafid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,24 +116,27 @@ void    draw_rect_door(int x, int y, int x1, int y1, t_graph *lst, int i, double
 	}
 }
 
-void	checkdoorstatus(t_graph *lst, double *distance)
+void	checkdoorstatus(t_graph *lst, double distance)
 {
-	if (*distance > 70)
+	int closetodoor;
+	
+	closetodoor = lst->map.width * 70 / 1000;
+	if (distance > closetodoor)
 	{
 		lst->door.door_number = 1;
 		return ;
 	}
-	else if (*distance <= 70 && *distance > 50)
+	else if (distance <= closetodoor && distance > (closetodoor * 0.8))
 	{
 		lst->door.door_number = 2;
 		return ;
 	}
-	else if (*distance <= 40 && *distance > 30)
+	else if (distance <= (closetodoor * 0.6) && distance > (closetodoor * 0.4))
 	{
 		lst->door.door_number = 3;
 		return ;
 	}
-	else if (*distance < 20)
+	else if (distance < (closetodoor * 0.3))
 	{
 		lst->door.door_number = 4;
 		return ;
@@ -185,9 +188,9 @@ void	rendringdoors(t_graph *lst, int i, int j)
 		distance = distance_points(lst->plyr.x_plyr, lst->door.xintercept_vertic, lst->plyr.y_plyr, lst->door.yintercept_vertic);
 	if (lst->sprite.distancetowall < distance)
 		return ;
-	checkdoorstatus(lst, &distance);
 	lst->sprite.distancetowall = distance;
 	distance = distance * cos(lst->raycast.ray_angle - lst->plyr.rotationangle);
+	checkdoorstatus(lst, distance);
 	distanceprojectionplane = ((lst->map.width) / 2) / tan(lst->plyr.fov / 2);
 	wallstripeheight = (lst->map.unit / distance) * distanceprojectionplane;
 	startpointy = (lst->map.height / 2) - (wallstripeheight / 2);

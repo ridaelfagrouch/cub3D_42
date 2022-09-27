@@ -6,7 +6,7 @@
 /*   By: sahafid <sahafid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 18:30:13 by sahafid           #+#    #+#             */
-/*   Updated: 2022/09/27 16:53:47 by sahafid          ###   ########.fr       */
+/*   Updated: 2022/09/27 17:26:08 by sahafid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	horizantal_intersaction(t_graph *lst)
 		lst->raycast.xstep *= -1;
 	if (lst->raycast.facingup)
 		check = 1;
-	while ((lst->raycast.xintercept_horiz > 0 && lst->raycast.xintercept_horiz <= lst->map.width * lst->map.unit) && (lst->raycast.yintercept_horiz > 0 && lst->raycast.yintercept_horiz <= lst->map.height * lst->map.unit))
+	while ((lst->raycast.xintercept_horiz >= 0 && lst->raycast.xintercept_horiz <= lst->map.width * lst->map.unit) && (lst->raycast.yintercept_horiz >= 0 && lst->raycast.yintercept_horiz <= lst->map.height * lst->map.unit))
 	{
 		if (check_wall(lst, lst->raycast.xintercept_horiz, lst->raycast.yintercept_horiz - check))
 		{
