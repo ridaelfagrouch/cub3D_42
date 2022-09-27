@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sahafid <sahafid@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rel-fagr <rel-fagr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 13:09:18 by sahafid           #+#    #+#             */
-/*   Updated: 2022/09/27 17:08:57 by sahafid          ###   ########.fr       */
+/*   Updated: 2022/09/27 17:41:28 by rel-fagr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void    init_player(t_graph *lst, t_map_ *data)
 {
 	direction(lst, data);
     lst->plyr.fov = 60 * (M_PI / 180);
-    lst->plyr.speed = 5;
+    lst->plyr.speed = 2;
     lst->plyr.rotationspeed = 4 * (M_PI / 180);
     lst->plyr.rotatedirection = 0;
     lst->plyr.walkdirection = 0;
@@ -53,7 +53,7 @@ void    init_map(t_graph *lst, t_map_ *data)
 	lst->map.floor_color = data->floor_color;
 	lst->map.wall_color = 0;
 	lst->map.player_color = data->ceil_color;
-	lst->map.unit = 25;
+	lst->map.unit = 15;
 	lst->plyr.x_plyr = data->map_d.player_x * lst->map.unit;
 	lst->plyr.y_plyr = data->map_d.player_y * lst->map.unit;
 	lst->sprite.spritefoundhorz = 0;
@@ -67,7 +67,7 @@ void    init_everything(t_graph *lst, t_map_ *data)
 	lst->x = data->map_d.map_width;
 	lst->map.map = data->map_d.map;
 	lst->map.height = 1000;
-	lst->map.width = 1000;
+	lst->map.width = 1300;
 	lst->mlx = mlx_init();
 	lst->wind = mlx_new_window(lst->mlx, \
 		lst->map.width, lst->map.height, "Cub3d");
@@ -81,6 +81,17 @@ void    init_texture(t_graph *lst, t_map_ *data)
 {
 	lst->sprite.sprite = mlx_xpm_file_to_image(lst->mlx, "srcs/textures/chest.xpm", &lst->sprite.width_sprite, &lst->sprite.height_sprite);
     lst->sprite.addrsprite = (int *)mlx_get_data_addr(lst->sprite.sprite, &lst->texture.bpp, &lst->texture.size_line, &lst->texture.endian);
+	
+	lst->door.door1_img =  mlx_xpm_file_to_image(lst->mlx, "srcs/textures/door1.xpm", &lst->door.width_door1, &lst->door.height_door1);
+    lst->door.door1_txtr = (int *)mlx_get_data_addr(lst->door.door1_img, &lst->texture.bpp, &lst->texture.size_line, &lst->texture.endian);
+	lst->door.door2_img =  mlx_xpm_file_to_image(lst->mlx, "srcs/textures/door2.xpm", &lst->door.width_door2, &lst->door.height_door2);
+    lst->door.door2_txtr = (int *)mlx_get_data_addr(lst->door.door2_img, &lst->texture.bpp, &lst->texture.size_line, &lst->texture.endian);
+	lst->door.door3_img =  mlx_xpm_file_to_image(lst->mlx, "srcs/textures/door3.xpm", &lst->door.width_door3, &lst->door.height_door3);
+    lst->door.door3_txtr = (int *)mlx_get_data_addr(lst->door.door3_img, &lst->texture.bpp, &lst->texture.size_line, &lst->texture.endian);
+	lst->door.door4_img =  mlx_xpm_file_to_image(lst->mlx, "srcs/textures/door4.xpm", &lst->door.width_door4, &lst->door.height_door4);
+    lst->door.door4_txtr = (int *)mlx_get_data_addr(lst->door.door4_img, &lst->texture.bpp, &lst->texture.size_line, &lst->texture.endian);
+
+	lst->door.door_number = 1;
 
 	lst->door.door1_img =  mlx_xpm_file_to_image(lst->mlx, "srcs/textures/door1.xpm", &lst->door.width_door1, &lst->door.height_door1);
     lst->door.door1_txtr = (int *)mlx_get_data_addr(lst->door.door1_img, &lst->texture.bpp, &lst->texture.size_line, &lst->texture.endian);

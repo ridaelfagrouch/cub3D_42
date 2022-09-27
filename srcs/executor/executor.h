@@ -140,6 +140,9 @@ typedef struct s_graph
 	int					y;
 	int					x1;
 	int					y1;
+	int					mouse_click;
+	int					old_x;
+	int					new_x;
 	struct s_player		plyr;
 	struct s_raycasting raycast;
 	struct s_map		map;

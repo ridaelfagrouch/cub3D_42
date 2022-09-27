@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sahafid <sahafid@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rel-fagr <rel-fagr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/15 17:23:51 by bavos             #+#    #+#             */
-/*   Updated: 2022/09/27 13:02:42 by sahafid          ###   ########.fr       */
+/*   Updated: 2022/09/27 17:40:36 by rel-fagr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ int	main(int argc, char **argv)
 	{
 		if (parser(argv, data))
 			return (free(data), 0);
-		ft_print_split(data->map_d.map);
 		executor(data);
 	}
 	else
