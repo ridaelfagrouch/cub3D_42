@@ -6,7 +6,7 @@
 /*   By: sahafid <sahafid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 16:46:05 by sahafid           #+#    #+#             */
-/*   Updated: 2022/09/27 15:26:48 by sahafid          ###   ########.fr       */
+/*   Updated: 2022/09/27 16:49:44 by sahafid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,6 @@ void    draw_rect_door(int x, int y, int x1, int y1, t_graph *lst, int i, double
 		ds = y + (wallheight / 2) - ((lst->map.height) / 2);
 		posY = ds * (double)height / wallheight;
 		pixel_color = get_texture_door(lst, posY, posX);
-		// printf("%d\n", pixel_color);
 		if (pixel_color != 16777215)
        		my_mlx_pixel_put(lst , x, y, pixel_color);
         y++;
@@ -119,22 +118,22 @@ void    draw_rect_door(int x, int y, int x1, int y1, t_graph *lst, int i, double
 
 void	checkdoorstatus(t_graph *lst, double *distance)
 {
-	if (*distance > 100)
+	if (*distance > 70)
 	{
 		lst->door.door_number = 1;
 		return ;
 	}
-	else if (*distance <= 100.0 && *distance > 70.0)
+	else if (*distance <= 70 && *distance > 50)
 	{
 		lst->door.door_number = 2;
 		return ;
 	}
-	else if (*distance <= 70.0 && *distance > 50.0)
+	else if (*distance <= 40 && *distance > 30)
 	{
 		lst->door.door_number = 3;
 		return ;
 	}
-	else if (*distance < 50.0)
+	else if (*distance < 20)
 	{
 		lst->door.door_number = 4;
 		return ;
@@ -259,10 +258,10 @@ void cast_rays(t_graph *lst)
 		vertical_intersaction(lst);
 		j = calculate_intersactions(lst);
 		rendringwalls(lst, i, j);
-		// j = calculate_intersactions_door(lst);
-		// rendringdoors(lst, i, j);
-		// j = calculate_intersactions_sprite(lst);
-		// rendringsprite(lst, i, j);
+		j = calculate_intersactions_door(lst);
+		rendringdoors(lst, i, j);
+		j = calculate_intersactions_sprite(lst);
+		rendringsprite(lst, i, j);
 		lst->sprite.spritefoundvert = 0;
 		lst->sprite.spritefoundhorz = 0;
 		lst->raycast.ray_angle += lst->plyr.fov / rays_num;

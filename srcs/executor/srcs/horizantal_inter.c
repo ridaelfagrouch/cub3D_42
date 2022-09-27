@@ -6,7 +6,7 @@
 /*   By: sahafid <sahafid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 18:30:13 by sahafid           #+#    #+#             */
-/*   Updated: 2022/09/27 15:14:32 by sahafid          ###   ########.fr       */
+/*   Updated: 2022/09/27 16:53:47 by sahafid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	horizantal_intersaction(t_graph *lst)
 		lst->raycast.xstep *= -1;
 	if (lst->raycast.facingup)
 		check = 1;
-	while ((lst->raycast.xintercept_horiz >= 0 && lst->raycast.xintercept_horiz <= lst->map.width) && (lst->raycast.yintercept_horiz >= 0 && lst->raycast.yintercept_horiz <= lst->map.height))
+	while ((lst->raycast.xintercept_horiz > 0 && lst->raycast.xintercept_horiz <= lst->map.width * lst->map.unit) && (lst->raycast.yintercept_horiz > 0 && lst->raycast.yintercept_horiz <= lst->map.height * lst->map.unit))
 	{
 		if (check_wall(lst, lst->raycast.xintercept_horiz, lst->raycast.yintercept_horiz - check))
 		{
@@ -48,7 +48,6 @@ void	horizantal_intersaction(t_graph *lst)
 		else if ((check_sprite(lst, lst->raycast.xintercept_horiz, lst->raycast.yintercept_horiz - check) == 1 && sprite == 1) && door == 1)
 		{
 			sprite = 0;
-			// printf("%d\n", door);
 			lst->sprite.horiz_intersaction = 1;
 			lst->sprite.spritefoundhorz = 1;
 			lst->sprite.xintercept_horiz = lst->raycast.xintercept_horiz;

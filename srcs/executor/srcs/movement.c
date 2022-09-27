@@ -72,9 +72,6 @@ int	check_sprite(t_graph *lst, int x, int y)
 	pos2 = y / lst->map.unit;
 	if ((pos1 >= 0 && pos1 < lst->x) && (pos2 >= 0 && pos2 < lst->y))
 	{
-		// if (lst->map.map[pos2] && lst->map.map[pos2][pos1] && \
-		// 	lst->map.map[pos2][pos1] == '1')
-		// 	return (0);
 		if (lst->map.map[pos2] && lst->map.map[pos2][pos1] && \
 			lst->map.map[pos2][pos1] == 'C')
 			return (1);
