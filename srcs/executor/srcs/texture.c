@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   texture.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sahafid <sahafid@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rel-fagr <rel-fagr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 12:28:46 by sahafid           #+#    #+#             */
-/*   Updated: 2022/09/27 14:40:47 by sahafid          ###   ########.fr       */
+/*   Updated: 2022/09/27 17:34:22 by rel-fagr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,8 @@ int	get_texture_door(t_graph *lst, int y, int x)
 	int		color;
 
 	color = 0;
-	if ((y >= 0 && y <= lst->texture.height_N) && (x >= 0 && x <= lst->texture.width_N))
-	{
+	// if ((y >= 0 && y <= lst->texture.height_N) && (x >= 0 && x <= lst->texture.width_N))
+	// {
 		if (lst->door.door_number == 1)
 			color = lst->door.door1_txtr[(int)((abs((int)y) * lst->door.width_door1) + x)];
 		else if (lst->door.door_number == 2)
@@ -68,7 +68,7 @@ int	get_texture_door(t_graph *lst, int y, int x)
 			color = lst->door.door3_txtr[(int)((abs((int)y) * lst->door.width_door3) + x)];
 		else if (lst->door.door_number == 4)
 			color = lst->door.door4_txtr[(int)((abs((int)y) * lst->door.width_door4) + x)];
-	}
+	// }
 	return (color);
 }
 
