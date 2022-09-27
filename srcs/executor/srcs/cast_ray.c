@@ -6,7 +6,7 @@
 /*   By: sahafid <sahafid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 16:46:05 by sahafid           #+#    #+#             */
-/*   Updated: 2022/09/27 17:02:05 by sahafid          ###   ########.fr       */
+/*   Updated: 2022/09/27 18:22:22 by sahafid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,8 @@ void    draw_rect_sprite(int x, int y, int x1, int y1, t_graph *lst, int i, doub
 		ds = y + (wallheight / 2) - ((lst->map.height) / 2);
 		posY = ds * (double)height / wallheight;
 		pixel_color = lst->sprite.addrsprite[(int)((abs((int)posY) * width) + posX)];
-        my_mlx_pixel_put(lst , x, y, pixel_color);
+		if (pixel_color != 16777215)
+        	my_mlx_pixel_put(lst , x, y, pixel_color);
         y++;
 	}
 }
