@@ -6,7 +6,7 @@
 /*   By: sahafid <sahafid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 16:46:05 by sahafid           #+#    #+#             */
-/*   Updated: 2022/09/27 14:41:12 by sahafid          ###   ########.fr       */
+/*   Updated: 2022/09/27 15:26:48 by sahafid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ void    draw_rect(int x, int y, int x1, int y1, t_graph *lst, int i, double wall
         my_mlx_pixel_put(lst , x, y, pixel_color);
         y++;
 	}
-	lst->door.foundoor = 0;
 }
 
 void    draw_rect_sprite(int x, int y, int x1, int y1, t_graph *lst, int i, double wallheight)
@@ -188,6 +187,7 @@ void	rendringdoors(t_graph *lst, int i, int j)
 	if (lst->sprite.distancetowall < distance)
 		return ;
 	checkdoorstatus(lst, &distance);
+	lst->sprite.distancetowall = distance;
 	distance = distance * cos(lst->raycast.ray_angle - lst->plyr.rotationangle);
 	distanceprojectionplane = ((lst->map.width) / 2) / tan(lst->plyr.fov / 2);
 	wallstripeheight = (lst->map.unit / distance) * distanceprojectionplane;
@@ -259,10 +259,10 @@ void cast_rays(t_graph *lst)
 		vertical_intersaction(lst);
 		j = calculate_intersactions(lst);
 		rendringwalls(lst, i, j);
-		j = calculate_intersactions_door(lst);
-		rendringdoors(lst, i, j);
-		j = calculate_intersactions_sprite(lst);
-		rendringsprite(lst, i, j);
+		// j = calculate_intersactions_door(lst);
+		// rendringdoors(lst, i, j);
+		// j = calculate_intersactions_sprite(lst);
+		// rendringsprite(lst, i, j);
 		lst->sprite.spritefoundvert = 0;
 		lst->sprite.spritefoundhorz = 0;
 		lst->raycast.ray_angle += lst->plyr.fov / rays_num;

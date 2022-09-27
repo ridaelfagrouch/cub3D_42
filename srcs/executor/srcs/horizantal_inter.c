@@ -6,7 +6,7 @@
 /*   By: sahafid <sahafid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 18:30:13 by sahafid           #+#    #+#             */
-/*   Updated: 2022/09/27 13:01:55 by sahafid          ###   ########.fr       */
+/*   Updated: 2022/09/27 15:14:32 by sahafid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,10 @@ void	horizantal_intersaction(t_graph *lst)
 			lst->raycast.horiz_intersaction = 1;
 			return ;
 		}
-		else if (check_sprite(lst, lst->raycast.xintercept_horiz, lst->raycast.yintercept_horiz - check) == 1 && sprite == 1)
+		else if ((check_sprite(lst, lst->raycast.xintercept_horiz, lst->raycast.yintercept_horiz - check) == 1 && sprite == 1) && door == 1)
 		{
 			sprite = 0;
+			// printf("%d\n", door);
 			lst->sprite.horiz_intersaction = 1;
 			lst->sprite.spritefoundhorz = 1;
 			lst->sprite.xintercept_horiz = lst->raycast.xintercept_horiz;
