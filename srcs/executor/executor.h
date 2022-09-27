@@ -86,6 +86,7 @@ typedef struct s_player
 	double	rotationspeed;
 	int		rotatedirection;
 	int		walkdirection;
+	int		walkdirectionleftright;
 } t_player;
 
 typedef struct s_raycasting

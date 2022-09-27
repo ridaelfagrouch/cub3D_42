@@ -6,7 +6,7 @@
 /*   By: rel-fagr <rel-fagr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 18:30:13 by sahafid           #+#    #+#             */
-/*   Updated: 2022/09/27 16:19:44 by rel-fagr         ###   ########.fr       */
+/*   Updated: 2022/09/27 17:39:24 by rel-fagr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	horizantal_intersaction(t_graph *lst)
 			lst->raycast.horiz_intersaction = 1;
 			return ;
 		}
-		else if (check_sprite(lst, lst->raycast.xintercept_horiz, lst->raycast.yintercept_horiz - check) == 1 && sprite == 1)
+		else if ((check_sprite(lst, lst->raycast.xintercept_horiz, lst->raycast.yintercept_horiz - check) == 1 && sprite == 1) && door == 1)
 		{
 			sprite = 0;
 			lst->sprite.horiz_intersaction = 1;

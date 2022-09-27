@@ -6,7 +6,7 @@
 /*   By: rel-fagr <rel-fagr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 14:48:25 by sahafid           #+#    #+#             */
-/*   Updated: 2022/09/27 17:00:18 by rel-fagr         ###   ########.fr       */
+/*   Updated: 2022/09/27 17:39:12 by rel-fagr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -175,9 +175,9 @@ void    player_movement(t_graph *lst)
 		lst->plyr.x_plyr = save1;
 		lst->plyr.y_plyr = save2;
     }
-    if (lst->plyr.walkdirection == 2)
+    if (lst->plyr.walkdirectionleftright == 1)
         turningleftright(lst, 0);
-    if (lst->plyr.walkdirection == 3)
+    if (lst->plyr.walkdirectionleftright == -1)
         turningleftright(lst, 1);
 }
 
