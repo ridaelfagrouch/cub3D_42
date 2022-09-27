@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rel-fagr <rel-fagr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sahafid <sahafid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 13:09:18 by sahafid           #+#    #+#             */
-/*   Updated: 2022/09/26 15:50:57 by rel-fagr         ###   ########.fr       */
+/*   Updated: 2022/09/27 14:29:46 by sahafid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,17 @@ void    init_texture(t_graph *lst, t_map_ *data)
 {
 	lst->sprite.sprite = mlx_xpm_file_to_image(lst->mlx, "srcs/textures/chest.xpm", &lst->sprite.width_sprite, &lst->sprite.height_sprite);
     lst->sprite.addrsprite = (int *)mlx_get_data_addr(lst->sprite.sprite, &lst->texture.bpp, &lst->texture.size_line, &lst->texture.endian);
+	
+	lst->door.door1_img =  mlx_xpm_file_to_image(lst->mlx, "srcs/textures/door1.xpm", &lst->door.width_door1, &lst->door.height_door1);
+    lst->door.door1_txtr = (int *)mlx_get_data_addr(lst->door.door1_img, &lst->texture.bpp, &lst->texture.size_line, &lst->texture.endian);
+	lst->door.door2_img =  mlx_xpm_file_to_image(lst->mlx, "srcs/textures/door2.xpm", &lst->door.width_door2, &lst->door.height_door2);
+    lst->door.door2_txtr = (int *)mlx_get_data_addr(lst->door.door2_img, &lst->texture.bpp, &lst->texture.size_line, &lst->texture.endian);
+	lst->door.door3_img =  mlx_xpm_file_to_image(lst->mlx, "srcs/textures/door3.xpm", &lst->door.width_door3, &lst->door.height_door3);
+    lst->door.door3_txtr = (int *)mlx_get_data_addr(lst->door.door3_img, &lst->texture.bpp, &lst->texture.size_line, &lst->texture.endian);
+	lst->door.door4_img =  mlx_xpm_file_to_image(lst->mlx, "srcs/textures/door4.xpm", &lst->door.width_door4, &lst->door.height_door4);
+    lst->door.door4_txtr = (int *)mlx_get_data_addr(lst->door.door4_img, &lst->texture.bpp, &lst->texture.size_line, &lst->texture.endian);
+
+	lst->door.door_number = 1;
 
     lst->texture.texture_img_N = mlx_xpm_file_to_image(lst->mlx, data->no_t, &lst->texture.width_N, &lst->texture.height_N);
     lst->texture.img_addr_N = (int *)mlx_get_data_addr(lst->texture.texture_img_N, &lst->texture.bpp, &lst->texture.size_line, &lst->texture.endian);

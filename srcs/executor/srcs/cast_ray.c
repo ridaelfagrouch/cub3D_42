@@ -6,7 +6,7 @@
 /*   By: sahafid <sahafid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 16:46:05 by sahafid           #+#    #+#             */
-/*   Updated: 2022/09/26 23:10:02 by sahafid          ###   ########.fr       */
+/*   Updated: 2022/09/27 14:41:12 by sahafid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,30 @@ void    draw_rect_sprite(int x, int y, int x1, int y1, t_graph *lst, int i, doub
 	}
 }
 
+void	get_width_height_door(t_graph *lst, int *width, int *height)
+{
+	if (lst->door.door_number == 1)
+	{
+		*width = lst->door.width_door1;
+		*height = lst->door.height_door1;
+	}
+	else if (lst->door.door_number == 2)
+	{
+		*width = lst->door.width_door2;
+		*height = lst->door.height_door2;
+	}
+	else if (lst->door.door_number == 3)
+	{
+		*width = lst->door.width_door3;
+		*height = lst->door.height_door3;
+	}
+	else if (lst->door.door_number == 4)
+	{
+		*width = lst->door.width_door4;
+		*height = lst->door.height_door4;
+	}
+}
+
 void    draw_rect_door(int x, int y, int x1, int y1, t_graph *lst, int i, double wallheight)
 {
 	double	posX;
@@ -79,28 +103,44 @@ void    draw_rect_door(int x, int y, int x1, int y1, t_graph *lst, int i, double
 
 	(void)x1;
 	pixel_color = 0;
-	width = lst->sprite.width_sprite;
-	height = lst->sprite.height_sprite;
-	posX = 0;
-	posY = 0;
-	ds = 0;
+	get_width_height_door(lst, &width, &height);
+	posX = get_x_of_texture_doors(lst, i, width);
 	i = 0;
-	wallheight = 0;
 	while (y <= y1)
     {
-		pixel_color = 255;
-        my_mlx_pixel_put(lst , x, y, pixel_color);
+		ds = y + (wallheight / 2) - ((lst->map.height) / 2);
+		posY = ds * (double)height / wallheight;
+		pixel_color = get_texture_door(lst, posY, posX);
+		// printf("%d\n", pixel_color);
+		if (pixel_color != 16777215)
+       		my_mlx_pixel_put(lst , x, y, pixel_color);
         y++;
 	}
 }
 
-int	checkdoorstatus(t_graph *lst, double *distance)
+void	checkdoorstatus(t_graph *lst, double *distance)
 {
-	if (!lst->door.foundoor)
-		return (0);
-	if (*distance < 50.0)
-		return (1);
-	return (0);
+	if (*distance > 100)
+	{
+		lst->door.door_number = 1;
+		return ;
+	}
+	else if (*distance <= 100.0 && *distance > 70.0)
+	{
+		lst->door.door_number = 2;
+		return ;
+	}
+	else if (*distance <= 70.0 && *distance > 50.0)
+	{
+		lst->door.door_number = 3;
+		return ;
+	}
+	else if (*distance < 50.0)
+	{
+		lst->door.door_number = 4;
+		return ;
+	}
+	return ;
 }
 
 void	rendringwalls(t_graph *lst, int i, int j)
@@ -115,8 +155,8 @@ void	rendringwalls(t_graph *lst, int i, int j)
 		distance = distance_points(lst->plyr.x_plyr, lst->raycast.xintercept_horiz, lst->plyr.y_plyr, lst->raycast.yintercept_horiz);
 	else
 		distance = distance_points(lst->plyr.x_plyr, lst->raycast.xintercept_vertic, lst->plyr.y_plyr, lst->raycast.yintercept_vertic);
-	lst->sprite.distancetowall = distance;
 	distance = distance * cos(lst->raycast.ray_angle - lst->plyr.rotationangle);
+	lst->sprite.distancetowall = distance;
 	distanceprojectionplane = ((lst->map.width) / 2) / tan(lst->plyr.fov / 2);
 	wallstripeheight = (lst->map.unit / distance) * distanceprojectionplane;
 	startpointy = (lst->map.height / 2) - (wallstripeheight / 2);
@@ -147,6 +187,7 @@ void	rendringdoors(t_graph *lst, int i, int j)
 		distance = distance_points(lst->plyr.x_plyr, lst->door.xintercept_vertic, lst->plyr.y_plyr, lst->door.yintercept_vertic);
 	if (lst->sprite.distancetowall < distance)
 		return ;
+	checkdoorstatus(lst, &distance);
 	distance = distance * cos(lst->raycast.ray_angle - lst->plyr.rotationangle);
 	distanceprojectionplane = ((lst->map.width) / 2) / tan(lst->plyr.fov / 2);
 	wallstripeheight = (lst->map.unit / distance) * distanceprojectionplane;

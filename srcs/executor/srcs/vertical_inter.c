@@ -6,7 +6,7 @@
 /*   By: sahafid <sahafid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 18:25:36 by sahafid           #+#    #+#             */
-/*   Updated: 2022/09/26 23:07:33 by sahafid          ###   ########.fr       */
+/*   Updated: 2022/09/27 12:21:46 by sahafid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ void	vertical_intersaction(t_graph *lst)
 		}
 	}
 	lst->raycast.vertic_intersaction = 0;
-	lst->door.vertic_intersaction = 0;
+	// lst->door.vertic_intersaction = 0;
 	if (sprite)
 	{
 		lst->sprite.vertic_intersaction = 0;

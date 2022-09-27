@@ -20,6 +20,23 @@ typedef struct s_door
 	int		horiz_intersaction;
 	int		vertic_intersaction;
 	int		foundoor;
+	void	*door1_img;
+	int		*door1_txtr;
+	void	*door2_img;
+	int		*door2_txtr;
+	void	*door3_img;
+	int		*door3_txtr;
+	void	*door4_img;
+	int		*door4_txtr;
+	int		width_door1;
+	int		height_door1;
+	int		width_door2;
+	int		height_door2;
+	int		width_door3;
+	int		height_door3;
+	int		width_door4;
+	int		height_door4;
+	int		door_number;
 } t_door;
 
 typedef struct s_sprite
@@ -190,6 +207,7 @@ double	calculate_intersactions_sprite(t_graph *lst);
 
 void    new_x_y(int *new_x, int *new_y, int j, int y, t_graph *lst);
 int	calculate_intersactions_door(t_graph *lst);
-
+double	get_x_of_texture_doors(t_graph *lst, int i, int width);
+int	get_texture_door(t_graph *lst, int y, int x);
 
 #endif

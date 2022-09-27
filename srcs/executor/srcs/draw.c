@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rel-fagr <rel-fagr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sahafid <sahafid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 14:48:25 by sahafid           #+#    #+#             */
-/*   Updated: 2022/09/26 17:44:18 by rel-fagr         ###   ########.fr       */
+/*   Updated: 2022/09/27 14:31:15 by sahafid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -191,11 +191,10 @@ void    draw_walls(t_graph *lst)
     rotate_player(lst);
     player_movement(lst);
     checkcollectible(lst);
-    // cast_rays(lst, 0);
     cast_rays(lst);
-    draw_minimap_border(lst);
-    draw_map(lst->map.map, lst);
-    draw_player(lst);
+    // draw_minimap_border(lst);
+    // draw_map(lst->map.map, lst);
+    // draw_player(lst);
 }
 
 void    draw_map(char	**map, t_graph *lst)

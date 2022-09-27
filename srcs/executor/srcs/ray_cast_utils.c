@@ -6,7 +6,7 @@
 /*   By: sahafid <sahafid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 18:27:30 by sahafid           #+#    #+#             */
-/*   Updated: 2022/09/26 20:43:50 by sahafid          ###   ########.fr       */
+/*   Updated: 2022/09/27 12:05:51 by sahafid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,10 +81,7 @@ int	calculate_intersactions_door(t_graph *lst)
 	distance_horiz = 0;
 	distance_vertic = 0;
 	if (!lst->door.horiz_intersaction && !lst->door.vertic_intersaction)
-	{
-		lst->door.foundoor = 0;
 		return (3);
-	}
 	if (lst->door.horiz_intersaction)
 		distance_horiz = distance_points(lst->plyr.x_plyr, lst->door.xintercept_horiz, lst->plyr.y_plyr, lst->door.yintercept_horiz);
 	else
