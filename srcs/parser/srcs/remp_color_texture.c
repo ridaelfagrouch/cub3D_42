@@ -6,7 +6,7 @@
 /*   By: rel-fagr <rel-fagr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 13:05:48 by rel-fagr          #+#    #+#             */
-/*   Updated: 2022/09/22 21:13:47 by rel-fagr         ###   ########.fr       */
+/*   Updated: 2022/09/27 19:31:29 by rel-fagr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,44 @@ void	check_color(char **split_color, int *i)
 }
 
 /* --------------------------------------------------------------- */
+void	check_color_isdigit(char **split_color, int *k)
+{
+	char	*str;
+	int		i;
+	int		j;
+
+	i = 0;
+	while(split_color[i])
+	{
+		j = 0;
+		str = ft_strtrim(&split_color[i][j], " ");
+		while (str[j])
+		{
+			if (!ft_isdigit(str[j]) && str[j] != '.')
+				*k = 4;
+			j++;
+		}
+		free(str);
+		i++;
+	}
+}
+
+void	count_virgul(char *str, int *j)
+{
+	int i;
+	int count;
+
+	i = 0;
+	count = 0;
+	while(str[i])
+	{
+		if (str[i] == ',')
+			count++;
+		i++;
+	}
+	if (count > 2 || count < 2)
+		*j = 4;
+}
 
 void	remp_color(int *count, char *ptr, t_map_ *data, char *c)
 {
@@ -37,11 +75,13 @@ void	remp_color(int *count, char *ptr, t_map_ *data, char *c)
 	int		i;
 
 	i = 0;
-	split_color = ft_split(ft_strtrim(ft_strtrim(ptr, "F "), "C "), ',');
-	check_color(split_color, &i);
-	str = ft_strtrim(ft_strtrim(ptr, "\n"), " ");
-	if (ft_isdigit(str[ft_strlen(str) - 1]) == 0)
+	str = ft_substr(ptr, 1, ft_strlen(ptr) - 1);
+	count_virgul(str, &i);
+	split_color = ft_split(str, ',');
+	if (str[ft_strlen(str) - 1] == ',')
 		i = 4;
+	check_color_isdigit(split_color, &i);
+	check_color(split_color, &i);
 	if (ft_strlen_split(split_color) == 3 && i == 3)
 	{
 		*count += 1;
