@@ -12,10 +12,21 @@
 
 #include "../executor.h"
 
+// int	mouse(int key, int x, int y, t_graph *lst)
+// {
+// 		if (key == 1)
+// 		{
+	
+// 		}
+		
+// 	return (0);
+// }
+
 int routine(t_graph *lst)
 {
     mlx_hook(lst->wind, 2, 0L, deal_key, lst);
 	mlx_hook(lst->wind, 3, 0L, reset, lst);
+	// mlx_mouse_hook(lst->wind, mouse, lst);
 	mlx_destroy_image(lst->mlx, lst->map.img);
 	mlx_clear_window(lst->mlx, lst->wind);
 	lst->map.img = mlx_new_image(lst->mlx, lst->map.width, lst->map.height);
