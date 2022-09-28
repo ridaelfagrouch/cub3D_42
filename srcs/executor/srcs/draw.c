@@ -6,7 +6,7 @@
 /*   By: sahafid <sahafid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 14:48:25 by sahafid           #+#    #+#             */
-/*   Updated: 2022/09/28 15:04:03 by sahafid          ###   ########.fr       */
+/*   Updated: 2022/09/28 15:07:59 by sahafid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,22 +98,23 @@ void    draw_cub1(int x, int y, int x1, int y1, t_graph *lst, int i)
 
 void    draw_player(t_graph *lst)
 {
-	drawline(100, 100, 105, 100, lst, 0xFF0000);
-    drawline(100, 101, 105, 101, lst, 0xFF0000);
-    drawline(100, 102, 105, 102, lst, 0xFF0000);
-    drawline(100, 103, 105, 103, lst, 0xFF0000);
-    drawline(100, 104, 105, 104, lst, 0xFF0000);
-    drawline(100, 105, 105, 105, lst, 0xFF0000);
+    int i;
+
+    i = 99;
+    while (++i <= 105)
+        drawline(100, i, 105, i, lst, 0xFF0000);
 }
 
 void    draw_minimap_border(t_graph *lst)
 {
-    drawline(200, 0, 200, 202, lst, 0);
-    drawline(201, 0, 201, 202, lst, 0);
-    drawline(202, 0, 202, 202, lst, 0);
-    drawline(0, 200, 200, 200, lst, 0);
-    drawline(0, 201, 202, 201, lst, 0);
-    drawline(0, 202, 202, 202, lst, 0);
+    int i;
+
+    i = 199;
+    while (++i <= 202)
+    {
+        drawline(i, 0, i, 202, lst, 0);
+        drawline(0, i, 202, i, lst, 0);
+    }
 }
 
 void    rotate_player(t_graph *lst)
