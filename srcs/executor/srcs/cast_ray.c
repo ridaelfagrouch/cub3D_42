@@ -6,7 +6,7 @@
 /*   By: sahafid <sahafid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 16:46:05 by sahafid           #+#    #+#             */
-/*   Updated: 2022/09/27 18:25:15 by sahafid          ###   ########.fr       */
+/*   Updated: 2022/09/28 16:52:19 by sahafid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void    draw_rect(int x, int y, int x1, int y1, t_graph *lst, int i, double wall
 	height = 0;
 	posX = 0;
 	posY = 0;
-	get_width_height(lst, &width, &height, i);
+	get_widthheight(lst, &width, &height, i);
 	posX = get_x_of_texture(lst, i, width);
 	ds = 0;
 	while (y <= y1)
@@ -52,8 +52,8 @@ void    draw_rect_sprite(int x, int y, int x1, int y1, t_graph *lst, int i, doub
 
 	(void)x1;
 	pixel_color = 0;
-	width = lst->sprite.width_sprite;
-	height = lst->sprite.height_sprite;
+	width = lst->sprite.widthsprite;
+	height = lst->sprite.heightsprite;
 	posX = 0;
 	posY = 0;
 	posX = get_x_of_texture_sprite(lst, i, width);
@@ -69,27 +69,27 @@ void    draw_rect_sprite(int x, int y, int x1, int y1, t_graph *lst, int i, doub
 	}
 }
 
-void	get_width_height_door(t_graph *lst, int *width, int *height)
+void	get_widthheightdoor(t_graph *lst, int *width, int *height)
 {
 	if (lst->door.door_number == 1)
 	{
-		*width = lst->door.width_door1;
-		*height = lst->door.height_door1;
+		*width = lst->door.widthdoor1;
+		*height = lst->door.heightdoor1;
 	}
 	else if (lst->door.door_number == 2)
 	{
-		*width = lst->door.width_door2;
-		*height = lst->door.height_door2;
+		*width = lst->door.widthdoor2;
+		*height = lst->door.heightdoor2;
 	}
 	else if (lst->door.door_number == 3)
 	{
-		*width = lst->door.width_door3;
-		*height = lst->door.height_door3;
+		*width = lst->door.widthdoor3;
+		*height = lst->door.heightdoor3;
 	}
 	else if (lst->door.door_number == 4)
 	{
-		*width = lst->door.width_door4;
-		*height = lst->door.height_door4;
+		*width = lst->door.widthdoor4;
+		*height = lst->door.heightdoor4;
 	}
 }
 
@@ -104,7 +104,7 @@ void    draw_rect_door(int x, int y, int x1, int y1, t_graph *lst, int i, double
 
 	(void)x1;
 	pixel_color = 0;
-	get_width_height_door(lst, &width, &height);
+	get_widthheightdoor(lst, &width, &height);
 	posX = get_x_of_texture_doors(lst, i, width);
 	i = 0;
 	while (y <= y1)

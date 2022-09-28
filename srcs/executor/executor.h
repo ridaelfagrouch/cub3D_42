@@ -28,22 +28,22 @@ typedef struct s_door
 	int		*door3_txtr;
 	void	*door4_img;
 	int		*door4_txtr;
-	int		width_door1;
-	int		height_door1;
-	int		width_door2;
-	int		height_door2;
-	int		width_door3;
-	int		height_door3;
-	int		width_door4;
-	int		height_door4;
+	int		widthdoor1;
+	int		heightdoor1;
+	int		widthdoor2;
+	int		heightdoor2;
+	int		widthdoor3;
+	int		heightdoor3;
+	int		widthdoor4;
+	int		heightdoor4;
 	int		door_number;
 } t_door;
 
 typedef struct s_sprite
 {
 	double	distancetowall;
-	int		width_sprite;
-	int		height_sprite;
+	int		widthsprite;
+	int		heightsprite;
 	void	*sprite;
 	int		*addrsprite;
 	double	xintercept_horiz;
@@ -109,27 +109,27 @@ typedef struct s_raycasting
 
 typedef struct s_texture
 {
-	void	*texture_img_N;
-	int		*img_addr_N;
-	void	*texture_img_S;
-	int		*img_addr_S;
-	void	*texture_img_E;
-	int		*img_addr_E;
-	void	*texture_img_W;
-	int		*img_addr_W;
+	void	*textureimgn;
+	int		*imgaddrN;
+	void	*textureimgs;
+	int		*imgaddrS;
+	void	*textureimge;
+	int		*imgaddrE;
+	void	*textureimgw;
+	int		*imgaddrW;
 	int		bpp;
 	int		size_line;
 	int		endian;
 	int		width;
 	int		height;
-	int		width_N;
-	int		height_N;
-	int		width_S;
-	int		height_S;
-	int		width_W;
-	int		height_W;
-	int		width_E;
-	int		height_E;
+	int		widthN;
+	int		heightN;
+	int		widthS;
+	int		heightS;
+	int		widthW;
+	int		heightW;
+	int		widthE;
+	int		heightE;
 } t_texture;
 
 typedef struct s_graph
@@ -196,7 +196,7 @@ void	draw_map(char **map, t_graph *lst);
 /* --------------------------------- TEXTURE ----------------------------- */
 
 double	get_x_of_texture(t_graph *lst, int i, int width);
-void	get_width_height(t_graph *lst, int *width, int *height, int i);
+void	get_widthheight(t_graph *lst, int *width, int *height, int i);
 int		get_texture(t_graph *lst, int y, int x, int i);
 
 /* --------------------------------- PROTOTYPES ----------------------------- */

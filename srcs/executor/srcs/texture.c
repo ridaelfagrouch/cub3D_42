@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   texture.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rel-fagr <rel-fagr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sahafid <sahafid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 12:28:46 by sahafid           #+#    #+#             */
-/*   Updated: 2022/09/27 17:39:49 by rel-fagr         ###   ########.fr       */
+/*   Updated: 2022/09/28 16:52:19 by sahafid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,14 +37,14 @@ int	get_texture(t_graph *lst, int y, int x, int i)
 
 	color = 0;
 	direction = get_direction(lst, i);
-	if (direction == 'N' && (y >= 0 && y <= lst->texture.height_N) && (x >= 0 && x <= lst->texture.width_N))
-		color = lst->texture.img_addr_N[(int)((abs(y) * lst->texture.width_N) + abs(x))];
-	else if (direction == 'S'&& (y >= 0 && y <= lst->texture.height_S) && (x >= 0 && x <= lst->texture.width_S))
-		color = lst->texture.img_addr_S[(int)((abs(y) * lst->texture.width_S) + abs(x))];
-	else if (direction == 'E'&& (y >= 0 && y <= lst->texture.height_E) && (x >= 0 && x <= lst->texture.width_E))
-		color = lst->texture.img_addr_E[(int)((abs(y) * lst->texture.width_E) + abs(x))];
-	else if (direction == 'W'&& (y >= 0 && y <= lst->texture.height_W) && (x >= 0 && x <= lst->texture.width_W))
-		color = lst->texture.img_addr_W[(int)((abs(y) * lst->texture.width_W) + abs(x))];
+	if (direction == 'N' && (y >= 0 && y <= lst->texture.heightN) && (x >= 0 && x <= lst->texture.widthN))
+		color = lst->texture.imgaddrN[(int)((abs(y) * lst->texture.widthN) + abs(x))];
+	else if (direction == 'S'&& (y >= 0 && y <= lst->texture.heightS) && (x >= 0 && x <= lst->texture.widthS))
+		color = lst->texture.imgaddrS[(int)((abs(y) * lst->texture.widthS) + abs(x))];
+	else if (direction == 'E'&& (y >= 0 && y <= lst->texture.heightE) && (x >= 0 && x <= lst->texture.widthE))
+		color = lst->texture.imgaddrE[(int)((abs(y) * lst->texture.widthE) + abs(x))];
+	else if (direction == 'W'&& (y >= 0 && y <= lst->texture.heightW) && (x >= 0 && x <= lst->texture.widthW))
+		color = lst->texture.imgaddrW[(int)((abs(y) * lst->texture.widthW) + abs(x))];
 	return (color);
 }
 
@@ -53,14 +53,14 @@ int	get_texture_door(t_graph *lst, int y, int x)
 	int		color;
 
 	color = 0;
-	if (lst->door.door_number == 1 && (y >= 0 && y <= lst->door.height_door1) && (x >= 0 && x <= lst->door.width_door1))
-		color = lst->door.door1_txtr[(int)((abs((int)y) * lst->door.width_door1) + x)];
-	else if (lst->door.door_number == 2 && (y >= 0 && y <= lst->door.height_door2) && (x >= 0 && x <= lst->door.width_door2))
-		color = lst->door.door2_txtr[(int)((abs((int)y) * lst->door.width_door2) + x)];
-	else if (lst->door.door_number == 3 && (y >= 0 && y <= lst->door.height_door3) && (x >= 0 && x <= lst->door.width_door3))
-		color = lst->door.door3_txtr[(int)((abs((int)y) * lst->door.width_door3) + x)];
-	else if (lst->door.door_number == 4 && (y >= 0 && y <= lst->door.height_door4) && (x >= 0 && x <= lst->door.width_door4))
-		color = lst->door.door4_txtr[(int)((abs((int)y) * lst->door.width_door4) + x)];
+	if (lst->door.door_number == 1 && (y >= 0 && y <= lst->door.heightdoor1) && (x >= 0 && x <= lst->door.widthdoor1))
+		color = lst->door.door1_txtr[(int)((abs((int)y) * lst->door.widthdoor1) + x)];
+	else if (lst->door.door_number == 2 && (y >= 0 && y <= lst->door.heightdoor2) && (x >= 0 && x <= lst->door.widthdoor2))
+		color = lst->door.door2_txtr[(int)((abs((int)y) * lst->door.widthdoor2) + x)];
+	else if (lst->door.door_number == 3 && (y >= 0 && y <= lst->door.heightdoor3) && (x >= 0 && x <= lst->door.widthdoor3))
+		color = lst->door.door3_txtr[(int)((abs((int)y) * lst->door.widthdoor3) + x)];
+	else if (lst->door.door_number == 4 && (y >= 0 && y <= lst->door.heightdoor4) && (x >= 0 && x <= lst->door.widthdoor4))
+		color = lst->door.door4_txtr[(int)((abs((int)y) * lst->door.widthdoor4) + x)];
 	return (color);
 }
 
@@ -121,32 +121,32 @@ double	get_x_of_texture_sprite(t_graph *lst, int i, int width)
 	return (x_offset);
 }
 
-void	get_width_height(t_graph *lst, int *width, int *height, int i)
+void	get_widthheight(t_graph *lst, int *width, int *height, int i)
 {
 	if (i == 0)
 	{
 		if (lst->raycast.facingup)
 		{
-			*height = lst->texture.height_N;
-			*width = lst->texture.width_N;
+			*height = lst->texture.heightN;
+			*width = lst->texture.widthN;
 		}
 		else
 		{
-			*height = lst->texture.height_S;
-			*width = lst->texture.width_S;
+			*height = lst->texture.heightS;
+			*width = lst->texture.widthS;
 		}
 	}
 	else
 	{
 		if (lst->raycast.facingright)
 		{
-			*height = lst->texture.height_E;
-			*width = lst->texture.width_E;
+			*height = lst->texture.heightE;
+			*width = lst->texture.widthE;
 		}
 		else
 		{
-			*height = lst->texture.height_W;
-			*width = lst->texture.width_W;
+			*height = lst->texture.heightW;
+			*width = lst->texture.widthW;
 		}
 	}
 	return ;
