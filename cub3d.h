@@ -6,7 +6,7 @@
 /*   By: rel-fagr <rel-fagr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 18:55:26 by rel-fagr          #+#    #+#             */
-/*   Updated: 2022/09/27 18:54:07 by rel-fagr         ###   ########.fr       */
+/*   Updated: 2022/09/28 21:50:46 by rel-fagr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,5 +56,6 @@ typedef struct s_map_
 
 int		parser(char **argv, t_map_ *data);
 void	executor(t_map_ *data);
+void	free_all(t_map_ *data, char *str);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: rel-fagr <rel-fagr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 13:08:10 by rel-fagr          #+#    #+#             */
-/*   Updated: 2022/09/23 16:57:39 by rel-fagr         ###   ########.fr       */
+/*   Updated: 2022/09/28 23:59:49 by rel-fagr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,27 +24,25 @@ int	check_map_error(char *str, t_map_ *data)
 	{
 		c = str[i];
 		if (c == '0' || c == '1' || c == ' ' || c == 'N' || c == 'S' \
-			|| c == 'W' || c == 'E' || c =='C')
+			|| c == 'W' || c == 'E' || c == 'C')
 		{
 			i++;
 			if (c == 'N' || c == 'S' || c == 'W' || c == 'E')
 				data->map_d.count_player++;
 		}
 		else
-			return (write(2, "error!! invalid map\n", 20), 1);
+			return (1);
 	}
 	return (0);
 }
 
 /* --------------------------------------------------------------- */
 
-void	free_check_data(char *ptr, char *ptr1, char *str, t_map_ *data)
+void	free_check_data(char *ptr, char *ptr1, char *str)
 {
 	free(ptr);
 	free(ptr1);
 	free(str);
-	free(data);
-	exit(1);
 }
 
 /* --------------------------------------------------------------- */
@@ -67,7 +65,10 @@ int	check_map(char *str, t_map_ *data, int i)
 	if (data->map_d.map_hight > 0 && ft_strlen(ptr) != 0)
 	{
 		if (check_map_error(ptr1, data))
-			free_check_data(ptr, ptr1, str, data);
+		{
+			free_check_data(ptr, ptr1, str);
+			free_all(data, "error!! invalid map");
+		}
 	}
 	if ((int)ft_strlen(ptr1) > data->map_d.map_width)
 		data->map_d.map_width = ft_strlen(ptr1);

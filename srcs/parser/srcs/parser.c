@@ -6,91 +6,11 @@
 /*   By: rel-fagr <rel-fagr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/18 11:00:48 by rel-fagr          #+#    #+#             */
-/*   Updated: 2022/09/26 17:38:26 by rel-fagr         ###   ########.fr       */
+/*   Updated: 2022/09/29 00:05:27 by rel-fagr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../parser.h"
-
-void	check_door1(t_map_ *data, int i, int j)
-{
-	if (data->map_d.map[i][j + 1] == '1' && data->map_d.map[i][j - 1] == '1')
-		data->map_d.map[i][j] = 'B';
-	if (data->map_d.map[i + 1][j] == '1' && data->map_d.map[i - 1][j] == '1')
-		data->map_d.map[i][j] = 'B';
-}
-
-void	check_door_around(t_map_ *data, int i, int j)
-{
-	int	count;
-
-	count = 0;
-	if (data->map_d.map[i][j + 1] == '1')
-		count++;
-	if (data->map_d.map[i][j - 1] == '1')
-		count++;
-	if (data->map_d.map[i + 1][j] == '1')
-		count++;
-	if (data->map_d.map[i - 1][j] == '1')
-		count++;
-	if (count >= 3)
-		data->map_d.map[i][j] = '0';
-}
-
-void	check_multi_doors(t_map_ *data, int i, int j)
-{
-	int	i1;
-	int	j1;
-
-	i1 = i;
-	j1 = j + 1;
-	check_door_around(data, i, j);
-	while(data->map_d.map[i1][j1])
-	{
-		if ((data->map_d.map[i1][j1] == 'B' && data->map_d.map[i1][j1 + 1] == 'B') || \
-			(data->map_d.map[i1][j1] == 'B' && data->map_d.map[i1][j1 + 1] == '1'))
-			data->map_d.map[i1][j1] = '0';
-		else if ((data->map_d.map[i1][j1] == 'B' && data->map_d.map[i1][j1 - 1] == 'B'))
-			data->map_d.map[i1][j1] = '0';
-		else
-			break ;
-		j1++;
-	}
-	i1 = i + 1;
-	j1 = j;
-	while(data->map_d.map[i1][j1])
-	{
-		if ((data->map_d.map[i1][j1] == 'B' && data->map_d.map[i1 + 1][j1] == 'B') || \
-			(data->map_d.map[i1][j1] == 'B' && data->map_d.map[i1 + 1][j1] == '1'))
-			data->map_d.map[i1][j1] = '0';
-		else if ((data->map_d.map[i1][j1] == 'B' && data->map_d.map[i1 - 1][j1] == 'B'))
-			data->map_d.map[i1][j1] = '0';
-		else
-			break ;
-		i1++;
-	}
-}
-
-void	check_door2(t_map_ *data)
-{
-	int		i;
-	int		j;
-	char	c;
-	i = 0;
-	while(data->map_d.map[i])
-	{
-		j = 0;
-		while (data->map_d.map[i][j])
-		{
-			c = data->map_d.map[i][j];
-			if (c == 'B')
-				check_multi_doors(data, i, j);
-			j++;
-		}
-		i++;
-	}
-	
-}
 
 /* --------------------------------------------------------------- */
 
@@ -105,14 +25,14 @@ void	check_valid_line(t_map_ *data)
 	{
 		j = 0;
 		if (check_empty_line(data, i))
-			free_garbage(data, "error!! empty line");
+			free_all(data, "error!! empty line");
 		while (data->map_d.map[i][j])
 		{
 			c = data->map_d.map[i][j];
 			if (c == '0' || c == 'W' || c == 'E' || c == 'N' || c == 'S')
 				if (check_left_right(data->map_d.map[i], j) || \
 					check_up_down(data, i, j))
-					free_garbage(data, "error!! unclosed map");
+					free_all(data, "error!! empty line");
 			if (c == '0')
 				check_door1(data, i, j);
 			j++;
@@ -127,11 +47,7 @@ void	check_text_col_data(t_map_ *data)
 {
 	if (data->no_t == NULL || data->so_t == NULL || data->ea_t == NULL || \
 		data->we_t == NULL || data->ceil_color == -1 || data->floor_color == -1)
-	{
-		printf("error!! bad map arg\n");
-		free(data);
-		exit (1);
-	}
+		free_all(data, "error!! bad map arg");
 }
 
 /* --------------------------------------------------------------- */
@@ -160,7 +76,7 @@ int	ft_check_map(t_map_	*data)
 	}
 	free(str);
 	if (data->map_d.count_player == 0 || data->map_d.count_player > 1)
-		return (write(1, "error!! bad player number\n", 26), 1);
+		free_all(data, "error!! bad player number");
 	return (0);
 }
 
@@ -199,5 +115,6 @@ int	parser(char **argv, t_map_ *data)
 	creat_map_array(data, argv);
 	check_valid_line(data);
 	virtual_wall(data);
+	system("leaks cub3D");
 	return (0);
 }
