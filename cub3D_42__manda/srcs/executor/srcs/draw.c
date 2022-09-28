@@ -6,39 +6,11 @@
 /*   By: sahafid <sahafid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 14:48:25 by sahafid           #+#    #+#             */
-/*   Updated: 2022/09/28 17:22:43 by sahafid          ###   ########.fr       */
+/*   Updated: 2022/09/28 20:53:59 by sahafid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../executor.h"
-
-void	my_mlx_pixel_put(t_graph *lst, int x, int y, int color)
-{
-	char	*test;
-
-	if ((x >= 0 && x < lst->map.width) && (y >= 0 && y < lst->map.height))
-	{
-		test = &lst->map.addr[(y * lst->map.size_line) + (x * lst->map.bpp / 8)];
-		*(unsigned int *)test = color;
-	}
-}
-
-void	draw_cub1(int x, int y, int x1, int y1, t_graph *lst, int i)
-{
-	int	j;
-
-	j = x;
-	while (y < y1)
-	{
-		while (j <= x1)
-		{
-			my_mlx_pixel_put(lst, j, y, i);
-			j++;
-		}
-		j = x;
-		y++;
-	}
-}
 
 void	rotate_player(t_graph *lst)
 {
@@ -69,11 +41,4 @@ void	player_movement(t_graph *lst)
 		return ;
 	lst->plyr.x_plyr = save1;
 	lst->plyr.y_plyr = save2;
-}
-
-void	draw_walls(t_graph *lst)
-{
-	rotate_player(lst);
-	player_movement(lst);
-	cast_rays(lst);
 }

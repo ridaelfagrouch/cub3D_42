@@ -6,11 +6,32 @@
 /*   By: sahafid <sahafid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 18:25:36 by sahafid           #+#    #+#             */
-/*   Updated: 2022/09/28 16:42:19 by sahafid          ###   ########.fr       */
+/*   Updated: 2022/09/28 20:59:23 by sahafid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../executor.h"
+
+void	searchforverticalinter(t_graph *lst, int check)
+{
+	while ((lst->raycast.xinter_ve > 0 && lst->raycast.xinter_ve < \
+	lst->x * lst->map.unit) && (lst->raycast.yinter_ve > 0 && \
+	lst->raycast.yinter_ve < lst->y * lst->map.unit))
+	{
+		if (checkwall(lst, lst->raycast.xinter_ve - check, \
+		lst->raycast.yinter_ve))
+		{
+			lst->raycast.vertic_intersaction = 1;
+			return ;
+		}
+		else
+		{
+			lst->raycast.xinter_ve += lst->raycast.xstep;
+			lst->raycast.yinter_ve += lst->raycast.ystep;
+		}
+	}
+	lst->raycast.vertic_intersaction = 0;
+}
 
 void	vertical_intersaction(t_graph *lst)
 {
@@ -34,21 +55,5 @@ void	vertical_intersaction(t_graph *lst)
 		lst->raycast.ystep *= -1;
 	if (lst->raycast.facingleft)
 		check = 1;
-	while ((lst->raycast.xinter_ve > 0 && lst->raycast.xinter_ve < \
-	lst->map.width * lst->map.unit) && (lst->raycast.yinter_ve > 0 && \
-	lst->raycast.yinter_ve < lst->map.height * lst->map.unit))
-	{
-		if (checkwall(lst, lst->raycast.xinter_ve - check, \
-		lst->raycast.yinter_ve))
-		{
-			lst->raycast.vertic_intersaction = 1;
-			return ;
-		}
-		else
-		{
-			lst->raycast.xinter_ve += lst->raycast.xstep;
-			lst->raycast.yinter_ve += lst->raycast.ystep;
-		}
-	}
-	lst->raycast.vertic_intersaction = 0;
+	searchforverticalinter(lst, check);
 }

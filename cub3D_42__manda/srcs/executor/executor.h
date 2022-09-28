@@ -6,7 +6,7 @@
 /*   By: sahafid <sahafid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 15:08:46 by sahafid           #+#    #+#             */
-/*   Updated: 2022/09/28 17:51:12 by sahafid          ###   ########.fr       */
+/*   Updated: 2022/09/28 21:17:05 by sahafid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,13 +131,12 @@ void	init_texture(t_graph *lst, t_map_ *data);
 
 /* --------------------------------- RAYCAST ----------------------------- */
 
-
 void	cast_rays(t_graph *lst);
 void	normilizeangle(double *ray_angle);
 void	vertical_intersaction(t_graph *lst);
 void	horizantal_intersaction(t_graph *lst);
 void	checking_where_plyr_facing(t_graph *lst);
-double	calculate_intersactions(t_graph *lst);
+int		calculate_intersactions(t_graph *lst);
 double	distance_points(double x1, double x2, double y1, double y2);
 
 /* --------------------------------- DRAWING ----------------------------- */
@@ -146,8 +145,8 @@ void	my_mlx_pixel_put(t_graph *lst, int x, int y, int color);
 void	draw_cub(int x, int y, int x1, int y1, t_graph *lst, int i);
 void	draw_floor_ceilling(t_graph *lst);
 void	draw_walls(t_graph *lst);
-void	draw_cub1(int x, int y, int x1, int y1, t_graph *lst, int i);
-void	draw_rect(int x, int y, int y1, t_graph *lst, int i);
+void	draw_cub1(int y, int y1, t_graph *lst, int i);
+void	draw_rect(int x, int y, int y1, t_graph *lst);
 
 /* --------------------------------- MAP ----------------------------- */
 
@@ -162,5 +161,8 @@ void	get_widthheight(t_graph *lst, int *width, int *height, int i);
 int		get_texture(t_graph *lst, int y, int x, int i);
 
 /* --------------------------------- PROTOTYPES ----------------------------- */
+
+void	rotate_player(t_graph *lst);
+void	player_movement(t_graph *lst);
 
 #endif

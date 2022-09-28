@@ -6,7 +6,7 @@
 /*   By: sahafid <sahafid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 12:28:46 by sahafid           #+#    #+#             */
-/*   Updated: 2022/09/28 16:52:19 by sahafid          ###   ########.fr       */
+/*   Updated: 2022/09/28 21:04:15 by sahafid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,18 +85,16 @@ void	get_widthheight(t_graph *lst, int *width, int *height, int i)
 			*height = lst->texture.heightS;
 			*width = lst->texture.widthS;
 		}
+		return ;
+	}
+	if (lst->raycast.facingright)
+	{
+		*height = lst->texture.heightE;
+		*width = lst->texture.widthE;
 	}
 	else
 	{
-		if (lst->raycast.facingright)
-		{
-			*height = lst->texture.heightE;
-			*width = lst->texture.widthE;
-		}
-		else
-		{
-			*height = lst->texture.heightW;
-			*width = lst->texture.widthW;
-		}
+		*height = lst->texture.heightW;
+		*width = lst->texture.widthW;
 	}
 }

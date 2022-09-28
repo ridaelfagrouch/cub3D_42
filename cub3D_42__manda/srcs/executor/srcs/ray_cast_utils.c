@@ -6,7 +6,7 @@
 /*   By: sahafid <sahafid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 18:27:30 by sahafid           #+#    #+#             */
-/*   Updated: 2022/09/28 16:10:56 by sahafid          ###   ########.fr       */
+/*   Updated: 2022/09/28 20:43:00 by sahafid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ double	distance_points(double x1, double x2, double y1, double y2)
 	return (square_root);
 }
 
-double	calculate_intersactions(t_graph *lst)
+int	calculate_intersactions(t_graph *lst)
 {
 	double	distance_ho;
 	double	distance_ve;

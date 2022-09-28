@@ -154,7 +154,7 @@ typedef struct s_graph
 /* --------------------------------- PARSING ------------------------------- */
 
 int		deal_key(int key, t_graph *var);
-int		check_wall_movement(t_graph *lst, int x, int y, int x1, int y1);
+int		checkwallmovement(t_graph *lst, int x, int y);
 int		check_wall(t_graph *lst, int x, int y);
 void    checkcollectible(t_graph *lst);
 
@@ -184,7 +184,7 @@ void   	draw_cub(int x, int y, int x1, int y1, t_graph *lst, int i);
 void	draw_floor_ceilling(t_graph *lst);
 void	draw_walls(t_graph *lst);
 void	drawline(double x0, double y0, int x1, int y1, t_graph *lst, int j);
-void   	draw_cub1(int x, int y, int x1, int y1, t_graph *lst, int i);
+void   	draw_cub1(int y, int y1, t_graph *lst, int i);
 void    draw_rect(int x, int y, int x1, int y1, t_graph *lst, int i, double wallheight);
 
 /* --------------------------------- MAP ----------------------------- */
@@ -213,5 +213,14 @@ void    new_x_y(int *new_x, int *new_y, int j, int y, t_graph *lst);
 int	calculate_intersactions_door(t_graph *lst);
 double	get_x_of_texture_doors(t_graph *lst, int i, int width);
 int	get_texture_door(t_graph *lst, int y, int x);
+
+
+
+void    draw_walls(t_graph *lst);
+void    draw_map(char	**map, t_graph *lst);
+void    rotate_player(t_graph *lst);
+void    player_movement(t_graph *lst);
+void    draw_minimap_border(t_graph *lst);
+void    draw_player(t_graph *lst);
 
 #endif

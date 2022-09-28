@@ -6,20 +6,41 @@
 /*   By: sahafid <sahafid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 18:30:13 by sahafid           #+#    #+#             */
-/*   Updated: 2022/09/28 17:52:34 by sahafid          ###   ########.fr       */
+/*   Updated: 2022/09/28 20:59:37 by sahafid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../executor.h"
 
-void	horizantal_intersaction(t_graph *lst)
+void	searchingforhorizantalinter(t_graph *lst, int check)
 {
-	int		check;
 	double	mapx;
 	double	mapy;
 
 	mapx = lst->x * lst->map.unit;
 	mapy = lst->y * lst->map.unit;
+	while ((lst->raycast.xinter_ho >= 0 && lst->raycast.xinter_ho <= mapx) \
+	&& (lst->raycast.yinter_ho >= 0 && lst->raycast.yinter_ho <= mapy))
+	{
+		if (checkwall(lst, lst->raycast.xinter_ho, \
+		lst->raycast.yinter_ho - check))
+		{
+			lst->raycast.horiz_intersaction = 1;
+			return ;
+		}
+		else
+		{
+			lst->raycast.xinter_ho += lst->raycast.xstep;
+			lst->raycast.yinter_ho += lst->raycast.ystep;
+		}
+	}
+	lst->raycast.horiz_intersaction = 0;
+}
+
+void	horizantal_intersaction(t_graph *lst)
+{
+	int		check;
+
 	check = 0;
 	lst->raycast.horiz_intersaction = 0;
 	lst->raycast.yinter_ho = floor(lst->plyr.y_plyr / lst->map.unit) \
@@ -39,20 +60,5 @@ void	horizantal_intersaction(t_graph *lst)
 		lst->raycast.xstep *= -1;
 	if (lst->raycast.facingup)
 		check = 1;
-	while ((lst->raycast.xinter_ho >= 0 && lst->raycast.xinter_ho <= mapx) \
-	&& (lst->raycast.yinter_ho >= 0 && lst->raycast.yinter_ho <= mapy))
-	{
-		if (checkwall(lst, lst->raycast.xinter_ho, \
-		lst->raycast.yinter_ho - check))
-		{
-			lst->raycast.horiz_intersaction = 1;
-			return ;
-		}
-		else
-		{
-			lst->raycast.xinter_ho += lst->raycast.xstep;
-			lst->raycast.yinter_ho += lst->raycast.ystep;
-		}
-	}
-	lst->raycast.horiz_intersaction = 0;
+	searchingforhorizantalinter(lst, check);
 }
