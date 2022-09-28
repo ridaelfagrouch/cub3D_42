@@ -6,7 +6,7 @@
 /*   By: rel-fagr <rel-fagr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/15 17:23:51 by bavos             #+#    #+#             */
-/*   Updated: 2022/09/29 00:17:42 by rel-fagr         ###   ########.fr       */
+/*   Updated: 2022/09/29 00:23:53 by rel-fagr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,12 @@ int	main(int argc, char **argv)
 		if (parser(argv, data))
 			return (free(data), 0);
 		executor(data);
+		free(data->ea_t);
+		free(data->no_t);
+		free(data->so_t);
+		free(data->we_t);
+		free_matrice(data->map_d.map);
+		free(data);
 	}
 	else
 		free_all(data, "bad arg number!!");

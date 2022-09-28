@@ -4,6 +4,7 @@
     "files.associations": {
         "executor.h": "c",
         "iterator": "c",
+<<<<<<< HEAD
         "array": "c",
         "string": "c",
         "string_view": "c",
@@ -13,5 +14,8 @@
         "bitset": "c",
         "chrono": "c",
         "unordered_map": "c"
+=======
+        "ios": "c"
+>>>>>>> 2c42c291a24dbcdd0e33349b38afe494e353757a
     }
 }

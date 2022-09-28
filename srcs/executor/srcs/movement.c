@@ -121,27 +121,26 @@ int	check_sprite(t_graph *lst, int x, int y)
 	return (0);
 }
 
-int	check_wall_movement(t_graph *lst, int x, int y, int x1, int y1)
+int	checkwallmovement(t_graph *lst, int x, int y)
 {
-	int	posPx;
-	int	posPy;
-	int	posDx;
-	int	posDy;
+	int	pospx;
+	int	pospy;
+	int	posdx;
+	int	posdy;
 
-	posPx = x / lst->map.unit;
-	posPy = y / lst->map.unit;
-	posDx = x1 / lst->map.unit;
-	posDy = y1 / lst->map.unit;
-
-	if ((posPx >= 0 && posPx <= lst->x) && (posPy >= 0 && posPy <= lst->y))
+	pospx = lst->plyr.x_plyr / lst->map.unit;
+	pospy = lst->plyr.y_plyr / lst->map.unit;
+	posdx = x / lst->map.unit;
+	posdy = y / lst->map.unit;
+	if ((posdx >= 0 && posdx <= lst->x) && (posdy >= 0 && posdy <= lst->y))
 	{
-		if (lst->map.map[posPy][posPx] == '1' || \
-			lst->map.map[posPy][posPx] == ' ')
+		if (lst->map.map[posdy][posdx] == '1' || \
+			lst->map.map[posdy][posdx] == ' ')
 			return (1);
-		if (!((posPx == posDx) && (posPy == posDy)))
+		if (!((pospx == posdx) && (pospy == posdy)))
 		{
-			if (lst->map.map[posPy][posPx] == 'V' && \
-				lst->map.map[posDy][posDx] == 'V')
+			if (lst->map.map[pospy][pospx] == 'V' && \
+				lst->map.map[posdy][posdx] == 'V')
 				return (1);
 		}
 	}

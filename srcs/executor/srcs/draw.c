@@ -6,7 +6,7 @@
 /*   By: sahafid <sahafid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 14:48:25 by sahafid           #+#    #+#             */
-/*   Updated: 2022/09/28 15:07:59 by sahafid          ###   ########.fr       */
+/*   Updated: 2022/09/29 00:20:57 by sahafid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,34 +22,6 @@ void    my_mlx_pixel_put(t_graph   *lst, int x, int y, int color)
         test = &lst->map.addr[(y * lst->map.size_line) + (x * lst->map.bpp / 8)];
 	    *(unsigned int*)test = color;   
     }
-}
-
-void drawline(double x0, double y0, int x1, int y1, t_graph *lst, int j)
-{
-    double 	dx;
-	double	dy;
-	int	    steps;
-	double	x;
-	double	y;
-	int		i;
-
-	dx = x1 - x0;
-	dy = y1 - y0;
-	i = 0;
-    steps = 0;
-    if (fabs(dx) > fabs(dy))
-		steps = fabs(dx);
-	else
-		steps = fabs(dy);
-	x = dx / steps;
-	y = dy / steps;
-	while (i < steps)
-	{
-        my_mlx_pixel_put(lst , x0, y0, j);
-		x0 = x0 + x;
-		y0 = y0 + y;
-		i++;
-	}
 }
 
 void    new_x_y(int *new_x, int *new_y, int j, int y, t_graph *lst)
@@ -79,21 +51,32 @@ void    draw_cub(int x, int y, int x1, int y1, t_graph *lst, int i)
     }
 }
 
-void    draw_cub1(int x, int y, int x1, int y1, t_graph *lst, int i)
+void drawline(double x0, double y0, int x1, int y1, t_graph *lst, int j)
 {
-	int	j;
+    double 	dx;
+	double	dy;
+	int	    steps;
+	double	x;
+	double	y;
+	int		i;
 
-	j = x;
-	while (y < y1)
-    {
-        while (j <= x1)
-		{
-            my_mlx_pixel_put(lst ,j, y, i);
-			j++;
-		}
-		j = x;
-        y++;
-    }
+	dx = x1 - x0;
+	dy = y1 - y0;
+	i = 0;
+    steps = 0;
+    if (fabs(dx) > fabs(dy))
+		steps = fabs(dx);
+	else
+		steps = fabs(dy);
+	x = dx / steps;
+	y = dy / steps;
+	while (i < steps)
+	{
+        my_mlx_pixel_put(lst , x0, y0, j);
+		x0 = x0 + x;
+		y0 = y0 + y;
+		i++;
+	}
 }
 
 void    draw_player(t_graph *lst)
@@ -136,70 +119,15 @@ void    player_movement(t_graph *lst)
 	step = lst->plyr.walkdirection * lst->plyr.speed;
 	save1 = lst->plyr.x_plyr + (step * cos(lst->plyr.rotationangle));
 	save2 = lst->plyr.y_plyr + (step * sin(lst->plyr.rotationangle));
-	if (check_wall_movement(lst, save1, save2, lst->plyr.x_plyr, lst->plyr.y_plyr))
+	if (checkwallmovement(lst, save1, save2))
 		return ;
 	lst->plyr.x_plyr = save1;
 	lst->plyr.y_plyr = save2;
-
-
 	step = lst->plyr.walkdirectionleftright * lst->plyr.speed;
 	save1 = lst->plyr.x_plyr + (step * sin(lst->plyr.rotationangle));
 	save2 = lst->plyr.y_plyr - (step * cos(lst->plyr.rotationangle));
-	if (check_wall_movement(lst, save1, save2, lst->plyr.x_plyr, lst->plyr.y_plyr))
+	if (checkwallmovement(lst, save1, save2))
 		return ;
 	lst->plyr.x_plyr = save1;
 	lst->plyr.y_plyr = save2;
-}
-
-void    draw_walls(t_graph *lst)
-{
-    rotate_player(lst);
-    player_movement(lst);
-    checkcollectible(lst);
-    cast_rays(lst);
-    draw_minimap_border(lst);
-    draw_map(lst->map.map, lst);
-    draw_player(lst);
-}
-
-void    draw_map(char	**map, t_graph *lst)
-{
-    int	i;
-    int j;
-    int x;
-    int y;
-
-	i = 0;
-    j = 0;
-    x = 0;
-	y = 0;
-	lst->x1 = lst->map.unit;
-	lst->y1 = lst->map.unit;
-	while (map[i])
-    {
-        while (map[i][j])
-        {
-            if (map[i][j] == '0' || map[i][j] == 'V')
-                draw_cub(x, y, lst->x1, lst->y1, lst, lst->map.floor_color);
-            else if (map[i][j] == '1')
-				draw_cub(x, y, lst->x1, lst->y1, lst, 0);
-            else if (map[i][j] == 'S' || map[i][j] == 'W' || map[i][j] == 'N' || map[i][j] == 'E')
-                draw_cub(x, y, lst->x1, lst->y1, lst, lst->map.floor_color);
-            else if (map[i][j] == 'C')
-                draw_cub(x, y, lst->x1, lst->y1, lst, 0xFFFF00);
-            else if (map[i][j] == 'B')
-                draw_cub(x, y, lst->x1, lst->y1, lst, 0xCD853F);
-            else
-                draw_cub(x, y, lst->x1, lst->y1, lst, 0x2F4F4F);
-            x += lst->map.unit;
-            lst->x1 += lst->map.unit;
-            j++;
-        }
-        x = 0;
-        y += lst->map.unit;
-        lst->y1 += lst->map.unit;
-        lst->x1 = lst->map.unit;
-        j = 0;
-        i++;
-    }
 }

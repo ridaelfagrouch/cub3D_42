@@ -6,7 +6,7 @@
 /*   By: sahafid <sahafid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 19:31:21 by sahafid           #+#    #+#             */
-/*   Updated: 2022/09/26 16:27:37 by sahafid          ###   ########.fr       */
+/*   Updated: 2022/09/28 23:44:22 by sahafid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,5 +21,4 @@ void    checkcollectible(t_graph *lst)
     posy = lst->plyr.y_plyr / lst->map.unit;
     if (lst->map.map[posy][posx] == 'C')
         lst->map.map[posy][posx] = '0';
-    
 }

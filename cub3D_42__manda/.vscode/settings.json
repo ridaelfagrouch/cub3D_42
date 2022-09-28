@@ -1,0 +1,8 @@
+{
+    "makefile.extensionOutputFolder": "./.vscode",
+    "editor.insertSpaces": false,
+    "files.associations": {
+        "executor.h": "c",
+        "iterator": "c"
+    }
+}
