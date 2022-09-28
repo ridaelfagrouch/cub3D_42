@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: sahafid <sahafid@student.42.fr>            +#+  +:+       +#+         #
+#    By: rel-fagr <rel-fagr@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/21 18:47:15 by rel-fagr          #+#    #+#              #
-#    Updated: 2022/09/27 12:25:25 by sahafid          ###   ########.fr        #
+#    Updated: 2022/09/27 22:15:11 by rel-fagr         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,8 +38,9 @@ export TITLE
 
 # ---------------------------------------------------------------------------- #
 CC			:= gcc
-CC_FLAGS	:= -Wall -Wextra -Werror -static-libsan -fsanitize=address -lm
+CC_FLAGS	:= -Wall -Wextra -Werror -lm -static-libsan -fsanitize=address 
 # -fno-signed-zeros -mtune=intel -Ofast -march=native -fno-trapping-math
+
 NAME		:= cub3D
 MAIN		:= cub3d.c
 HEADER		:= cub3d.h
