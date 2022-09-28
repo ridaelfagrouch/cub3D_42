@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rel-fagr <rel-fagr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sahafid <sahafid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 14:48:25 by sahafid           #+#    #+#             */
-/*   Updated: 2022/09/27 17:39:12 by rel-fagr         ###   ########.fr       */
+/*   Updated: 2022/09/28 15:04:03 by sahafid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,59 +126,28 @@ void    rotate_player(t_graph *lst)
 }
 
 
-void    turningleftright(t_graph *lst, int direction)
-{
-    double	newangle;
-    int		save1;
-    int		save2;
-
-	if (direction == 0)
-	{
-		newangle = lst->plyr.rotationangle + M_PI / 2;
-		normilizeAngle(&newangle);
-		save1 = lst->plyr.x_plyr + (lst->plyr.speed * cos(newangle));
-		save2 = lst->plyr.y_plyr + (lst->plyr.speed * sin(newangle));
-	}
-	else
-	{
-		newangle = lst->plyr.rotationangle - M_PI / 2;
-		normilizeAngle(&newangle);
-		save1 = lst->plyr.x_plyr + (lst->plyr.speed * cos(newangle));
-		save2 = lst->plyr.y_plyr + (lst->plyr.speed * sin(newangle));
-	}
-    if (check_wall_movement(lst, save1, save2, lst->plyr.x_plyr, lst->plyr.y_plyr))
-			return ;
-	lst->plyr.x_plyr = save1;
-	lst->plyr.y_plyr = save2;
-}
-
 void    player_movement(t_graph *lst)
 {
     double save1;
     double save2;
+	double step;
     
-    if (lst->plyr.walkdirection == -1)
-    {
-        save1 = lst->plyr.x_plyr - (lst->plyr.speed * cos(lst->plyr.rotationangle));
-		save2 = lst->plyr.y_plyr - (lst->plyr.speed * sin(lst->plyr.rotationangle));
-		if (check_wall_movement(lst, save1, save2, lst->plyr.x_plyr, lst->plyr.y_plyr))
-		    return ;
-		lst->plyr.x_plyr = save1;
-		lst->plyr.y_plyr = save2;
-    }
-    if (lst->plyr.walkdirection == 1)
-    {
-        save1 = lst->plyr.x_plyr + (lst->plyr.speed * cos(lst->plyr.rotationangle));
-		save2 = lst->plyr.y_plyr + (lst->plyr.speed * sin(lst->plyr.rotationangle));
-		if (check_wall_movement(lst, save1, save2, lst->plyr.x_plyr, lst->plyr.y_plyr))
-			return ;
-		lst->plyr.x_plyr = save1;
-		lst->plyr.y_plyr = save2;
-    }
-    if (lst->plyr.walkdirectionleftright == 1)
-        turningleftright(lst, 0);
-    if (lst->plyr.walkdirectionleftright == -1)
-        turningleftright(lst, 1);
+	step = lst->plyr.walkdirection * lst->plyr.speed;
+	save1 = lst->plyr.x_plyr + (step * cos(lst->plyr.rotationangle));
+	save2 = lst->plyr.y_plyr + (step * sin(lst->plyr.rotationangle));
+	if (check_wall_movement(lst, save1, save2, lst->plyr.x_plyr, lst->plyr.y_plyr))
+		return ;
+	lst->plyr.x_plyr = save1;
+	lst->plyr.y_plyr = save2;
+
+
+	step = lst->plyr.walkdirectionleftright * lst->plyr.speed;
+	save1 = lst->plyr.x_plyr + (step * sin(lst->plyr.rotationangle));
+	save2 = lst->plyr.y_plyr - (step * cos(lst->plyr.rotationangle));
+	if (check_wall_movement(lst, save1, save2, lst->plyr.x_plyr, lst->plyr.y_plyr))
+		return ;
+	lst->plyr.x_plyr = save1;
+	lst->plyr.y_plyr = save2;
 }
 
 void    draw_walls(t_graph *lst)

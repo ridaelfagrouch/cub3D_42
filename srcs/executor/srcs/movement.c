@@ -159,9 +159,9 @@ int	deal_key(int key, t_graph *var)
 	if (key == 1)
 		var->plyr.walkdirection = -1;
 	if (key == 2)
-		var->plyr.walkdirectionleftright = 1;
-	if (key == 0)
 		var->plyr.walkdirectionleftright = -1;
+	if (key == 0)
+		var->plyr.walkdirectionleftright = 1;
 	if (key == 53)
 		exit(0);
 	return (0);
