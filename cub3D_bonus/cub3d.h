@@ -6,14 +6,14 @@
 /*   By: rel-fagr <rel-fagr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 18:55:26 by rel-fagr          #+#    #+#             */
-/*   Updated: 2022/09/29 13:21:19 by rel-fagr         ###   ########.fr       */
+/*   Updated: 2022/09/28 21:50:46 by rel-fagr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
 
-# include "../libft/libft.h"
+# include "libft/libft.h"
 # include "mlx.h"
 # include <unistd.h>
 # include <fcntl.h>

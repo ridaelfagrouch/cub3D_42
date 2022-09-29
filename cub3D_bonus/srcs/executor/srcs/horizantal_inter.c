@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   horizantal_inter.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rel-fagr <rel-fagr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sahafid <sahafid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 18:30:13 by sahafid           #+#    #+#             */
-/*   Updated: 2022/09/27 17:39:24 by rel-fagr         ###   ########.fr       */
+/*   Updated: 2022/09/29 13:42:26 by sahafid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	horizantal_intersaction(t_graph *lst)
 {
-	int check;
+	int	check;
 	int	sprite;
 	int	door;
 
@@ -24,10 +24,12 @@ void	horizantal_intersaction(t_graph *lst)
 	lst->sprite.horiz_intersaction = 0;
 	lst->door.horiz_intersaction = 0;
 	lst->raycast.horiz_intersaction = 0;
-	lst->raycast.yintercept_horiz = floor(lst->plyr.y_plyr / lst->map.unit) * lst->map.unit;
+	lst->raycast.yinter_ho = floor(lst->plyr.y_plyr / lst->map.unit) \
+	* lst->map.unit;
 	if (lst->raycast.facingdown)
-		lst->raycast.yintercept_horiz += lst->map.unit;
-	lst->raycast.xintercept_horiz = lst->plyr.x_plyr + (lst->raycast.yintercept_horiz - lst->plyr.y_plyr) / tan(lst->raycast.ray_angle);
+		lst->raycast.yinter_ho += lst->map.unit;
+	lst->raycast.xinter_ho = lst->plyr.x_plyr + (lst->raycast.yinter_ho - \
+	lst->plyr.y_plyr) / tan(lst->raycast.ray_angle);
 	lst->raycast.ystep = lst->map.unit;
 	if (lst->raycast.facingup)
 		lst->raycast.ystep *= -1;
@@ -38,36 +40,41 @@ void	horizantal_intersaction(t_graph *lst)
 		lst->raycast.xstep *= -1;
 	if (lst->raycast.facingup)
 		check = 1;
-	while ((lst->raycast.xintercept_horiz >= 0 && lst->raycast.xintercept_horiz <= lst->map.width * lst->map.unit) && (lst->raycast.yintercept_horiz >= 0 && lst->raycast.yintercept_horiz <= lst->map.height * lst->map.unit))
+	while ((lst->raycast.xinter_ho >= 0 && lst->raycast.xinter_ho <= \
+	lst->map.width * lst->map.unit) && (lst->raycast.yinter_ho >= 0 && \
+	lst->raycast.yinter_ho <= lst->map.height * lst->map.unit))
 	{
-		if (check_wall(lst, lst->raycast.xintercept_horiz, lst->raycast.yintercept_horiz - check))
+		if (check_wall(lst, lst->raycast.xinter_ho, lst->raycast.yinter_ho \
+		- check))
 		{
 			lst->raycast.horiz_intersaction = 1;
 			return ;
 		}
-		else if ((check_sprite(lst, lst->raycast.xintercept_horiz, lst->raycast.yintercept_horiz - check) == 1 && sprite == 1) && door == 1)
+		else if ((check_sprite(lst, lst->raycast.xinter_ho, \
+		lst->raycast.yinter_ho - check) == 1 && sprite == 1) && door == 1)
 		{
 			sprite = 0;
 			lst->sprite.horiz_intersaction = 1;
 			lst->sprite.spritefoundhorz = 1;
-			lst->sprite.xintercept_horiz = lst->raycast.xintercept_horiz;
-			lst->sprite.yintercept_horiz = lst->raycast.yintercept_horiz;
-			lst->raycast.xintercept_horiz += lst->raycast.xstep;
-			lst->raycast.yintercept_horiz += lst->raycast.ystep;
+			lst->sprite.xinter_ho = lst->raycast.xinter_ho;
+			lst->sprite.yinter_ho = lst->raycast.yinter_ho;
+			lst->raycast.xinter_ho += lst->raycast.xstep;
+			lst->raycast.yinter_ho += lst->raycast.ystep;
 		}
-		else if (check_sprite(lst, lst->raycast.xintercept_horiz, lst->raycast.yintercept_horiz - check) == 2 && door == 1)
+		else if (check_sprite(lst, lst->raycast.xinter_ho, \
+		lst->raycast.yinter_ho - check) == 2 && door == 1)
 		{
 			door = 0;
 			lst->door.horiz_intersaction = 1;
-			lst->door.xintercept_horiz = lst->raycast.xintercept_horiz;
-			lst->door.yintercept_horiz = lst->raycast.yintercept_horiz;
-			lst->raycast.xintercept_horiz += lst->raycast.xstep;
-			lst->raycast.yintercept_horiz += lst->raycast.ystep;
+			lst->door.xinter_ho = lst->raycast.xinter_ho;
+			lst->door.yinter_ho = lst->raycast.yinter_ho;
+			lst->raycast.xinter_ho += lst->raycast.xstep;
+			lst->raycast.yinter_ho += lst->raycast.ystep;
 		}
 		else
 		{
-			lst->raycast.xintercept_horiz += lst->raycast.xstep;
-			lst->raycast.yintercept_horiz += lst->raycast.ystep;
+			lst->raycast.xinter_ho += lst->raycast.xstep;
+			lst->raycast.yinter_ho += lst->raycast.ystep;
 		}
 	}
 	lst->raycast.horiz_intersaction = 0;

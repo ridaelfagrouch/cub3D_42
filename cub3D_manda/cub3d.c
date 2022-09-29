@@ -6,28 +6,11 @@
 /*   By: rel-fagr <rel-fagr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/15 17:23:51 by bavos             #+#    #+#             */
-/*   Updated: 2022/09/29 13:38:40 by rel-fagr         ###   ########.fr       */
+/*   Updated: 2022/09/27 17:40:36 by rel-fagr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-void	free_all(t_map_ *data, char *str)
-{
-	printf("%s\n", str);
-	if (data->ea_t != NULL)
-		free(data->ea_t);
-	if (data->no_t != NULL)
-		free(data->no_t);
-	if (data->so_t != NULL)
-		free(data->so_t);
-	if (data->we_t != NULL)
-		free(data->we_t);
-	if (data->map_d.map != NULL)
-		free_matrice(data->map_d.map);
-	free(data);
-	exit(1);
-}
 
 int	main(int argc, char **argv)
 {

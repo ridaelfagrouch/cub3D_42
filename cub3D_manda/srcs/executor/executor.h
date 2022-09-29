@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rel-fagr <rel-fagr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sahafid <sahafid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 15:08:46 by sahafid           #+#    #+#             */
-/*   Updated: 2022/09/29 01:06:20 by rel-fagr         ###   ########.fr       */
+/*   Updated: 2022/09/29 13:40:05 by sahafid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,26 +76,26 @@ typedef struct s_raycasting
 typedef struct s_texture
 {
 	void	*textureimgn;
-	int		*imgaddrN;
+	int		*imgaddrn;
 	void	*textureimgs;
-	int		*imgaddrS;
+	int		*imgaddrs;
 	void	*textureimge;
-	int		*imgaddrE;
+	int		*imgaddre;
 	void	*textureimgw;
-	int		*imgaddrW;
+	int		*imgaddrw;
 	int		bpp;
 	int		size_line;
 	int		endian;
 	int		width;
 	int		height;
-	int		widthN;
-	int		heightN;
-	int		widthS;
-	int		heightS;
-	int		widthW;
-	int		heightW;
-	int		widthE;
-	int		heightE;
+	int		widthn;
+	int		heightn;
+	int		widths;
+	int		heights;
+	int		widthw;
+	int		heightw;
+	int		widthe;
+	int		heighte;
 } t_texture;
 
 typedef struct s_graph

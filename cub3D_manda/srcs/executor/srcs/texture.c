@@ -6,7 +6,7 @@
 /*   By: sahafid <sahafid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 12:28:46 by sahafid           #+#    #+#             */
-/*   Updated: 2022/09/28 21:04:15 by sahafid          ###   ########.fr       */
+/*   Updated: 2022/09/29 13:40:05 by sahafid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,18 +37,18 @@ int	get_texture(t_graph *lst, int y, int x, int i)
 
 	color = 0;
 	direction = get_direction(lst, i);
-	if (direction == 'N' && (y >= 0 && y <= lst->texture.heightN) \
-		&& (x >= 0 && x <= lst->texture.widthN))
-		color = lst->texture.imgaddrN[(int)((y * lst->texture.widthN) + x)];
-	else if (direction == 'S' && (y >= 0 && y <= lst->texture.heightS) \
-		&& (x >= 0 && x <= lst->texture.widthS))
-		color = lst->texture.imgaddrS[(int)((y * lst->texture.widthS) + x)];
-	else if (direction == 'E' && (y >= 0 && y <= lst->texture.heightE) \
-		&& (x >= 0 && x <= lst->texture.widthE))
-		color = lst->texture.imgaddrE[(int)((y * lst->texture.widthE) + x)];
-	else if (direction == 'W' && (y >= 0 && y <= lst->texture.heightW) \
-		&& (x >= 0 && x <= lst->texture.widthW))
-		color = lst->texture.imgaddrW[(int)((y * lst->texture.widthW) + x)];
+	if (direction == 'N' && (y >= 0 && y <= lst->texture.heightn) \
+		&& (x >= 0 && x <= lst->texture.widthn))
+		color = lst->texture.imgaddrn[(int)((y * lst->texture.widthn) + x)];
+	else if (direction == 'S' && (y >= 0 && y <= lst->texture.heights) \
+		&& (x >= 0 && x <= lst->texture.widths))
+		color = lst->texture.imgaddrs[(int)((y * lst->texture.widths) + x)];
+	else if (direction == 'E' && (y >= 0 && y <= lst->texture.heighte) \
+		&& (x >= 0 && x <= lst->texture.widthe))
+		color = lst->texture.imgaddre[(int)((y * lst->texture.widthe) + x)];
+	else if (direction == 'W' && (y >= 0 && y <= lst->texture.heightw) \
+		&& (x >= 0 && x <= lst->texture.widthw))
+		color = lst->texture.imgaddrw[(int)((y * lst->texture.widthw) + x)];
 	return (color);
 }
 
@@ -77,24 +77,24 @@ void	get_widthheight(t_graph *lst, int *width, int *height, int i)
 	{
 		if (lst->raycast.facingup)
 		{
-			*height = lst->texture.heightN;
-			*width = lst->texture.widthN;
+			*height = lst->texture.heightn;
+			*width = lst->texture.widthn;
 		}
 		else
 		{
-			*height = lst->texture.heightS;
-			*width = lst->texture.widthS;
+			*height = lst->texture.heights;
+			*width = lst->texture.widths;
 		}
 		return ;
 	}
 	if (lst->raycast.facingright)
 	{
-		*height = lst->texture.heightE;
-		*width = lst->texture.widthE;
+		*height = lst->texture.heighte;
+		*width = lst->texture.widthe;
 	}
 	else
 	{
-		*height = lst->texture.heightW;
-		*width = lst->texture.widthW;
+		*height = lst->texture.heightw;
+		*width = lst->texture.widthw;
 	}
 }
