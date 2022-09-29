@@ -6,7 +6,7 @@
 #    By: sahafid <sahafid@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/22 13:34:55 by rel-fagr          #+#    #+#              #
-#    Updated: 2022/09/28 23:45:16 by sahafid          ###   ########.fr        #
+#    Updated: 2022/09/29 16:14:19 by sahafid          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,8 @@ CC_FLAGS	:= -Wall -Wextra -Werror
 
 SRCS_DIR := srcs/
 SRCS_LST := executor.c draw.c movement.c cast_ray.c vertical_inter.c ray_cast_utils.c \
-			horizantal_inter.c init.c draw_ceilling.c texture.c checkcollectible.c render.c
+			horizantal_inter.c init.c draw_ceilling.c texture.c checkcollectible.c render.c \
+			rendersprite.c renderdoor.c mouse.c init_textures.c minimap.c texture_utiles.c
 SRCS := ${addprefix ${SRCS_DIR}, ${SRCS_LST}}
 
 OBJS_DIR := objs/

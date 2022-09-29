@@ -6,14 +6,14 @@
 /*   By: rel-fagr <rel-fagr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 18:55:26 by rel-fagr          #+#    #+#             */
-/*   Updated: 2022/09/29 13:33:27 by rel-fagr         ###   ########.fr       */
+/*   Updated: 2022/09/23 17:25:55 by rel-fagr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
 
-# include "../libft/libft.h"
+# include "libft/libft.h"
 # include "mlx.h"
 # include <unistd.h>
 # include <fcntl.h>
@@ -56,6 +56,5 @@ typedef struct s_map_
 
 int		parser(char **argv, t_map_ *data);
 void	executor(t_map_ *data);
-void	free_all(t_map_ *data, char *str);
 
 #endif

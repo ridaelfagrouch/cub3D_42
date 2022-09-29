@@ -1,7 +1,17 @@
-
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   executor.h                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rel-fagr <rel-fagr@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/09/29 01:21:13 by sahafid           #+#    #+#             */
+/*   Updated: 2022/09/29 16:54:09 by rel-fagr         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #ifndef EXECUTOR_H
-#define EXECUTOR_H
+# define EXECUTOR_H
 
 /* ------------------------------- LIBRARIES -------------------------------- */
 
@@ -13,10 +23,10 @@
 
 typedef struct s_door
 {
-	double	xintercept_horiz;
-	double	yintercept_horiz;
-	double	xintercept_vertic;
-	double	yintercept_vertic;
+	double	xinter_ho;
+	double	yinter_ho;
+	double	xinter_ve;
+	double	yinter_ve;
 	int		horiz_intersaction;
 	int		vertic_intersaction;
 	int		foundoor;
@@ -37,7 +47,7 @@ typedef struct s_door
 	int		widthdoor4;
 	int		heightdoor4;
 	int		door_number;
-} t_door;
+}	t_door;
 
 typedef struct s_sprite
 {
@@ -46,15 +56,15 @@ typedef struct s_sprite
 	int		heightsprite;
 	void	*sprite;
 	int		*addrsprite;
-	double	xintercept_horiz;
-	double	yintercept_horiz;
-	double	xintercept_vertic;
-	double	yintercept_vertic;
+	double	xinter_ho;
+	double	yinter_ho;
+	double	xinter_ve;
+	double	yinter_ve;
 	int		horiz_intersaction;
 	int		vertic_intersaction;
 	int		spritefoundhorz;
 	int		spritefoundvert;
-} t_sprite;
+}	t_sprite;
 
 typedef struct s_map
 {
@@ -73,8 +83,7 @@ typedef struct s_map
 	char	*addr1;
 	int		height;
 	int		width;
-} t_map;
-
+}	t_map;
 
 typedef struct s_player
 {
@@ -87,16 +96,16 @@ typedef struct s_player
 	int		rotatedirection;
 	int		walkdirection;
 	int		walkdirectionleftright;
-} t_player;
+}	t_player;
 
 typedef struct s_raycasting
 {
 	double	ray_angle;
 	int		num_rays;
-	double	xintercept_horiz;
-	double	yintercept_horiz;
-	double	xintercept_vertic;
-	double	yintercept_vertic;
+	double	xinter_ho;
+	double	yinter_ho;
+	double	xinter_ve;
+	double	yinter_ve;
 	double	xstep;
 	double	ystep;
 	int		facingup;
@@ -105,32 +114,43 @@ typedef struct s_raycasting
 	int		facingright;
 	int		horiz_intersaction;
 	int		vertic_intersaction;
-} t_raycasting;
+	double	wallheight;
+	int		j;
+}	t_raycasting;
 
 typedef struct s_texture
 {
 	void	*textureimgn;
-	int		*imgaddrN;
+	int		*imgaddrn;
 	void	*textureimgs;
-	int		*imgaddrS;
+	int		*imgaddrs;
 	void	*textureimge;
-	int		*imgaddrE;
+	int		*imgaddre;
 	void	*textureimgw;
-	int		*imgaddrW;
+	int		*imgaddrw;
 	int		bpp;
 	int		size_line;
 	int		endian;
 	int		width;
 	int		height;
-	int		widthN;
-	int		heightN;
-	int		widthS;
-	int		heightS;
-	int		widthW;
-	int		heightW;
-	int		widthE;
-	int		heightE;
-} t_texture;
+	int		widthn;
+	int		heightn;
+	int		widths;
+	int		heights;
+	int		widthw;
+	int		heightw;
+	int		widthe;
+	int		heighte;
+}	t_texture;
+
+typedef struct s_data
+{
+	int	i;
+	int	j;
+	int	x;
+	int	y;
+	int color;
+}	t_data;
 
 typedef struct s_graph
 {
@@ -145,20 +165,19 @@ typedef struct s_graph
 	int					new_x;
 	int					minimap_check;
 	struct s_player		plyr;
-	struct s_raycasting raycast;
+	struct s_raycasting	raycast;
 	struct s_map		map;
 	struct s_texture	texture;
 	struct s_sprite		sprite;
 	struct s_door		door;
-	t_map_ 				*data;
-} t_graph;
+}	t_graph;
 
 /* --------------------------------- PARSING ------------------------------- */
 
 int		deal_key(int key, t_graph *var);
 int		checkwallmovement(t_graph *lst, int x, int y);
 int		check_wall(t_graph *lst, int x, int y);
-void    checkcollectible(t_graph *lst);
+void	checkcollectible(t_graph *lst);
 
 /* --------------------------------- INIT ------------------------------- */
 
@@ -171,22 +190,22 @@ void	init_texture(t_graph *lst, t_map_ *data);
 /* --------------------------------- RAYCAST ----------------------------- */
 
 void	cast_rays(t_graph *lst);
-void	normilizeAngle(double *ray_angle);
+void	normilizeangle(double *ray_angle);
 void	vertical_intersaction(t_graph *lst);
 void	horizantal_intersaction(t_graph *lst);
 void	checking_where_plyr_facing(t_graph *lst);
-double	calculate_intersactions(t_graph *lst);
+int		calculate_intersactions(t_graph *lst);
 double	distance_points(double x1, double x2, double y1, double y2);
 
 /* --------------------------------- DRAWING ----------------------------- */
 
 void	my_mlx_pixel_put(t_graph *lst, int x, int y, int color);
-void   	draw_cub(int x, int y, int x1, int y1, t_graph *lst, int i);
+void	draw_cub(int x, int y, int x1, int y1, t_graph *lst, int i);
 void	draw_floor_ceilling(t_graph *lst);
 void	draw_walls(t_graph *lst);
 void	drawline(double x0, double y0, int x1, int y1, t_graph *lst, int j);
-void   	draw_cub1(int y, int y1, t_graph *lst, int i);
-void    draw_rect(int x, int y, int x1, int y1, t_graph *lst, int i, double wallheight);
+void	draw_cub1(int y, int y1, t_graph *lst, int i);
+void	draw_rect(int x, int y, int y1, t_graph *lst);
 
 /* --------------------------------- MAP ----------------------------- */
 
@@ -202,26 +221,30 @@ int		get_texture(t_graph *lst, int y, int x, int i);
 
 /* --------------------------------- PROTOTYPES ----------------------------- */
 
-
-int	horizantal_intersaction_sprite(t_graph *lst);
-int	vertical_intersaction_sprite(t_graph *lst);
-int	check_sprite(t_graph *lst, int x, int y);
+int		horizantal_intersaction_sprite(t_graph *lst);
+int		vertical_intersaction_sprite(t_graph *lst);
+int		check_sprite(t_graph *lst, int x, int y);
 void	draw_rays_sprite(t_graph *lst, int j, int i);
 double	get_x_of_texture_sprite(t_graph *lst, int i, int width);
-double	calculate_intersactions_sprite(t_graph *lst);
+int		calculate_intersactions_sprite(t_graph *lst);
 
-void    new_x_y(int *new_x, int *new_y, int j, int y, t_graph *lst);
-int	calculate_intersactions_door(t_graph *lst);
+void	new_x_y(int *new_x, int *new_y, int j, int y, t_graph *lst);
+int		calculate_intersactions_door(t_graph *lst);
 double	get_x_of_texture_doors(t_graph *lst, int i, int width);
-int	get_texture_door(t_graph *lst, int y, int x);
+int		get_texture_door(t_graph *lst, int y, int x);
 
+void	draw_walls(t_graph *lst);
+void	draw_map(char	**map, t_graph *lst);
+void	rotate_player(t_graph *lst);
+void	player_movement(t_graph *lst);
+void	draw_minimap_border(t_graph *lst);
+void	draw_player(t_graph *lst);
 
+void	rendringdoors(t_graph *lst, int i);
+void	rendringsprite(t_graph *lst, int i);
 
-void    draw_walls(t_graph *lst);
-void    draw_map(char	**map, t_graph *lst);
-void    rotate_player(t_graph *lst);
-void    player_movement(t_graph *lst);
-void    draw_minimap_border(t_graph *lst);
-void    draw_player(t_graph *lst);
+int		mouse_press(int key, int x, int y, t_graph *lst);
+int		mouse_release(int key, int x, int y, t_graph *lst);
+int		mouse_houver(int x, int y, t_graph *lst);
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vertical_inter.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rel-fagr <rel-fagr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sahafid <sahafid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 18:25:36 by sahafid           #+#    #+#             */
-/*   Updated: 2022/09/27 17:40:01 by rel-fagr         ###   ########.fr       */
+/*   Updated: 2022/09/29 13:41:23 by sahafid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	vertical_intersaction(t_graph *lst)
 {
-	int check;
-	int sprite;
+	int	check;
+	int	sprite;
 	int	door;
 
 	check = 0;
@@ -24,11 +24,12 @@ void	vertical_intersaction(t_graph *lst)
 	lst->sprite.vertic_intersaction = 0;
 	lst->door.vertic_intersaction = 0;
 	lst->raycast.vertic_intersaction = 0;
-
-	lst->raycast.xintercept_vertic = floor(lst->plyr.x_plyr / lst->map.unit) * lst->map.unit;
+	lst->raycast.xinter_ve = floor(lst->plyr.x_plyr / \
+	lst->map.unit) * lst->map.unit;
 	if (lst->raycast.facingright)
-		lst->raycast.xintercept_vertic += lst->map.unit;
-	lst->raycast.yintercept_vertic = lst->plyr.y_plyr + (lst->raycast.xintercept_vertic - lst->plyr.x_plyr) * tan(lst->raycast.ray_angle);
+		lst->raycast.xinter_ve += lst->map.unit;
+	lst->raycast.yinter_ve = lst->plyr.y_plyr + (lst->raycast.xinter_ve - \
+	lst->plyr.x_plyr) * tan(lst->raycast.ray_angle);
 	lst->raycast.xstep = lst->map.unit;
 	if (lst->raycast.facingleft)
 		lst->raycast.xstep *= -1;
@@ -39,40 +40,44 @@ void	vertical_intersaction(t_graph *lst)
 		lst->raycast.ystep *= -1;
 	if (lst->raycast.facingleft)
 		check = 1;
-	while ((lst->raycast.xintercept_vertic > 0 && lst->raycast.xintercept_vertic < lst->map.width * lst->map.unit) && (lst->raycast.yintercept_vertic > 0 && lst->raycast.yintercept_vertic < lst->map.height * lst->map.unit))
+	while ((lst->raycast.xinter_ve > 0 && lst->raycast.xinter_ve < \
+	lst->map.width * lst->map.unit) && (lst->raycast.yinter_ve > 0 && \
+	lst->raycast.yinter_ve < lst->map.height * lst->map.unit))
 	{
-		if (check_wall(lst, lst->raycast.xintercept_vertic - check, lst->raycast.yintercept_vertic))
+		if (check_wall(lst, lst->raycast.xinter_ve - check, \
+		lst->raycast.yinter_ve))
 		{
 			lst->raycast.vertic_intersaction = 1;
 			return ;
 		}
-		else if ((check_sprite(lst, lst->raycast.xintercept_vertic - check, lst->raycast.yintercept_vertic) == 1 && sprite == 1) && door == 1)
+		else if ((check_sprite(lst, lst->raycast.xinter_ve - check, \
+		lst->raycast.yinter_ve) == 1 && sprite == 1) && door == 1)
 		{
 			sprite = 0;
 			lst->sprite.vertic_intersaction = 1;
 			lst->sprite.spritefoundvert = 1;
-			lst->sprite.xintercept_vertic = lst->raycast.xintercept_vertic;
-			lst->sprite.yintercept_vertic = lst->raycast.yintercept_vertic;
-			lst->raycast.xintercept_vertic += lst->raycast.xstep;
-			lst->raycast.yintercept_vertic += lst->raycast.ystep;
+			lst->sprite.xinter_ve = lst->raycast.xinter_ve;
+			lst->sprite.yinter_ve = lst->raycast.yinter_ve;
+			lst->raycast.xinter_ve += lst->raycast.xstep;
+			lst->raycast.yinter_ve += lst->raycast.ystep;
 		}
-		else if (check_sprite(lst, lst->raycast.xintercept_vertic - check, lst->raycast.yintercept_vertic) == 2 && door == 1)
+		else if (check_sprite(lst, lst->raycast.xinter_ve - \
+		check, lst->raycast.yinter_ve) == 2 && door == 1)
 		{
 			door = 0;
 			lst->door.vertic_intersaction = 1;
-			lst->door.xintercept_vertic = lst->raycast.xintercept_vertic;
-			lst->door.yintercept_vertic = lst->raycast.yintercept_vertic;
-			lst->raycast.xintercept_vertic += lst->raycast.xstep;
-			lst->raycast.yintercept_vertic += lst->raycast.ystep;
+			lst->door.xinter_ve = lst->raycast.xinter_ve;
+			lst->door.yinter_ve = lst->raycast.yinter_ve;
+			lst->raycast.xinter_ve += lst->raycast.xstep;
+			lst->raycast.yinter_ve += lst->raycast.ystep;
 		}
 		else
 		{
-			lst->raycast.xintercept_vertic += lst->raycast.xstep;
-			lst->raycast.yintercept_vertic += lst->raycast.ystep;
+			lst->raycast.xinter_ve += lst->raycast.xstep;
+			lst->raycast.yinter_ve += lst->raycast.ystep;
 		}
 	}
 	lst->raycast.vertic_intersaction = 0;
-	// lst->door.vertic_intersaction = 0;
 	if (sprite)
 	{
 		lst->sprite.vertic_intersaction = 0;
