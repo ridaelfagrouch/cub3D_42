@@ -6,7 +6,7 @@
 /*   By: rel-fagr <rel-fagr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 13:09:18 by sahafid           #+#    #+#             */
-/*   Updated: 2022/09/29 01:13:56 by rel-fagr         ###   ########.fr       */
+/*   Updated: 2022/09/29 14:08:55 by rel-fagr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,12 @@ void    init_everything(t_graph *lst, t_map_ *data)
 	lst->map.width = 1300;
 	lst->minimap_check = 1;
 	lst->mlx = mlx_init();
+	if (lst->mlx == NULL)
+		free_all(data, "error mlx_init");
 	lst->wind = mlx_new_window(lst->mlx, \
 		lst->map.width, lst->map.height, "Cub3d");
+	if (lst->wind == NULL)
+		free_all(data, "error mlx_init");
 	lst->map.img = NULL;
 	lst->map.addr = NULL;
 	lst->map.img = mlx_new_image(lst->mlx, lst->map.width, lst->map.height);
