@@ -6,7 +6,7 @@
 /*   By: sahafid <sahafid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 13:25:22 by sahafid           #+#    #+#             */
-/*   Updated: 2022/09/29 16:16:17 by sahafid          ###   ########.fr       */
+/*   Updated: 2022/09/29 18:11:14 by sahafid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,10 @@ void	draw_rect_sprite(int x, int y, int y1, t_graph *lst)
 {
 	double	posx;
 	double	posy;
-	int		pixel_color;
 	int		width;
 	int		height;
 	double	ds;
 
-	pixel_color = 0;
 	width = lst->sprite.widthsprite;
 	height = lst->sprite.heightsprite;
 	posx = 0;
@@ -32,10 +30,10 @@ void	draw_rect_sprite(int x, int y, int y1, t_graph *lst)
 	{
 		ds = y + (lst->raycast.wallheight / 2) - ((lst->map.height) / 2);
 		posy = ds * (double)height / lst->raycast.wallheight;
-		pixel_color = lst->sprite.addrsprite[(int)((abs((int)posy) * \
-		width) + posx)];
-		if (pixel_color != 16777215)
-			my_mlx_pixel_put(lst, x, y, pixel_color);
+		if (lst->sprite.addrsprite[(int)((abs((int)posy) * \
+		width) + posx)] != 16777215)
+			my_mlx_pixel_put(lst, x, y, \
+			lst->sprite.addrsprite[(int)((abs((int)posy) * width) + posx)]);
 		y++;
 	}
 }
@@ -69,6 +67,16 @@ int	calculate_intersactions_sprite(t_graph *lst)
 		return (0);
 }
 
+static void	calculate_distances(t_graph *lst, double *distance)
+{
+	if (lst->raycast.j == 0)
+		*distance = distance_points(lst->plyr.x_plyr, lst->sprite.xinter_ho, \
+		lst->plyr.y_plyr, lst->sprite.yinter_ho);
+	else
+		*distance = distance_points(lst->plyr.x_plyr, lst->sprite.xinter_ve, \
+		lst->plyr.y_plyr, lst->sprite.yinter_ve);
+}
+
 void	rendringsprite(t_graph *lst, int i)
 {
 	double	distanceprojectionplane;
@@ -78,12 +86,7 @@ void	rendringsprite(t_graph *lst, int i)
 
 	if (!lst->sprite.spritefoundhorz && !lst->sprite.spritefoundvert)
 		return ;
-	if (lst->raycast.j == 0)
-		distance = distance_points(lst->plyr.x_plyr, lst->sprite.xinter_ho, \
-		lst->plyr.y_plyr, lst->sprite.yinter_ho);
-	else
-		distance = distance_points(lst->plyr.x_plyr, lst->sprite.xinter_ve, \
-		lst->plyr.y_plyr, lst->sprite.yinter_ve);
+	calculate_distances(lst, &distance);
 	if (lst->sprite.distancetowall < distance)
 		return ;
 	distance = distance * cos(lst->raycast.ray_angle - lst->plyr.rotationangle);

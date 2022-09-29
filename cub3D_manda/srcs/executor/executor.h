@@ -6,12 +6,12 @@
 /*   By: sahafid <sahafid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 15:08:46 by sahafid           #+#    #+#             */
-/*   Updated: 2022/09/29 13:40:05 by sahafid          ###   ########.fr       */
+/*   Updated: 2022/09/29 18:22:14 by sahafid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef	EXECUTOR_H
-#define	EXECUTOR_H
+#ifndef EXECUTOR_H
+# define EXECUTOR_H
 
 /* ------------------------------- LIBRARIES -------------------------------- */
 
@@ -38,8 +38,7 @@ typedef struct s_map
 	char	*addr1;
 	int		height;
 	int		width;
-} t_map;
-
+}	t_map;
 
 typedef struct s_player
 {
@@ -52,7 +51,7 @@ typedef struct s_player
 	int		rotatedirection;
 	int		walkdirection;
 	int		walkdirectionleftright;
-} t_player;
+}	t_player;
 
 typedef struct s_raycasting
 {
@@ -71,7 +70,7 @@ typedef struct s_raycasting
 	int		horiz_intersaction;
 	int		vertic_intersaction;
 	double	wallstripeheight;
-} t_raycasting;
+}	t_raycasting;
 
 typedef struct s_texture
 {
@@ -96,7 +95,7 @@ typedef struct s_texture
 	int		heightw;
 	int		widthe;
 	int		heighte;
-} t_texture;
+}	t_texture;
 
 typedef struct s_graph
 {
@@ -109,11 +108,12 @@ typedef struct s_graph
 	int					old_x;
 	int					new_x;
 	int					minimap_check;
+	t_map_				*data;
 	struct s_player		plyr;
-	struct s_raycasting raycast;
+	struct s_raycasting	raycast;
 	struct s_map		map;
 	struct s_texture	texture;
-} t_graph;
+}	t_graph;
 
 /* --------------------------------- PARSING ------------------------------- */
 
@@ -143,7 +143,6 @@ double	distance_points(double x1, double x2, double y1, double y2);
 /* --------------------------------- DRAWING ----------------------------- */
 
 void	my_mlx_pixel_put(t_graph *lst, int x, int y, int color);
-void	draw_cub(int x, int y, int x1, int y1, t_graph *lst, int i);
 void	draw_floor_ceilling(t_graph *lst);
 void	draw_walls(t_graph *lst);
 void	draw_cub1(int y, int y1, t_graph *lst, int i);
@@ -165,5 +164,6 @@ int		get_texture(t_graph *lst, int y, int x, int i);
 
 void	rotate_player(t_graph *lst);
 void	player_movement(t_graph *lst);
+int		close_cub(t_graph *lst);
 
 #endif

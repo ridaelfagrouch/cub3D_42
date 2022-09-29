@@ -6,7 +6,7 @@
 /*   By: rel-fagr <rel-fagr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 07:57:18 by sahafid           #+#    #+#             */
-/*   Updated: 2022/09/26 17:52:20 by rel-fagr         ###   ########.fr       */
+/*   Updated: 2022/09/29 17:03:20 by rel-fagr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ void	executor(t_map_ *data)
 {
 	t_graph	lst;
 
+	lst.data = data;
 	init_map(&lst, data);
 	init_player(&lst, data);
 	init_raycast(&lst);

@@ -6,7 +6,7 @@
 /*   By: sahafid <sahafid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 01:21:13 by sahafid           #+#    #+#             */
-/*   Updated: 2022/09/29 16:37:25 by sahafid          ###   ########.fr       */
+/*   Updated: 2022/09/29 18:12:42 by sahafid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -164,6 +164,7 @@ typedef struct s_graph
 	int					old_x;
 	int					new_x;
 	int					minimap_check;
+	t_map_				*data;
 	struct s_player		plyr;
 	struct s_raycasting	raycast;
 	struct s_map		map;
@@ -191,8 +192,8 @@ void	init_texture(t_graph *lst, t_map_ *data);
 
 void	cast_rays(t_graph *lst);
 void	normilizeangle(double *ray_angle);
-void	vertical_intersaction(t_graph *lst);
-void	horizantal_intersaction(t_graph *lst);
+void	vertical_intersaction(t_graph *lst, int check);
+void	horizantal_intersaction(t_graph *lst, int check);
 void	checking_where_plyr_facing(t_graph *lst);
 int		calculate_intersactions(t_graph *lst);
 double	distance_points(double x1, double x2, double y1, double y2);
@@ -221,8 +222,6 @@ int		get_texture(t_graph *lst, int y, int x, int i);
 
 /* --------------------------------- PROTOTYPES ----------------------------- */
 
-int		horizantal_intersaction_sprite(t_graph *lst);
-int		vertical_intersaction_sprite(t_graph *lst);
 int		check_sprite(t_graph *lst, int x, int y);
 void	draw_rays_sprite(t_graph *lst, int j, int i);
 double	get_x_of_texture_sprite(t_graph *lst, int i, int width);
@@ -246,5 +245,7 @@ void	rendringsprite(t_graph *lst, int i);
 int		mouse_press(int key, int x, int y, t_graph *lst);
 int		mouse_release(int key, int x, int y, t_graph *lst);
 int		mouse_houver(int x, int y, t_graph *lst);
+int		calculate_intersactions_door(t_graph *lst);
+int		close_cub(t_graph *lst);
 
 #endif

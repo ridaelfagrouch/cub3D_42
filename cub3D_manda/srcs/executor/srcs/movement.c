@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   movement.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rel-fagr <rel-fagr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sahafid <sahafid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 14:47:27 by sahafid           #+#    #+#             */
-/*   Updated: 2022/09/29 01:10:55 by rel-fagr         ###   ########.fr       */
+/*   Updated: 2022/09/29 18:21:59 by sahafid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 int	routine(t_graph *lst)
 {
+	mlx_hook(lst->wind, 17, 0L, close_cub, lst);
 	mlx_hook(lst->wind, 2, 0L, deal_key, lst);
 	mlx_hook(lst->wind, 3, 0L, reset, lst);
 	mlx_destroy_image(lst->mlx, lst->map.img);

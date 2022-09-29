@@ -6,7 +6,7 @@
 /*   By: sahafid <sahafid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 14:47:27 by sahafid           #+#    #+#             */
-/*   Updated: 2022/09/29 16:31:01 by sahafid          ###   ########.fr       */
+/*   Updated: 2022/09/29 18:12:30 by sahafid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 int	routine(t_graph *lst)
 {
+	mlx_hook(lst->wind, 17, 0L, close_cub, lst);
 	mlx_hook(lst->wind, 2, 0L, deal_key, lst);
 	mlx_hook(lst->wind, 3, 0L, reset, lst);
 	mlx_hook(lst->wind, 4, 1L << 8, mouse_press, lst);
