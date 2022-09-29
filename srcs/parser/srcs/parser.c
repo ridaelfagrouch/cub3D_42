@@ -6,7 +6,7 @@
 /*   By: rel-fagr <rel-fagr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/18 11:00:48 by rel-fagr          #+#    #+#             */
-/*   Updated: 2022/09/29 00:05:27 by rel-fagr         ###   ########.fr       */
+/*   Updated: 2022/09/29 01:05:05 by rel-fagr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,6 +115,5 @@ int	parser(char **argv, t_map_ *data)
 	creat_map_array(data, argv);
 	check_valid_line(data);
 	virtual_wall(data);
-	system("leaks cub3D");
 	return (0);
 }

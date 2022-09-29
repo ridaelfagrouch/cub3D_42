@@ -6,7 +6,7 @@
 /*   By: rel-fagr <rel-fagr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/15 17:23:51 by bavos             #+#    #+#             */
-/*   Updated: 2022/09/29 00:23:53 by rel-fagr         ###   ########.fr       */
+/*   Updated: 2022/09/29 00:25:23 by rel-fagr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	free_all(t_map_ *data, char *str)
 		free(data->so_t);
 	if (!data->we_t)
 		free(data->we_t);
-	if(!data->map_d.map)
+	if (!data->map_d.map)
 		free_matrice(data->map_d.map);
 	free(data);
 	exit(1);

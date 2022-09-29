@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sahafid <sahafid@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rel-fagr <rel-fagr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 23:45:02 by sahafid           #+#    #+#             */
-/*   Updated: 2022/09/28 23:45:28 by sahafid          ###   ########.fr       */
+/*   Updated: 2022/09/29 01:14:16 by rel-fagr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,12 @@ void    draw_walls(t_graph *lst)
     player_movement(lst);
     checkcollectible(lst);
     cast_rays(lst);
-    draw_minimap_border(lst);
-    draw_map(lst->map.map, lst);
-    draw_player(lst);
+    if (lst->minimap_check % 2)
+    {
+        draw_minimap_border(lst);
+        draw_map(lst->map.map, lst);
+        draw_player(lst);
+    }
 }
 
 void    draw_map(char	**map, t_graph *lst)

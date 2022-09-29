@@ -149,6 +149,8 @@ int	checkwallmovement(t_graph *lst, int x, int y)
 
 int	deal_key(int key, t_graph *var)
 {
+	if (key == 82)
+		var->minimap_check++;
 	if (key == 124)
 		var->plyr.rotatedirection = 1;
 	if (key == 123)
