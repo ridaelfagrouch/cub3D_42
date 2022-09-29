@@ -1,9 +1,9 @@
-NO srcs/textures/west.xpm
+NO srcs/textures/l7abss.xpm
 EA srcs/textures/west.xpm
-WE srcs/textures/west.xpm
+WE srcs/textures/l7abss.xpm
 SO srcs/textures/west.xpm
 
-C 128,128,128
+C 0,0,0
 
 
 F 255,255,255
@@ -32,7 +32,7 @@ F 255,255,255
 100000000C00000001           10001
 100001000000000001           10001
 100011000000000001           10001
-1000110000000000C1          10001
+1000110000000C0001          10001
 100011000000000001         10001
 100011000000000001        10001
 100011111111111111       10001

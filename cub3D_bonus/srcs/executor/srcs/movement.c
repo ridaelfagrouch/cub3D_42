@@ -40,9 +40,9 @@ int	mouse_houver(int x, int y, t_graph *lst)
 	if (x > 0 && x < lst->map.width && y > 0 && y < lst->map.height)
 	{
 		if (lst->old_x - lst->new_x > 0)
-			lst->plyr.rotationangle += 0.0698132;
-		else if (lst->old_x - lst->new_x < 0)
 			lst->plyr.rotationangle -= 0.0698132;
+		else if (lst->old_x - lst->new_x < 0)
+			lst->plyr.rotationangle += 0.0698132;
 		lst->old_x = x;
 	}
 	return (0);
