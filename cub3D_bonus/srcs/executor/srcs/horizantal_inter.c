@@ -6,11 +6,16 @@
 /*   By: sahafid <sahafid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 18:30:13 by sahafid           #+#    #+#             */
-/*   Updated: 2022/09/29 13:42:26 by sahafid          ###   ########.fr       */
+/*   Updated: 2022/09/29 17:00:21 by sahafid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../executor.h"
+
+// void	searchforhoriz(t_graph *lst)
+// {
+	
+// }
 
 void	horizantal_intersaction(t_graph *lst)
 {
@@ -40,6 +45,7 @@ void	horizantal_intersaction(t_graph *lst)
 		lst->raycast.xstep *= -1;
 	if (lst->raycast.facingup)
 		check = 1;
+	// searchforhoriz(lst);
 	while ((lst->raycast.xinter_ho >= 0 && lst->raycast.xinter_ho <= \
 	lst->map.width * lst->map.unit) && (lst->raycast.yinter_ho >= 0 && \
 	lst->raycast.yinter_ho <= lst->map.height * lst->map.unit))

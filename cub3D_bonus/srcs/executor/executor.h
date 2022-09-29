@@ -6,7 +6,7 @@
 /*   By: sahafid <sahafid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 01:21:13 by sahafid           #+#    #+#             */
-/*   Updated: 2022/09/29 16:23:50 by sahafid          ###   ########.fr       */
+/*   Updated: 2022/09/29 16:37:25 by sahafid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,7 +149,7 @@ typedef struct s_data
 	int	j;
 	int	x;
 	int	y;
-	int color;
+	int	color;
 }	t_data;
 
 typedef struct s_graph
