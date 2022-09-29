@@ -6,7 +6,7 @@
 /*   By: rel-fagr <rel-fagr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 18:59:26 by rel-fagr          #+#    #+#             */
-/*   Updated: 2022/09/22 16:05:31 by rel-fagr         ###   ########.fr       */
+/*   Updated: 2022/09/28 23:59:18 by rel-fagr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,15 +108,5 @@ int	check_empty_line(t_map_ *data, int i)
 			return (free(ptr.ptr1), free(ptr.ptr2), \
 				free(ptr.ptr3), free(ptr.ptr4), 0);
 	}
-	return (0);
-}
-
-/* --------------------------------------------------------------- */
-
-void	free_garbage(t_map_ *data, char *str)
-{
-	printf("%s\n", str);
-	free_matrice(data->map_d.map);
-	free (data);
-	exit (1);
+	return (free(ptr.ptr1), free(ptr.ptr2), 0);
 }

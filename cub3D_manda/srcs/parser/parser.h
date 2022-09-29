@@ -6,7 +6,7 @@
 /*   By: rel-fagr <rel-fagr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/18 13:12:07 by rel-fagr          #+#    #+#             */
-/*   Updated: 2022/09/21 18:56:10 by rel-fagr         ###   ########.fr       */
+/*   Updated: 2022/09/29 18:37:29 by rel-fagr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,5 +50,6 @@ int		check_empty_line(t_map_ *data, int i);
 int		check_up_down(t_map_ *data, int i, int j);
 int		check_left_right(char *str, int i);
 void	virtual_wall(t_map_ *data);
+void	remp_color(int *count, char *ptr, t_map_ *data, char *c);
 
 #endif
