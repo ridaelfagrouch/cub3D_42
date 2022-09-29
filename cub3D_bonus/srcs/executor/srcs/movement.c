@@ -48,8 +48,17 @@ int	mouse_houver(int x, int y, t_graph *lst)
 	return (0);
 }
 
+int	close_cub3d(t_graph *var)
+{
+	mlx_destroy_image(var->mlx, var->wind);
+	free_all(var->data, "");
+	exit(1);
+	return (0);
+}
+
 int routine(t_graph *lst)
 {
+	mlx_hook(lst->wind, 17, 0L, close_cub3d, lst);
     mlx_hook(lst->wind, 2, 0L, deal_key, lst);
 	mlx_hook(lst->wind, 3, 0L, reset, lst);
 	mlx_hook(lst->wind, 4, 1L<<8, mouse_press, lst);

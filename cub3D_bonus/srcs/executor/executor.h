@@ -150,6 +150,7 @@ typedef struct s_graph
 	struct s_texture	texture;
 	struct s_sprite		sprite;
 	struct s_door		door;
+	t_map_ 				*data;
 } t_graph;
 
 /* --------------------------------- PARSING ------------------------------- */
