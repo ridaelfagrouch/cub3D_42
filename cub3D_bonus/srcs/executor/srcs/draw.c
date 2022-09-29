@@ -6,13 +6,13 @@
 /*   By: sahafid <sahafid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 14:48:25 by sahafid           #+#    #+#             */
-/*   Updated: 2022/09/29 16:17:08 by sahafid          ###   ########.fr       */
+/*   Updated: 2022/09/29 16:36:26 by sahafid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../executor.h"
 
-void	my_mlx_pixel_put(t_graph   *lst, int x, int y, int color)
+void	my_mlx_pixel_put(t_graph *lst, int x, int y, int color)
 {
 	char	*test;
 

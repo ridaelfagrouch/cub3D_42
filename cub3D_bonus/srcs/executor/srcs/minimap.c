@@ -3,35 +3,34 @@
 /*                                                        :::      ::::::::   */
 /*   minimap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sahafid <sahafid@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rel-fagr <rel-fagr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 14:05:21 by sahafid           #+#    #+#             */
-/*   Updated: 2022/09/29 14:05:49 by sahafid          ###   ########.fr       */
+/*   Updated: 2022/09/29 19:46:23 by rel-fagr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../executor.h"
 
-void	new_x_y(int *new_x, int *new_y, int j, int y, t_graph *lst)
+void	new_x_y(int j, int y, t_graph *lst)
 {
-	*new_x = j - (lst->plyr.x_plyr - 100);
-	*new_y = y - (lst->plyr.y_plyr - 100);
+	lst->new_x1 = j - (lst->plyr.x_plyr - 100);
+	lst->new_y1 = y - (lst->plyr.y_plyr - 100);
 }
 
-void	draw_cub(int x, int y, int x1, int y1, t_graph *lst, int i)
+void	draw_cub(int x, int y, t_graph *lst, int i)
 {
 	int	j;
-	int	new_x;
-	int	new_y;
 
 	j = x;
-	while (y < y1)
+	while (y < lst->y1)
 	{
-		while (j <= x1)
+		while (j <= lst->x1)
 		{
-			new_x_y(&new_x, &new_y, j, y, lst);
-			if (new_x > 0 && new_x < 200 && new_y > 0 && new_y < 200)
-				my_mlx_pixel_put(lst, new_x, new_y, i);
+			new_x_y(j, y, lst);
+			if (lst->new_x1 > 0 && lst->new_x1 < 200 && \
+				lst->new_y1 > 0 && lst->new_y1 < 200)
+				my_mlx_pixel_put(lst, lst->new_x1, lst->new_y1, i);
 			j++;
 		}
 		j = x;
@@ -39,18 +38,17 @@ void	draw_cub(int x, int y, int x1, int y1, t_graph *lst, int i)
 	}
 }
 
-void	drawline(double x0, double y0, int x1, int y1, t_graph *lst, int j)
+void	drawline(t_graph data, t_graph *lst, int j)
 {
 	double	dx;
 	double	dy;
 	int		steps;
 	double	x;
 	double	y;
-	int		i;
 
-	dx = x1 - x0;
-	dy = y1 - y0;
-	i = 0;
+	dx = data.x1 - data.x;
+	dy = data.y1 - data.y;
+	data.i = 0;
 	steps = 0;
 	if (fabs(dx) > fabs(dy))
 		steps = fabs(dx);
@@ -58,32 +56,48 @@ void	drawline(double x0, double y0, int x1, int y1, t_graph *lst, int j)
 		steps = fabs(dy);
 	x = dx / steps;
 	y = dy / steps;
-	while (i < steps)
+	while (data.i < steps)
 	{
-		my_mlx_pixel_put(lst, x0, y0, j);
-		x0 = x0 + x;
-		y0 = y0 + y;
-		i++;
+		my_mlx_pixel_put(lst, data.x, data.y, j);
+		data.x = data.x + x;
+		data.y = data.y + y;
+		data.i++;
 	}
 }
 
 void	draw_player(t_graph *lst)
 {
-	int	i;
+	int		i;
+	t_graph	data;
 
 	i = 99;
+	data.x = 100;
+	data.x1 = 105;
 	while (++i <= 105)
-		drawline(100, i, 105, i, lst, 0xFF0000);
+	{
+		data.y = i;
+		data.y1 = i;
+		drawline(data, lst, 0xFF0000);
+	}
 }
 
 void	draw_minimap_border(t_graph *lst)
 {
-	int	i;
+	int		i;
+	t_graph	data;
 
 	i = 199;
 	while (++i <= 202)
 	{
-		drawline(i, 0, i, 202, lst, 0);
-		drawline(0, i, 202, i, lst, 0);
+		data.x = i;
+		data.x1 = i;
+		data.y = 0;
+		data.y1 = 202;
+		drawline(data, lst, 0);
+		data.x = 0;
+		data.x1 = 202;
+		data.y = i;
+		data.y1 = i;
+		drawline(data, lst, 0);
 	}
 }

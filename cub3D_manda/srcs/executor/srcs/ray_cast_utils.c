@@ -6,11 +6,18 @@
 /*   By: sahafid <sahafid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 18:27:30 by sahafid           #+#    #+#             */
-/*   Updated: 2022/09/28 20:43:00 by sahafid          ###   ########.fr       */
+/*   Updated: 2022/09/29 18:22:04 by sahafid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../executor.h"
+
+int	close_cub(t_graph *lst)
+{
+	mlx_destroy_image(lst->mlx, lst->wind);
+	free_all(lst->data, "");
+	return (0);
+}
 
 double	distance_points(double x1, double x2, double y1, double y2)
 {

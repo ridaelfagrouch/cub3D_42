@@ -6,7 +6,7 @@
 /*   By: rel-fagr <rel-fagr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 01:21:13 by sahafid           #+#    #+#             */
-/*   Updated: 2022/09/29 16:59:57 by rel-fagr         ###   ########.fr       */
+/*   Updated: 2022/09/29 19:46:10 by rel-fagr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,7 +149,7 @@ typedef struct s_data
 	int	j;
 	int	x;
 	int	y;
-	int color;
+	int	color;
 }	t_data;
 
 typedef struct s_graph
@@ -158,6 +158,10 @@ typedef struct s_graph
 	void				*wind;
 	int					x;
 	int					y;
+	int					new_x1;
+	int					new_y1;
+	int					i;
+	int					j;
 	int					x1;
 	int					y1;
 	int					mouse_click;
@@ -192,8 +196,8 @@ void	init_texture(t_graph *lst, t_map_ *data);
 
 void	cast_rays(t_graph *lst);
 void	normilizeangle(double *ray_angle);
-void	vertical_intersaction(t_graph *lst);
-void	horizantal_intersaction(t_graph *lst);
+void	vertical_intersaction(t_graph *lst, int check);
+void	horizantal_intersaction(t_graph *lst, int check);
 void	checking_where_plyr_facing(t_graph *lst);
 int		calculate_intersactions(t_graph *lst);
 double	distance_points(double x1, double x2, double y1, double y2);
@@ -201,10 +205,10 @@ double	distance_points(double x1, double x2, double y1, double y2);
 /* --------------------------------- DRAWING ----------------------------- */
 
 void	my_mlx_pixel_put(t_graph *lst, int x, int y, int color);
-void	draw_cub(int x, int y, int x1, int y1, t_graph *lst, int i);
+void	draw_cub(int x, int y, t_graph *lst, int i);
 void	draw_floor_ceilling(t_graph *lst);
 void	draw_walls(t_graph *lst);
-void	drawline(double x0, double y0, int x1, int y1, t_graph *lst, int j);
+void	drawline(t_graph data, t_graph *lst, int j);
 void	draw_cub1(int y, int y1, t_graph *lst, int i);
 void	draw_rect(int x, int y, int y1, t_graph *lst);
 
@@ -222,14 +226,12 @@ int		get_texture(t_graph *lst, int y, int x, int i);
 
 /* --------------------------------- PROTOTYPES ----------------------------- */
 
-int		horizantal_intersaction_sprite(t_graph *lst);
-int		vertical_intersaction_sprite(t_graph *lst);
 int		check_sprite(t_graph *lst, int x, int y);
 void	draw_rays_sprite(t_graph *lst, int j, int i);
 double	get_x_of_texture_sprite(t_graph *lst, int i, int width);
 int		calculate_intersactions_sprite(t_graph *lst);
 
-void	new_x_y(int *new_x, int *new_y, int j, int y, t_graph *lst);
+void	new_x_y(int j, int y, t_graph *lst);
 int		calculate_intersactions_door(t_graph *lst);
 double	get_x_of_texture_doors(t_graph *lst, int i, int width);
 int		get_texture_door(t_graph *lst, int y, int x);
@@ -247,5 +249,6 @@ void	rendringsprite(t_graph *lst, int i);
 int		mouse_press(int key, int x, int y, t_graph *lst);
 int		mouse_release(int key, int x, int y, t_graph *lst);
 int		mouse_houver(int x, int y, t_graph *lst);
-
+int		calculate_intersactions_door(t_graph *lst);
+int		close_cub(t_graph *lst);
 #endif

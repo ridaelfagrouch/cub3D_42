@@ -6,7 +6,7 @@
 /*   By: sahafid <sahafid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 16:46:05 by sahafid           #+#    #+#             */
-/*   Updated: 2022/09/29 16:09:41 by sahafid          ###   ########.fr       */
+/*   Updated: 2022/09/29 18:16:05 by sahafid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,18 @@ void	draw_rect(int x, int y, int y1, t_graph *lst)
 	}
 }
 
+static void	calculate_distances(t_graph *lst, double *distance)
+{
+	if (lst->raycast.j == 0)
+		*distance = distance_points(lst->plyr.x_plyr, \
+		lst->raycast.xinter_ho, lst->plyr.y_plyr, lst->raycast.yinter_ho);
+	else
+		*distance = distance_points(lst->plyr.x_plyr, \
+		lst->raycast.xinter_ve, lst->plyr.y_plyr, lst->raycast.yinter_ve);
+	*distance = *distance * cos(lst->raycast.ray_angle - \
+	lst->plyr.rotationangle);
+}
+
 void	rendringwalls(t_graph *lst, int i)
 {
 	double	distanceprojectionplane;
@@ -44,13 +56,7 @@ void	rendringwalls(t_graph *lst, int i)
 	int		startpointy;
 	int		endpointy;
 
-	if (lst->raycast.j == 0)
-		distance = distance_points(lst->plyr.x_plyr, \
-		lst->raycast.xinter_ho, lst->plyr.y_plyr, lst->raycast.yinter_ho);
-	else
-		distance = distance_points(lst->plyr.x_plyr, \
-		lst->raycast.xinter_ve, lst->plyr.y_plyr, lst->raycast.yinter_ve);
-	distance = distance * cos(lst->raycast.ray_angle - lst->plyr.rotationangle);
+	calculate_distances(lst, &distance);
 	lst->sprite.distancetowall = distance;
 	distanceprojectionplane = ((lst->map.width) / 2) / tan(lst->plyr.fov / 2);
 	lst->raycast.wallheight = (lst->map.unit / distance) * \
@@ -70,20 +76,19 @@ void	rendringwalls(t_graph *lst, int i)
 void	cast_rays(t_graph *lst)
 {
 	int		i;
-	int		rays_num;
+	int		check;
 
 	lst->raycast.xinter_ho = 0;
 	lst->raycast.yinter_ho = 0;
+	check = 0;
 	lst->raycast.ray_angle = lst->plyr.rotationangle - lst->plyr.fov / 2;
 	i = 0;
-	rays_num = lst->map.width;
-	while (i < rays_num)
+	while (i < lst->map.width)
 	{
-		lst->door.foundoor = 0;
 		normilizeangle(&lst->raycast.ray_angle);
 		checking_where_plyr_facing(lst);
-		horizantal_intersaction(lst);
-		vertical_intersaction(lst);
+		horizantal_intersaction(lst, check);
+		vertical_intersaction(lst, check);
 		lst->raycast.j = calculate_intersactions(lst);
 		rendringwalls(lst, i);
 		lst->raycast.j = calculate_intersactions_door(lst);
@@ -92,7 +97,7 @@ void	cast_rays(t_graph *lst)
 		rendringsprite(lst, i);
 		lst->sprite.spritefoundhorz = 0;
 		lst->sprite.spritefoundvert = 0;
-		lst->raycast.ray_angle += lst->plyr.fov / rays_num;
+		lst->raycast.ray_angle += lst->plyr.fov / lst->map.width;
 		i++;
 	}
 }

@@ -6,23 +6,71 @@
 /*   By: sahafid <sahafid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 18:30:13 by sahafid           #+#    #+#             */
-/*   Updated: 2022/09/29 13:42:26 by sahafid          ###   ########.fr       */
+/*   Updated: 2022/09/29 17:37:11 by sahafid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../executor.h"
 
-void	horizantal_intersaction(t_graph *lst)
+static void	sprite_found(t_graph *lst, int *sprite)
 {
-	int	check;
+	*sprite = 0;
+	lst->sprite.horiz_intersaction = 1;
+	lst->sprite.spritefoundhorz = 1;
+	lst->sprite.xinter_ho = lst->raycast.xinter_ho;
+	lst->sprite.yinter_ho = lst->raycast.yinter_ho;
+	lst->raycast.xinter_ho += lst->raycast.xstep;
+	lst->raycast.yinter_ho += lst->raycast.ystep;
+}
+
+static void	door_found(t_graph *lst, int *door)
+{
+	*door = 0;
+	lst->door.horiz_intersaction = 1;
+	lst->door.xinter_ho = lst->raycast.xinter_ho;
+	lst->door.yinter_ho = lst->raycast.yinter_ho;
+	lst->raycast.xinter_ho += lst->raycast.xstep;
+	lst->raycast.yinter_ho += lst->raycast.ystep;
+}
+
+void	searchforhoriz(t_graph *lst, int check, int sprite, int door)
+{
+	while ((lst->raycast.xinter_ho >= 0 && lst->raycast.xinter_ho <= \
+	lst->map.width * lst->map.unit) && (lst->raycast.yinter_ho >= 0 && \
+	lst->raycast.yinter_ho <= lst->map.height * lst->map.unit))
+	{
+		if (check_wall(lst, lst->raycast.xinter_ho, lst->raycast.yinter_ho \
+		- check))
+		{
+			lst->raycast.horiz_intersaction = 1;
+			return ;
+		}
+		else if ((check_sprite(lst, lst->raycast.xinter_ho, \
+		lst->raycast.yinter_ho - check) == 1 && sprite == 1) && door == 1)
+			sprite_found(lst, &sprite);
+		else if (check_sprite(lst, lst->raycast.xinter_ho, \
+		lst->raycast.yinter_ho - check) == 2 && door == 1)
+			door_found(lst, &door);
+		else
+		{
+			lst->raycast.xinter_ho += lst->raycast.xstep;
+			lst->raycast.yinter_ho += lst->raycast.ystep;
+		}
+	}
+	lst->raycast.horiz_intersaction = 0;
+	if (sprite)
+		lst->sprite.spritefoundhorz = 0;
+}
+
+void	horizantal_intersaction(t_graph *lst, int check)
+{
 	int	sprite;
 	int	door;
 
-	check = 0;
 	door = 1;
 	sprite = 1;
-	lst->sprite.horiz_intersaction = 0;
 	lst->door.horiz_intersaction = 0;
+	lst->sprite.horiz_intersaction = 0;
 	lst->raycast.horiz_intersaction = 0;
 	lst->raycast.yinter_ho = floor(lst->plyr.y_plyr / lst->map.unit) \
 	* lst->map.unit;
@@ -40,47 +88,5 @@ void	horizantal_intersaction(t_graph *lst)
 		lst->raycast.xstep *= -1;
 	if (lst->raycast.facingup)
 		check = 1;
-	while ((lst->raycast.xinter_ho >= 0 && lst->raycast.xinter_ho <= \
-	lst->map.width * lst->map.unit) && (lst->raycast.yinter_ho >= 0 && \
-	lst->raycast.yinter_ho <= lst->map.height * lst->map.unit))
-	{
-		if (check_wall(lst, lst->raycast.xinter_ho, lst->raycast.yinter_ho \
-		- check))
-		{
-			lst->raycast.horiz_intersaction = 1;
-			return ;
-		}
-		else if ((check_sprite(lst, lst->raycast.xinter_ho, \
-		lst->raycast.yinter_ho - check) == 1 && sprite == 1) && door == 1)
-		{
-			sprite = 0;
-			lst->sprite.horiz_intersaction = 1;
-			lst->sprite.spritefoundhorz = 1;
-			lst->sprite.xinter_ho = lst->raycast.xinter_ho;
-			lst->sprite.yinter_ho = lst->raycast.yinter_ho;
-			lst->raycast.xinter_ho += lst->raycast.xstep;
-			lst->raycast.yinter_ho += lst->raycast.ystep;
-		}
-		else if (check_sprite(lst, lst->raycast.xinter_ho, \
-		lst->raycast.yinter_ho - check) == 2 && door == 1)
-		{
-			door = 0;
-			lst->door.horiz_intersaction = 1;
-			lst->door.xinter_ho = lst->raycast.xinter_ho;
-			lst->door.yinter_ho = lst->raycast.yinter_ho;
-			lst->raycast.xinter_ho += lst->raycast.xstep;
-			lst->raycast.yinter_ho += lst->raycast.ystep;
-		}
-		else
-		{
-			lst->raycast.xinter_ho += lst->raycast.xstep;
-			lst->raycast.yinter_ho += lst->raycast.ystep;
-		}
-	}
-	lst->raycast.horiz_intersaction = 0;
-	if (sprite)
-	{
-		lst->sprite.horiz_intersaction = 0;
-		lst->sprite.spritefoundhorz = 0;
-	}
+	searchforhoriz(lst, check, sprite, door);
 }

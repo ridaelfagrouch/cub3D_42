@@ -3,21 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   movement.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rel-fagr <rel-fagr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sahafid <sahafid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 14:47:27 by sahafid           #+#    #+#             */
-/*   Updated: 2022/09/29 17:02:24 by rel-fagr         ###   ########.fr       */
+/*   Updated: 2022/09/29 18:21:59 by sahafid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../executor.h"
-
-int	close_cub(t_graph *lst)
-{
-	mlx_destroy_image(lst->mlx, lst->wind);
-	free_all(lst->data, "");
-	return (0);
-}
 
 int	routine(t_graph *lst)
 {
