@@ -6,7 +6,7 @@
 /*   By: rel-fagr <rel-fagr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 01:21:13 by sahafid           #+#    #+#             */
-/*   Updated: 2022/09/29 16:54:09 by rel-fagr         ###   ########.fr       */
+/*   Updated: 2022/09/29 16:59:57 by rel-fagr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -164,6 +164,7 @@ typedef struct s_graph
 	int					old_x;
 	int					new_x;
 	int					minimap_check;
+	t_map_				*data;
 	struct s_player		plyr;
 	struct s_raycasting	raycast;
 	struct s_map		map;

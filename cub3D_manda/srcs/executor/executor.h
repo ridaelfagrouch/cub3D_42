@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sahafid <sahafid@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rel-fagr <rel-fagr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 15:08:46 by sahafid           #+#    #+#             */
-/*   Updated: 2022/09/29 13:40:05 by sahafid          ###   ########.fr       */
+/*   Updated: 2022/09/29 17:03:04 by rel-fagr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,7 @@ typedef struct s_graph
 	int					old_x;
 	int					new_x;
 	int					minimap_check;
+	t_map_				*data;
 	struct s_player		plyr;
 	struct s_raycasting raycast;
 	struct s_map		map;
