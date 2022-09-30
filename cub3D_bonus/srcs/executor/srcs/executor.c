@@ -6,7 +6,7 @@
 /*   By: sahafid <sahafid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 07:57:18 by sahafid           #+#    #+#             */
-/*   Updated: 2022/09/30 12:59:19 by sahafid          ###   ########.fr       */
+/*   Updated: 2022/09/30 21:52:57 by sahafid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@ void	executor(t_map_ *data)
 	if (texturevalid())
 		return ;
 	init_texture(&lst, data);
+	init_sprite(&lst);
+	init_door(&lst);
 	mlx_loop_hook(lst.mlx, routine, &lst);
 	mlx_loop(lst.mlx);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rel-fagr <rel-fagr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sahafid <sahafid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 01:21:13 by sahafid           #+#    #+#             */
-/*   Updated: 2022/09/29 19:46:10 by rel-fagr         ###   ########.fr       */
+/*   Updated: 2022/09/30 21:53:04 by sahafid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -251,4 +251,7 @@ int		mouse_release(int key, int x, int y, t_graph *lst);
 int		mouse_houver(int x, int y, t_graph *lst);
 int		calculate_intersactions_door(t_graph *lst);
 int		close_cub(t_graph *lst);
+void	init_door(t_graph *lst);
+void	init_sprite(t_graph *lst);
+
 #endif
