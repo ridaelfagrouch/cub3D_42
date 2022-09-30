@@ -6,7 +6,7 @@
 /*   By: rel-fagr <rel-fagr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/18 11:00:48 by rel-fagr          #+#    #+#             */
-/*   Updated: 2022/09/29 18:35:19 by rel-fagr         ###   ########.fr       */
+/*   Updated: 2022/09/30 15:50:12 by rel-fagr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,8 @@ int	ft_check_map(t_map_	*data)
 
 int	init_map_data(t_map_ *data, char **argv)
 {
+	char	*str;
+
 	data->no_t = NULL;
 	data->so_t = NULL;
 	data->ea_t = NULL;
@@ -92,7 +94,8 @@ int	init_map_data(t_map_ *data, char **argv)
 	data->map_d.fst_line = 0;
 	data->map_d.count_player = 0;
 	data->map_d.map = NULL;
-	if (!ft_strcmp(ft_strrchr(argv[1], '.'), ".cub"))
+	str = ft_strrchr(argv[1], '.');
+	if (str && !ft_strcmp(str, ".cub"))
 	{
 		data->fd = open(argv[1], O_RDONLY);
 		if (data->fd < 0)
