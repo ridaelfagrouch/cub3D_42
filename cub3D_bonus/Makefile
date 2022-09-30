@@ -6,7 +6,7 @@
 #    By: rel-fagr <rel-fagr@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/21 18:47:15 by rel-fagr          #+#    #+#              #
-#    Updated: 2022/09/30 16:54:24 by rel-fagr         ###   ########.fr        #
+#    Updated: 2022/09/30 18:55:48 by rel-fagr         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,10 +46,10 @@ MAIN		:= cub3d.c
 HEADER		:= cub3d.h
 MLX		 	:= minilibx-linux
 
-LIBFT_ARCH	:= libft/libft.a
+LIBFT_ARCH	:= ../libft/libft.a
 PARS_ARCH	:= srcs/parser/libCubparser.a
 EXEC_ARCH	:= srcs/executor/libCubexecutor.a
-ARCHIVES	:= -Llibft -lft \
+ARCHIVES	:= -L../libft -lft \
 			-Lsrcs/parser -lCubparser \
 			-Lsrcs/executor -lCubexecutor
 
@@ -59,7 +59,7 @@ ARCHIVES	:= -Llibft -lft \
 all: ${NAME}
 
 ${LIBFT_ARCH}:
-	@make -C libft/
+	@make -C ../libft/
 
 ${PARS_ARCH}:
 	@make -C srcs/parser/
@@ -75,12 +75,12 @@ ${NAME}: title ${LIBFT_ARCH} ${PARS_ARCH} ${EXEC_ARCH} ${HEADER}
 	@printf "\n${MGN}Executable ${GRA}${NAME}${MGN} created${NNN} 🚀\n\n"
 
 clean:
-	@make -C libft/ clean
+	@make -C ../libft/ clean
 	@make -C srcs/parser/ clean
 	@make -C srcs/executor clean
 
 fclean: clean
-	@make -C libft/ fclean
+	@make -C ../libft/ fclean
 	@make -C srcs/parser/ fclean
 	@make -C srcs/executor fclean
 	@rm -f ${NAME}
