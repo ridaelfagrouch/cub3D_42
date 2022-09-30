@@ -6,7 +6,7 @@
 /*   By: rel-fagr <rel-fagr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 13:05:48 by rel-fagr          #+#    #+#             */
-/*   Updated: 2022/09/30 16:10:32 by rel-fagr         ###   ########.fr       */
+/*   Updated: 2022/09/30 16:24:54 by rel-fagr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,10 @@ void	remp_texture(int *count, char *ptr, t_map_ *data, char *c)
 	int		fd;
 	char	*str;
 	char	*ptr1;
-	char	*ptr2;
 
 	*count += 1;
-	ptr2 = ft_strrchr(ptr, '.');
-	if (ptr2 && !ft_strcmp(ptr2, ".xpm"))
+	ptr1 = ft_strrchr(ptr1, '.');
+	if (ptr1 && !ft_strcmp(ptr1, ".xpm"))
 	{
 		ptr1 = ft_substr(ptr, 2, ft_strlen(ptr) - 2);
 		str = ft_strtrim(ptr1, " ");
