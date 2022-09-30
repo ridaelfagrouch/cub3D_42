@@ -6,7 +6,7 @@
 /*   By: rel-fagr <rel-fagr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/15 17:23:51 by bavos             #+#    #+#             */
-/*   Updated: 2022/09/29 19:58:08 by rel-fagr         ###   ########.fr       */
+/*   Updated: 2022/09/30 15:35:52 by rel-fagr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,15 @@
 void	free_all(t_map_ *data, char *str)
 {
 	printf("%s\n", str);
-	if (!data->ea_t)
+	if (data->ea_t != NULL)
 		free(data->ea_t);
-	if (!data->no_t)
+	if (data->no_t != NULL)
 		free(data->no_t);
-	if (!data->so_t)
+	if (data->so_t != NULL)
 		free(data->so_t);
-	if (!data->we_t)
+	if (data->we_t != NULL)
 		free(data->we_t);
-	if (!data->map_d.map)
+	if (data->map_d.map != NULL)
 		free_matrice(data->map_d.map);
 	free(data);
 	exit(1);
