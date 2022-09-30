@@ -6,7 +6,7 @@
 /*   By: rel-fagr <rel-fagr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 13:09:18 by sahafid           #+#    #+#             */
-/*   Updated: 2022/09/30 21:19:17 by rel-fagr         ###   ########.fr       */
+/*   Updated: 2022/09/30 22:54:49 by rel-fagr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,16 @@
 static void	direction(t_graph *lst, t_map_ *data)
 {
 	if (data->map_d.map[data->map_d.player_y][data->map_d.player_x] == 'N')
-		lst->plyr.rotationangle = 3 * M_PI / 2;
+		lst->plyr.rotationangle = 3 * M_PI / 2 + 0.0005;
 	else if (data->map_d.map[data->map_d.player_y] \
 	[data->map_d.player_x] == 'S')
-		lst->plyr.rotationangle = M_PI / 2;
+		lst->plyr.rotationangle = M_PI / 2 + 0.0005;
 	else if (data->map_d.map[data->map_d.player_y] \
 	[data->map_d.player_x] == 'E')
-		lst->plyr.rotationangle = 0;
+		lst->plyr.rotationangle = 0 + 0.0005;
 	else if (data->map_d.map[data->map_d.player_y] \
 	[data->map_d.player_x] == 'W')
-		lst->plyr.rotationangle = M_PI;
+		lst->plyr.rotationangle = M_PI + 0.0005;
 }
 
 void	init_player(t_graph *lst, t_map_ *data)
@@ -56,9 +56,11 @@ void	init_map(t_graph *lst, t_map_ *data)
 	lst->map.floor_color = data->floor_color;
 	lst->map.wall_color = 0;
 	lst->map.player_color = data->ceil_color;
-	lst->map.unit = 32;
+	lst->map.unit = 25;
 	lst->plyr.x_plyr = data->map_d.player_x * lst->map.unit;
 	lst->plyr.y_plyr = data->map_d.player_y * lst->map.unit;
+	lst->plyr.x_plyr += lst->map.unit / 4;
+	lst->plyr.y_plyr += lst->map.unit / 4;
 	lst->sprite.spritefoundhorz = 0;
 	lst->sprite.spritefoundvert = 0;
 	lst->door.door_number = 1;
@@ -70,7 +72,7 @@ void	init_everything(t_graph *lst, t_map_ *data)
 	lst->x = data->map_d.map_width;
 	lst->map.map = data->map_d.map;
 	lst->map.height = 1000;
-	lst->map.width = 1300;
+	lst->map.width = 1500;
 	lst->minimap_check = 1;
 	lst->mouse_click = 0;
 	lst->mlx = mlx_init();

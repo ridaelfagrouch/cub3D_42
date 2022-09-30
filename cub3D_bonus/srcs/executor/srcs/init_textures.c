@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_textures.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rel-fagr <rel-fagr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sahafid <sahafid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 13:58:48 by sahafid           #+#    #+#             */
-/*   Updated: 2022/09/30 19:47:01 by rel-fagr         ###   ########.fr       */
+/*   Updated: 2022/09/30 21:52:05 by sahafid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,6 @@ void	init_door(t_graph *lst)
 
 void	init_texture(t_graph *lst, t_map_ *data)
 {
-	init_sprite(lst);
-	init_door(lst);
 	lst->texture.textureimgn = mlx_xpm_file_to_image(lst->mlx, data->no_t, \
 	&lst->texture.widthn, &lst->texture.heightn);
 	lst->texture.imgaddrn = (int *)mlx_get_data_addr(lst->texture.textureimgn, \

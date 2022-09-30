@@ -6,7 +6,7 @@
 /*   By: sahafid <sahafid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 14:47:27 by sahafid           #+#    #+#             */
-/*   Updated: 2022/09/29 18:21:59 by sahafid          ###   ########.fr       */
+/*   Updated: 2022/09/30 21:39:03 by sahafid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,8 @@ int	checkwallmovement(t_graph *lst, int x, int y)
 	pospy = lst->plyr.y_plyr / lst->map.unit;
 	posdx = x / lst->map.unit;
 	posdy = y / lst->map.unit;
-	if ((posdx >= 0 && posdx <= lst->x) && (posdy >= 0 && posdy <= lst->y))
+	if (((posdx >= 0 && posdx <= lst->x) && (posdy >= 0 && posdy <= lst->y)) && \
+	((pospx >= 0 && pospx <= lst->x) && (pospy >= 0 && pospy <= lst->y)))
 	{
 		if (lst->map.map[posdy][posdx] == '1' || \
 			lst->map.map[posdy][posdx] == ' ')
