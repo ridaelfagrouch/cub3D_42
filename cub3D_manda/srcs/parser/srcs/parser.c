@@ -6,7 +6,7 @@
 /*   By: rel-fagr <rel-fagr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/18 11:00:48 by rel-fagr          #+#    #+#             */
-/*   Updated: 2022/09/30 15:50:12 by rel-fagr         ###   ########.fr       */
+/*   Updated: 2022/09/30 16:51:20 by rel-fagr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,14 +25,14 @@ void	check_valid_line(t_map_ *data)
 	{
 		j = 0;
 		if (check_empty_line(data, i))
-			free_all(data, "error!! empty line");
+			free_all(data, "map error!!");
 		while (data->map_d.map[i][j])
 		{
 			c = data->map_d.map[i][j];
 			if (c == '0' || c == 'W' || c == 'E' || c == 'N' || c == 'S')
 				if (check_left_right(data->map_d.map[i], j) || \
 					check_up_down(data, i, j))
-					free_all(data, "error!! empty line");
+					free_all(data, "map error!!");
 			j++;
 		}
 	}

@@ -6,7 +6,7 @@
 #    By: rel-fagr <rel-fagr@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/21 18:33:31 by rel-fagr          #+#    #+#              #
-#    Updated: 2022/09/29 18:36:46 by rel-fagr         ###   ########.fr        #
+#    Updated: 2022/09/30 17:00:54 by rel-fagr         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,8 +24,8 @@ BLU := \033[34m
 
 # ---------------------------------------------------------------------------- #
 CC			:= gcc
-CC_FLAGS	:= -Wall -Wextra -Werror
-
+CC_FLAGS	:= -Wall -Wextra -Werror \
+			-fno-signed-zeros -mtune=intel -Ofast -march=native -fno-trapping-math
 SRCS_DIR := srcs/
 SRCS_LST := parser.c get_next_line_utils.c  get_next_line.c parse_map.c  remp_color_texture.c  creat_map.c \
 		check_map_syntax.c  virtual_walls.c remp_color.c

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sahafid <sahafid@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rel-fagr <rel-fagr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 13:09:18 by sahafid           #+#    #+#             */
-/*   Updated: 2022/09/30 13:34:59 by sahafid          ###   ########.fr       */
+/*   Updated: 2022/09/30 16:58:40 by rel-fagr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ void	init_everything(t_graph *lst, t_map_ *data)
 	lst->map.height = 1000;
 	lst->map.width = 1300;
 	lst->minimap_check = 1;
+	lst->mouse_click = 0;
 	lst->mlx = mlx_init();
 	lst->wind = mlx_new_window(lst->mlx, \
 		lst->map.width, lst->map.height, "Cub3d");

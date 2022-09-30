@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: sahafid <sahafid@student.42.fr>            +#+  +:+       +#+         #
+#    By: rel-fagr <rel-fagr@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/22 13:34:55 by rel-fagr          #+#    #+#              #
-#    Updated: 2022/09/28 20:58:49 by sahafid          ###   ########.fr        #
+#    Updated: 2022/09/30 17:01:03 by rel-fagr         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,8 +22,8 @@ BLU := \033[34m
 
 # ---------------------------------------------------------------------------- #
 CC			:= gcc
-CC_FLAGS	:= -Wall -Wextra -Werror
-
+CC_FLAGS	:= -Wall -Wextra -Werror \
+			-fno-signed-zeros -mtune=intel -Ofast -march=native -fno-trapping-math
 SRCS_DIR := srcs/
 SRCS_LST := executor.c draw.c movement.c cast_ray.c vertical_inter.c ray_cast_utils.c \
 			horizantal_inter.c init.c draw_ceilling.c texture.c  render.c init_texture.c
