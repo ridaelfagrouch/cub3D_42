@@ -6,7 +6,7 @@
 /*   By: rel-fagr <rel-fagr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 13:09:18 by sahafid           #+#    #+#             */
-/*   Updated: 2022/09/30 16:58:40 by rel-fagr         ###   ########.fr       */
+/*   Updated: 2022/09/30 20:02:42 by rel-fagr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	init_player(t_graph *lst, t_map_ *data)
 {
 	direction(lst, data);
 	lst->plyr.fov = 60 * (M_PI / 180);
-	lst->plyr.speed = 3;
+	lst->plyr.speed = 2;
 	lst->plyr.rotationspeed = 4 * (M_PI / 180);
 	lst->plyr.rotatedirection = 0;
 	lst->plyr.walkdirection = 0;
@@ -74,11 +74,19 @@ void	init_everything(t_graph *lst, t_map_ *data)
 	lst->minimap_check = 1;
 	lst->mouse_click = 0;
 	lst->mlx = mlx_init();
+	if (lst->mlx == NULL)
+		exit (1);
 	lst->wind = mlx_new_window(lst->mlx, \
 		lst->map.width, lst->map.height, "Cub3d");
+	if (lst->wind == NULL)
+		exit (1);
 	lst->map.img = NULL;
 	lst->map.addr = NULL;
 	lst->map.img = mlx_new_image(lst->mlx, lst->map.width, lst->map.height);
+	if (lst->map.img == NULL)
+		exit (1);
 	lst->map.addr = mlx_get_data_addr(lst->map.img, \
 		&lst->map.bpp, &lst->map.size_line, &lst->map.endian);
+	if (lst->map.addr == NULL)
+		exit (1);
 }

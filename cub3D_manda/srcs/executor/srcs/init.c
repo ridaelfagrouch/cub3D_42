@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sahafid <sahafid@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rel-fagr <rel-fagr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 13:09:18 by sahafid           #+#    #+#             */
-/*   Updated: 2022/09/30 13:34:54 by sahafid          ###   ########.fr       */
+/*   Updated: 2022/09/30 19:55:25 by rel-fagr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,11 +62,19 @@ void	init_everything(t_graph *lst, t_map_ *data)
 	lst->map.height = 1000;
 	lst->map.width = 1300;
 	lst->mlx = mlx_init();
+	if (lst->mlx == NULL)
+		exit (1);
 	lst->wind = mlx_new_window(lst->mlx, \
 		lst->map.width, lst->map.height, "Cub3d");
+	if (lst->wind == NULL)
+		exit (1);
 	lst->map.img = NULL;
 	lst->map.addr = NULL;
 	lst->map.img = mlx_new_image(lst->mlx, lst->map.width, lst->map.height);
+	if (lst->map.img == NULL)
+		exit (1);
 	lst->map.addr = mlx_get_data_addr(lst->map.img, \
 		&lst->map.bpp, &lst->map.size_line, &lst->map.endian);
+	if (lst->map.addr == NULL)
+		exit (1);
 }
