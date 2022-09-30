@@ -6,7 +6,7 @@
 #    By: rel-fagr <rel-fagr@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/21 18:47:15 by rel-fagr          #+#    #+#              #
-#    Updated: 2022/09/30 15:33:52 by rel-fagr         ###   ########.fr        #
+#    Updated: 2022/09/30 16:12:57 by rel-fagr         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,7 +38,7 @@ export TITLE
 
 # ---------------------------------------------------------------------------- #
 CC			:= gcc
-CC_FLAGS	:= -Wall -Wextra -Werror -static-libsan -fsanitize=address -lm 
+CC_FLAGS	:= -Wall -Wextra -Werror -lm 
 # -fno-signed-zeros -mtune=intel -Ofast -march=native -fno-trapping-math
 
 NAME		:= cub3D

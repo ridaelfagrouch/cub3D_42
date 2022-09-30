@@ -6,7 +6,7 @@
 /*   By: rel-fagr <rel-fagr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/15 17:23:51 by bavos             #+#    #+#             */
-/*   Updated: 2022/09/30 15:53:08 by rel-fagr         ###   ########.fr       */
+/*   Updated: 2022/09/30 15:59:06 by rel-fagr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,15 @@ void	free_all(t_map_ *data, char *str)
 	exit(1);
 }
 
+void	free_gar(t_map_	*data)
+{
+	free(data->ea_t);
+	free(data->no_t);
+	free(data->so_t);
+	free(data->we_t);
+	free_matrice(data->map_d.map);
+}
+
 int	main(int argc, char **argv)
 {
 	t_map_	*data;
@@ -41,11 +50,7 @@ int	main(int argc, char **argv)
 		if (parser(argv, data))
 			return (write(1, "bad arg!!\n", 10), free(data), 0);
 		executor(data);
-		free(data->ea_t);
-		free(data->no_t);
-		free(data->so_t);
-		free(data->we_t);
-		free_matrice(data->map_d.map);
+		free_gar(data);
 		free(data);
 	}
 	else
