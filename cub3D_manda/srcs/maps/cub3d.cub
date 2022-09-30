@@ -1,9 +1,6 @@
 NO srcs/textures/wall4.xpm
-
-EA srcs/textures/hitler.xpm
-
+EA srcs/textures/wall.xpm
 WE srcs/textures/wall.xpm
-
 SO srcs/textures/wall.xpm
 
 C 128,128,128

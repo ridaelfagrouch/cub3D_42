@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: rel-fagr <rel-fagr@student.42.fr>          +#+  +:+       +#+         #
+#    By: sahafid <sahafid@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/21 18:47:15 by rel-fagr          #+#    #+#              #
-#    Updated: 2022/09/29 20:00:35 by rel-fagr         ###   ########.fr        #
+#    Updated: 2022/09/30 15:20:17 by sahafid          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -71,7 +71,7 @@ title:
 	@echo " ${DARKVIOLET}$$TITLE${NC}"
 
 ${NAME}: title ${LIBFT_ARCH} ${PARS_ARCH} ${EXEC_ARCH} ${HEADER}
-	@${CC} ${CC_FLAGS} ${MAIN} -o ${NAME} ${ARCHIVES} -lmlx -framework openGL -framework Appkit -g
+	@${CC} ${CC_FLAGS} ${MAIN} -o ${NAME} ${ARCHIVES} -lmlx -framework openGL -framework Appkit
 	@printf "\n${MGN}Executable ${GRA}${NAME}${MGN} created${NNN} 🚀\n\n"
 
 clean:
